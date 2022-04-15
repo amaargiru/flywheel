@@ -8,7 +8,6 @@
 # Private settings like passwords etc
 appsettings_private.json
 
-
 # Logs
 *.log.*
 

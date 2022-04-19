@@ -6,6 +6,7 @@ from examiner import Examiner
 from refiner import Refiner
 from complicator import Complicator
 from lower import Lower
+from comparator import Comparator
 
 log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов
 log_max_file_count = 10  # Максимальное количество файлов логов
@@ -27,4 +28,6 @@ if __name__ == '__main__':
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
     user_input_without_punctuation_lower = Lower.list_lower(user_input_complex.user_input_without_punctuation)
     references_lower = Lower.references_lower(question.references)
+
+    index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
     pass

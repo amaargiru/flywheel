@@ -13,7 +13,7 @@ class ColorPrinter:
             print(Fore.BLACK + "Almost correct. Right answer is: ", end='')
             ColorPrinter.print_colored_diff(correction, index, references)
 
-        elif ratio > 0.5:  # Во фразах много общего, можно попробовать вывести пользователю diff
+        elif ratio > 0.65:  # Во фразах много общего, можно попробовать вывести пользователю diff
             print(Fore.BLACK + "Not bad. ", end='')
             print(Fore.BLACK + "Right answer is: ", end='')
             ColorPrinter.print_colored_diff(correction, index, references)

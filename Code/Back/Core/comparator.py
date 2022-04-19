@@ -32,7 +32,8 @@ class Comparator:
         b: list = [False] * answer_length
 
         for _, i, n in a:
-            for x in range(i, i + n):
-                b[x] = True
+            if n >= 3:  # Не показываем пользователю слишком короткие группы правильных букв, возможно, он ввел совсем другое слово
+                for x in range(i, i + n):
+                    b[x] = True
 
         return b

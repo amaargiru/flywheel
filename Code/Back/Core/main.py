@@ -32,4 +32,4 @@ if __name__ == '__main__':
 
     index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
-    ColorPrinter.color_print(question.references, index, correction)
+    ColorPrinter.print_message_to_user(question.references, index, correction, ratio)

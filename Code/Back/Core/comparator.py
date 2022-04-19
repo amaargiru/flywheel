@@ -1,3 +1,5 @@
+from difflib import SequenceMatcher
+
 import jellyfish
 
 
@@ -18,3 +20,19 @@ class Comparator:
                 max_index = i
 
         return max_index, max_ratio
+
+    @staticmethod
+    def find_matching_blocks(user_input_without_punctuation_lower, references_lower: list[str], reference_index):
+        seq = SequenceMatcher(None, ''.join(user_input_without_punctuation_lower), references_lower[reference_index])
+        a = seq.get_matching_blocks()
+
+        a = a[:-1]  # Last element is a dummy
+
+        answer_length =  len(references_lower[reference_index])
+        b: list = [False] * answer_length
+
+        for _, i, n in a:
+            for x in range(i, i + n):
+                b[x] = True
+
+        return b

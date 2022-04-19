@@ -7,6 +7,7 @@ from refiner import Refiner
 from complicator import Complicator
 from lower import Lower
 from comparator import Comparator
+from color_printer import ColorPrinter
 
 log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов
 log_max_file_count = 10  # Максимальное количество файлов логов
@@ -30,4 +31,5 @@ if __name__ == '__main__':
     references_lower = Lower.references_lower(question.references)
 
     index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
-    pass
+    correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
+    ColorPrinter.color_print(question.references, index, correction)

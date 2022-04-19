@@ -1,1 +1,2 @@
-Заменить длинное условие в refiner.py на regexp
+Back: Заменить длинное условие в refiner.py на regexp (с замером производительности)
+Back: в Complicator.complicate_user_input используются List'ы, попробовать заменить на Matrix из numpy (с замером производительности)

@@ -4,6 +4,8 @@ import sys
 from fw_logger import FlyWheelLogger
 from examiner import Examiner
 from refiner import Refiner
+from complicator import Complicator
+from lower import Lower
 
 log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов
 log_max_file_count = 10  # Максимальное количество файлов логов
@@ -22,5 +24,7 @@ if __name__ == '__main__':
     question = Examiner.next_question()
     user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
     user_input_cleaned = Refiner.refine_user_input(user_input)
-
+    user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
+    user_input_without_punctuation_lower = Lower.list_lower(user_input_complex.user_input_without_punctuation)
+    references_lower = Lower.references_lower(question.references)
     pass

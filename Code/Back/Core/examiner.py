@@ -9,7 +9,7 @@ class Question:
 
 class Examiner:
     @staticmethod
-    def next_question(username: str = None, user_pass: str = None) -> Question:
+    def next_question(user_id: int = 0) -> Question:
         return Question(native_phrase="Кошка сидит на столе",
                         references=["A cat sits on the table",
                                     "The cat sits on the table",

@@ -1,6 +1,8 @@
 import pathlib
 import sys
 
+import mysql.connector
+
 from color_printer import ColorPrinter
 from comparator import Comparator
 from complicator import Complicator
@@ -21,6 +23,19 @@ if __name__ == '__main__':
     except Exception as err:
         print(f"Error when trying to create log directory {str(err)}")
         sys.exit()  # Аварийный выход
+
+    mydb = mysql.connector.connect(host="localhost",
+                                   user="amaargiru",
+                                   password="8008",
+                                   database="flywheel")
+
+    mycursor = mydb.cursor()
+
+    mycursor.execute("SELECT nativePhrase, qReferences FROM question where id = 1")
+    myresult = mycursor.fetchall()
+
+    for x in myresult:
+        print(x)
 
     logger.info("Старт")
     question = Examiner.next_question()

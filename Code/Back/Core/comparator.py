@@ -28,7 +28,7 @@ class Comparator:
 
         a = a[:-1]  # Last element is a dummy
 
-        answer_length =  len(references_lower[reference_index])
+        answer_length = len(references_lower[reference_index])
         b: list = [False] * answer_length
 
         for _, i, n in a:

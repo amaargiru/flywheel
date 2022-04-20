@@ -1,4 +1,5 @@
 import pathlib
+import re
 import sys
 
 import mysql.connector
@@ -34,8 +35,9 @@ if __name__ == '__main__':
     mycursor.execute("SELECT nativePhrase, qReferences FROM question where id = 1")
     myresult = mycursor.fetchall()
 
-    for x in myresult:
-        print(x)
+    nativePhrase, qReferences = myresult[0]
+    a = re.findall('"([^"]*)"', nativePhrase)[0]
+    b = re.findall('"([^"]*)"', qReferences)
 
     logger.info("Старт")
     question = Examiner.next_question()

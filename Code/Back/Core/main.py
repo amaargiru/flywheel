@@ -1,9 +1,8 @@
 import pathlib
-import django
-import sqlalchemy
 import sys
 
 import mysql.connector
+from peewee import *
 
 from color_printer import ColorPrinter
 from comparator import Comparator
@@ -18,6 +17,7 @@ log_max_file_count = 10  # Максимальное количество фай�
 log_file_path = "logs//fw.log"
 
 if __name__ == '__main__':
+
     try:
         path = pathlib.Path(log_file_path)  # Создаем путь к файлу логов, если он не существует
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -30,8 +30,36 @@ if __name__ == '__main__':
                                    user="amaargiru",
                                    password="8008",
                                    database="flywheel")
-
     mycursor = mydb.cursor()
+
+
+
+
+    mysql_db = MySQLDatabase("flywheel",
+                             user="amaargiru",
+                             password="8008",
+                             host="localhost")
+
+
+    class Question(Model):
+        id = IntegerField()
+        nativePhrase = CharField(max_length=500)
+
+        class Meta:
+            database = mysql_db
+            table_name = "question"
+
+
+    mysql_db.connect()
+
+    q = Question.get(Question.id == 1).nativePhrase
+
+    print(q)
+
+
+
+
+
 
     logger.info("Старт")
     question = Examiner.next_question(mycursor, 1)

@@ -1,9 +1,6 @@
 import pathlib
 import sys
 
-import mysql.connector
-from peewee import *
-
 from color_printer import ColorPrinter
 from comparator import Comparator
 from complicator import Complicator
@@ -26,43 +23,8 @@ if __name__ == '__main__':
         print(f"Error when trying to create log directory {str(err)}")
         sys.exit()  # Аварийный выход
 
-    mydb = mysql.connector.connect(host="localhost",
-                                   user="amaargiru",
-                                   password="8008",
-                                   database="flywheel")
-    mycursor = mydb.cursor()
-
-
-
-
-    mysql_db = MySQLDatabase("flywheel",
-                             user="amaargiru",
-                             password="8008",
-                             host="localhost")
-
-
-    class Question(Model):
-        id = IntegerField()
-        nativePhrase = CharField(max_length=500)
-
-        class Meta:
-            database = mysql_db
-            table_name = "question"
-
-
-    mysql_db.connect()
-
-    q = Question.get(Question.id == 1).nativePhrase
-
-    print(q)
-
-
-
-
-
-
     logger.info("Старт")
-    question = Examiner.next_question(mycursor, 1)
+    question = Examiner.next_question(1)
     user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)

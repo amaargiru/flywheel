@@ -1,21 +1,23 @@
 from dataclasses import dataclass
 
+from db_schema import *
+
 
 @dataclass
-class Question:
+class UserQuestion:
     native_phrase: str
     references: list[str]
 
 
 class Examiner:
     @staticmethod
-    def next_question(mycursor, question_id: int = 1) -> Question:
-        mycursor.execute(f"SELECT nativePhrase FROM question where id = {question_id}")
-        myresult = mycursor.fetchall()
-        native_phrase = myresult[0][0]
+    def next_question(question_id: int = 1) -> UserQuestion:
+        native_phrase = Question.get(Question.id == question_id).native_phrase
 
-        mycursor.execute(f"SELECT englishPhrase FROM answer where questionId = {question_id}")
-        myresult = mycursor.fetchall()
-        references = [x[0] for x in myresult]
+        query = Answer.select().where(Answer.question_id == 1)
 
-        return Question(native_phrase, references)
+        references = []
+        for pet in query:
+            references.append(pet.english_phrase)
+
+        return UserQuestion(native_phrase, references)

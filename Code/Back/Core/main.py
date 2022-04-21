@@ -32,15 +32,8 @@ if __name__ == '__main__':
 
     mycursor = mydb.cursor()
 
-    mycursor.execute("SELECT nativePhrase, qReferences FROM question where id = 1")
-    myresult = mycursor.fetchall()
-
-    nativePhrase, qReferences = myresult[0]
-    a = re.findall('"([^"]*)"', nativePhrase)[0]
-    b = re.findall('"([^"]*)"', qReferences)
-
     logger.info("Старт")
-    question = Examiner.next_question()
+    question = Examiner.next_question(mycursor, 1)
     user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)

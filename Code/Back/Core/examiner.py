@@ -11,11 +11,12 @@ class Question:
 class Examiner:
     @staticmethod
     def next_question(mycursor, question_id: int = 1) -> Question:
-        mycursor.execute(f"SELECT nativePhrase, qReferences FROM question where id = {question_id}")
+        mycursor.execute(f"SELECT nativePhrase FROM question where id = {question_id}")
         myresult = mycursor.fetchall()
+        native_phrase = myresult[0][0]
 
-        native_phrase, q_references = myresult[0]
-        a = re.findall('"([^"]*)"', native_phrase)[0]
-        b = re.findall('"([^"]*)"', q_references)
+        mycursor.execute(f"SELECT englishPhrase FROM answer where questionId = {question_id}")
+        myresult = mycursor.fetchall()
+        references = [x[0] for x in myresult]
 
-        return Question(native_phrase=a, references=b)
+        return Question(native_phrase, references)

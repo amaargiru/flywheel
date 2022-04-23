@@ -23,11 +23,12 @@ if __name__ == '__main__':
         print(f"Error when trying to create log directory {str(err)}")
         sys.exit()  # Аварийный выход
 
-    userId: int = 1
-    questionId: int = 1
+    user_id: int = 1
 
     logger.info("Старт")
-    question = Examiner.next_question(question_id=1)
+
+    question_id = Examiner.define_next_question_num(user_id)
+    question = Examiner.next_question(question_id)
     user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)

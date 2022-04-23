@@ -7,9 +7,11 @@ database = MySQLDatabase('flywheel', **{'charset': 'utf8', 'sql_mode': 'PIPES_AS
 class UnknownField(object):
     def __init__(self, *_, **__): pass
 
+
 class BaseModel(Model):
     class Meta:
         database = database
+
 
 class Answer(BaseModel):
     english_phrase = CharField(column_name='englishPhrase')
@@ -18,11 +20,13 @@ class Answer(BaseModel):
     class Meta:
         table_name = 'answer'
 
+
 class Question(BaseModel):
     native_phrase = CharField(column_name='nativePhrase')
 
     class Meta:
         table_name = 'question'
+
 
 class Questionstat(BaseModel):
     question_id = IntegerField(column_name='questionId')
@@ -32,12 +36,14 @@ class Questionstat(BaseModel):
     class Meta:
         table_name = 'questionstat'
 
+
 class Questiontotheme(BaseModel):
     question_id = IntegerField(column_name='questionId')
     theme_id = IntegerField(column_name='themeId', index=True)
 
     class Meta:
         table_name = 'questiontotheme'
+
 
 class Questiontoword(BaseModel):
     question_id = IntegerField(column_name='questionId')
@@ -46,11 +52,13 @@ class Questiontoword(BaseModel):
     class Meta:
         table_name = 'questiontoword'
 
+
 class Theme(BaseModel):
     theme = CharField()
 
     class Meta:
         table_name = 'theme'
+
 
 class Themestat(BaseModel):
     theme_id = IntegerField(column_name='themeId')
@@ -59,6 +67,7 @@ class Themestat(BaseModel):
 
     class Meta:
         table_name = 'themestat'
+
 
 class User(BaseModel):
     attempts = IntegerField()
@@ -71,11 +80,13 @@ class User(BaseModel):
     class Meta:
         table_name = 'user'
 
+
 class Word(BaseModel):
     word = CharField()
 
     class Meta:
         table_name = 'word'
+
 
 class Wordstat(BaseModel):
     user_id = IntegerField(column_name='userId', index=True)

@@ -18,7 +18,7 @@ class Examiner:
         return question_num
 
     @staticmethod
-    def next_question(question_id: int = 1) -> UserQuestion:
+    def get_question(question_id: int = 1) -> UserQuestion:
         native_phrase = Question.get(Question.id == question_id).native_phrase
         query = Answer.select().where(Answer.question_id == question_id)
 

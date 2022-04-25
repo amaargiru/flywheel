@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>English Flywheel</title>
-    <link rel="icon" type="image/png" href="images/icon.png"/>
+    <link rel="icon" type="image/png" href="images/icon.png" />
     <link href="styles/style.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="wrapper">
         <div id="menu">
-            <p class="welcome">Welcome, <b></b></p>
-            <p class="logout"><a id="exit" href="#">Exit Chat</a></p>
+            <p class="welcome" id="header"><b>Flywheel Bot</b></p>
         </div>
+        <input type="text" name="text" id="chatbox" value="" />
+        <input name="usermsg" type="text" id="usermsg" />
 
-        <div id="chatbox"></div>
-
-        <form name="message" action="">
-            <input name="usermsg" type="text" id="usermsg" />
-            <input name="submitmsg" type="submit" id="submitmsg" value="Send" type="button" id="somebutton" onclick="addText()"/>
-        </form>
+        <input type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
     </div>
-    
-    <script type="text/javascript">
-        // jQuery Document
-        $(document).ready(function () {});
-    </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
-    //If user submits the form
-    $("#submitmsg").click(function (){
-    var clientmsg = $("#usermsg").val();
-    //$.post("post.php", { text: clientmsg });
-    $("#usermsg").val("");
-    $("#chatbox").val() = clientmsg;
-    return false;});
-    </script>
 </body>
+<script type="text/javascript">
+function updateChat()
+{
+    document.getElementById('chatbox').value += document.getElementById('usermsg').value;
+    document.getElementById('usermsg').value = "";
+    return false;
+}
+</script>
 </html>

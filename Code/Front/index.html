@@ -14,18 +14,18 @@
         <div id="menu">
             <p class="welcome" id="header"><b>Flywheel Bot</b></p>
         </div>
-        <input type="text" name="text" id="chatbox" value="" />
-        <input name="usermsg" type="text" id="usermsg" />
+        <div id="chatbox"></div>
 
+        <input name="usermsg" type="text" id="usermsg" />
         <input type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
     </div>
 </body>
 <script type="text/javascript">
-function updateChat()
-{
-    document.getElementById('chatbox').value += document.getElementById('usermsg').value;
-    document.getElementById('usermsg').value = "";
-    return false;
-}
+    function updateChat() {
+        document.getElementById('chatbox').innerText += "\n" + document.getElementById('usermsg').value;
+        document.getElementById('usermsg').value = "";
+        return false;
+    }
 </script>
+
 </html>

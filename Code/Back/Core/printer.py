@@ -7,7 +7,7 @@ class Printer:
         init()
 
         if ratio > 0.99:
-            print(Fore.RED + "Correct.")
+            print(Fore.GREEN + "Correct.")
 
         elif ratio > 0.97:  # Во фразах очень много общего, показываем пользователю diff
             print(Fore.BLACK + "Almost correct. Right answer is: ", end='')
@@ -42,8 +42,7 @@ class Printer:
 
     @staticmethod
     def format_message_to_api(references: list[str], index: int, correction: list[bool], ratio: float) -> dict:
-        message_to_user = {#"right_answer": references[index],
-                           "hint": Printer.__create_hint(correction, index, references)}
+        message_to_user = {"hint": Printer.__create_hint(correction, index, references)}
 
         if ratio > 0.99:
             message_to_user["score"] = 4

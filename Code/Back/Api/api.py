@@ -2,6 +2,7 @@ import json
 import sys
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 sys.path.append('../Core')
 
@@ -13,6 +14,22 @@ from lower import Lower
 from refiner import Refiner
 
 app = FastAPI()
+
+origins = [
+    "http://domainname.com",
+    "https://domainname.com",
+    "http://localhost",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # = origins
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 # http://127.0.0.1:8000/docs
@@ -43,4 +60,4 @@ def get_answer_check(user_id: int, question_id: int, user_input: str):
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
     a = Printer.format_message_to_api(question.references, index, correction, ratio)
 
-    return {"question_id": 1,            "answer": json.dumps(a)}
+    return {"question_id": 1, "answer": json.dumps(a)}

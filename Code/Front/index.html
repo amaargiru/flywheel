@@ -22,23 +22,53 @@
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
+    question_id = 1
+
     function updateChat() {
         document.getElementById('chatbox').innerText += "\n" + document.getElementById('usermsg').value;
-        document.getElementById('usermsg').value = "";
+        answerCheck();
         GetQuestion();
+        document.getElementById('usermsg').value = "";
+
         return false;
     }
-</script>
-<script>
-    function GetQuestion() {
+
+    async function GetQuestion() {
         axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
         axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-        axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
+        let a = await axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
             .then(response => {
                 console.log(response.data);
                 document.getElementById('chatbox').innerText += "\n" + `Enter phrase \"${response.data.native_phrase}\" in english:`
+                question_id = response.data.question_id
+
+                var objDiv = document.getElementById("chatbox");
+                objDiv.scrollTop = objDiv.scrollHeight;
             })
             .catch(error => console.error(error));
+        return false;
+    }
+
+    async function answerCheck() {
+        axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+        let a = await axios.get(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=` + document.getElementById('usermsg').value)
+            .then(response => {
+                console.log(response.data);
+                var asa = JSON.parse(response.data.answer);
+                document.getElementById('chatbox').innerText += "\n" + `Правильный ответ: ${asa.hint}`
+            })
+            .catch(error => console.error(error));
+        return false;
+    }
+
+    function sleep(milliseconds) {
+        var start = new Date().getTime();
+        for (var i = 0; i < 1e7; i++) {
+            if ((new Date().getTime() - start) > milliseconds) {
+                break;
+            }
+        }
     }
 </script>
 

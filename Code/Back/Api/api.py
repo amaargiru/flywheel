@@ -48,7 +48,7 @@ def get_next_question(user_id: int):
             "native_phrase": f"{question.native_phrase}"}
 
 
-# Example http://127.0.0.1:8000/get_answer_check?user_id=1&answer=qq
+# Example: http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=1&user_input=qq
 @app.get("/get_answer_check")
 def get_answer_check(user_id: int, question_id: int, user_input: str):
     question = Examiner.get_question(question_id)

@@ -25,7 +25,7 @@
     question_id = 1
 
     function updateChat() {
-        document.getElementById('chatbox').innerText += "\n" + document.getElementById('usermsg').value;
+        document.getElementById('chatbox').innerHTML += "\n" + document.getElementById('usermsg').value;
         answerCheck();
         GetQuestion();
         document.getElementById('usermsg').value = "";
@@ -39,7 +39,7 @@
         let a = await axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
             .then(response => {
                 console.log(response.data);
-                document.getElementById('chatbox').innerText += "\n" + `Enter phrase \"${response.data.native_phrase}\" in english:`
+                document.getElementById('chatbox').innerHTML += "\n" + `Enter phrase \"${response.data.native_phrase}\" in english:`
                 question_id = response.data.question_id
 
                 var objDiv = document.getElementById("chatbox");
@@ -56,7 +56,18 @@
             .then(response => {
                 console.log(response.data);
                 var asa = JSON.parse(response.data.answer);
-                document.getElementById('chatbox').innerText += "\n" + `Правильный ответ: ${asa.hint}`
+
+                hint = "";
+                for (var i = 0; i < asa.hint.length; i++) {
+                    b = asa.hint.charAt(i);
+                    if (b == '/') {
+                        hint += `<font color="red">${asa.hint.charAt(i + 1)}</font>`
+                        i++;
+                    }
+                    else
+                        hint += `<font color="green">${asa.hint.charAt(i)}</font>`
+                }
+                document.getElementById('chatbox').innerHTML += "\n" + `Правильный ответ: ${hint}`
             })
             .catch(error => console.error(error));
         return false;

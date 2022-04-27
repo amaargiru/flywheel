@@ -9,7 +9,7 @@
     <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
-<body onload="GetQuestion()">
+<body onload="getQuestion()">
     <div id="wrapper">
         <div id="menu">
             <p class="welcome" id="header"><b>Flywheel Bot</b></p>
@@ -22,40 +22,42 @@
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    question_id = 1
+    question_id = 1;
 
-    function updateChat() {
-        document.getElementById('chatbox').innerHTML += "\n" + document.getElementById('usermsg').value;
-        answerCheck();
-        GetQuestion();
+    async function updateChat() {
+        document.getElementById('chatbox').innerHTML += "<br>" + document.getElementById('usermsg').value;
+        chainReq();
         document.getElementById('usermsg').value = "";
-
         return false;
     }
 
-    async function GetQuestion() {
+    function getQuestion() {
         axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
         axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-        let a = await axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
+        return axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
             .then(response => {
                 console.log(response.data);
-                document.getElementById('chatbox').innerHTML += "\n" + `Enter phrase \"${response.data.native_phrase}\" in english:`
+                document.getElementById('chatbox').innerHTML += "<br>" + `Enter phrase \"${response.data.native_phrase}\" in english:`
                 question_id = response.data.question_id
 
                 var objDiv = document.getElementById("chatbox");
                 objDiv.scrollTop = objDiv.scrollHeight;
             })
             .catch(error => console.error(error));
-        return false;
     }
 
-    async function answerCheck() {
+    function chainReq() {
         axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
         axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-        let a = await axios.get(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=` + document.getElementById('usermsg').value)
-            .then(response => {
-                console.log(response.data);
-                var asa = JSON.parse(response.data.answer);
+
+        axios.all(
+            [axios.get(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`),
+            axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")])
+            .then(axios.spread((firstResponse, secondResponse) => {
+                console.log(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`)
+                console.log(firstResponse.data, secondResponse.data);
+
+                var asa = JSON.parse(firstResponse.data.answer);
 
                 hint = "";
                 for (var i = 0; i < asa.hint.length; i++) {
@@ -67,10 +69,16 @@
                     else
                         hint += `<font color="green">${asa.hint.charAt(i)}</font>`
                 }
-                document.getElementById('chatbox').innerHTML += "\n" + `Правильный ответ: ${hint}`
-            })
-            .catch(error => console.error(error));
-        return false;
+                document.getElementById('chatbox').innerHTML += "<br>" + `Правильный ответ: ${hint}`
+
+                console.log(secondResponse.data);
+                document.getElementById('chatbox').innerHTML += "<br>" + `Enter phrase \"${secondResponse.data.native_phrase}\" in english:`
+                question_id = secondResponse.data.question_id
+
+                var objDiv = document.getElementById("chatbox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }))
+            .catch(error => console.log(error));
     }
 
     function sleep(milliseconds) {
@@ -80,6 +88,10 @@
                 break;
             }
         }
+    }
+
+    function safer(str) {
+        return String(str).replace(/&/g, '').replace(/</g, '').replace(/>/g, '').replace(/"/g, '').replace(' ', "%20");
     }
 </script>
 

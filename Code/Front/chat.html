@@ -2,30 +2,37 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>English Flywheel. Chat</title>
-    <link rel="icon" type="image/png" href="images/icon.png" />
-    <link href="styles/style.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+  <title>English Flywheel. Chat</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link href="styles/style.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
 <body onload="getQuestion()">
-    <div id="wrapper">
-        <div id="menu">
-            <p class="welcome" id="header"><b>Flywheel Bot</b></p>
-        </div>
-        <div id="chatbox"></div>
-
-        <input name="usermsg" type="text" id="usermsg" />
-        <input type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
+  <div id="wrapper">
+    <div id="menu">
+      <p class="welcome" id="header"><b>Flywheel Bot</b></p>
     </div>
+    <div id="chatbox"></div>
+
+    <input name="usermsg" type="text" id="usermsg" />
+    <input type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
+  </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    question_id = 1;
+  question_id = 1;
 
-    async function updateChat() {
-        document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
+  const node = document.getElementById('usermsg');
+  node.addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      updateChat();
+    }
+  });
+
+  async function updateChat() {
+    document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
       <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
     
       <div class="chat__messages">
@@ -46,18 +53,18 @@
 
 
 
-        chainReq();
-        document.getElementById('usermsg').value = "";
-        return false;
-    }
+    chainReq();
+    document.getElementById('usermsg').value = "";
+    return false;
+  }
 
-    function getQuestion() {
-        axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-        axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-        return axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
-            .then(response => {
-                console.log(response.data);
-                document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
+  function getQuestion() {
+    axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+    axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+    return axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")
+      .then(response => {
+        console.log(response.data);
+        document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
     <div class="chat__item">
       <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
     
@@ -73,37 +80,37 @@
 
 
 
-                question_id = response.data.question_id
+        question_id = response.data.question_id
 
-                var objDiv = document.getElementById("chatbox");
-                objDiv.scrollTop = objDiv.scrollHeight;
-            })
-            .catch(error => console.error(error));
-    }
+        var objDiv = document.getElementById("chatbox");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      })
+      .catch(error => console.error(error));
+  }
 
-    function chainReq() {
-        axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
-        axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+  function chainReq() {
+    axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
+    axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
 
-        axios.all(
-            [axios.get(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`),
-            axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")])
-            .then(axios.spread((firstResponse, secondResponse) => {
-                console.log(firstResponse.data, secondResponse.data);
+    axios.all(
+      [axios.get(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`),
+      axios.get("http://127.0.0.1:8000/get_next_question?user_id=1")])
+      .then(axios.spread((firstResponse, secondResponse) => {
+        console.log(firstResponse.data, secondResponse.data);
 
-                var asa = JSON.parse(firstResponse.data.answer);
+        var asa = JSON.parse(firstResponse.data.answer);
 
-                hint = "";
-                for (var i = 0; i < asa.hint.length; i++) {
-                    b = asa.hint.charAt(i);
-                    if (b == '/') {
-                        hint += `<font color="red">${asa.hint.charAt(i + 1)}</font>`
-                        i++;
-                    }
-                    else
-                        hint += `<font color="green">${asa.hint.charAt(i)}</font>`
-                }
-                document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
+        hint = "";
+        for (var i = 0; i < asa.hint.length; i++) {
+          b = asa.hint.charAt(i);
+          if (b == '/') {
+            hint += `<font color="red">${asa.hint.charAt(i + 1)}</font>`
+            i++;
+          }
+          else
+            hint += `<font color="green">${asa.hint.charAt(i)}</font>`
+        }
+        document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
     <div class="chat__item">
       <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
     
@@ -117,8 +124,8 @@
 
 
 
-                console.log(secondResponse.data);
-                document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
+        console.log(secondResponse.data);
+        document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
     <div class="chat__item">
       <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
     
@@ -135,26 +142,26 @@
 
 
 
-                question_id = secondResponse.data.question_id
+        question_id = secondResponse.data.question_id
 
-                var objDiv = document.getElementById("chatbox");
-                objDiv.scrollTop = objDiv.scrollHeight;
-            }))
-            .catch(error => console.log(error));
-    }
+        var objDiv = document.getElementById("chatbox");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }))
+      .catch(error => console.log(error));
+  }
 
-    function sleep(milliseconds) {
-        var start = new Date().getTime();
-        for (var i = 0; i < 1e7; i++) {
-            if ((new Date().getTime() - start) > milliseconds) {
-                break;
-            }
-        }
+  function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds) {
+        break;
+      }
     }
+  }
 
-    function safer(str) {
-        return String(str).replace(/&/g, '').replace(/</g, '').replace(/>/g, '').replace(/"/g, '').replace(' ', "%20");
-    }
+  function safer(str) {
+    return String(str).replace(/&/g, '').replace(/</g, '').replace(/>/g, '').replace(/"/g, '').replace(' ', "%20");
+  }
 </script>
 
 </html>

@@ -78,7 +78,7 @@ a:hover {
 #left {
   text-align: left;
 
-  border: 1px solid #fff7c7;  
+  border: 1px solid #fff7c7;
   width: 330px;
   border-radius: 4px;
   border-bottom: 4px solid #a7a7a7;
@@ -209,7 +209,7 @@ a#exit {
   padding: 7px;
   background-color: #ccc;
   display: inline-block;
-  
+
   margin-left: 5px;
 }
 
@@ -217,11 +217,11 @@ a#exit {
   flex-direction: row-reverse;
 }
 
-  .chat__item--responder .chat__message {
-    flex-direction: row-reverse;
-  }
+.chat__item--responder .chat__message {
+  flex-direction: row-reverse;
+}
 
-  .chat__item--responder .chat__message-content {
-    margin-left: 0;
-    margin-right: 5px;
-  }
+.chat__item--responder .chat__message-content {
+  margin-left: 0;
+  margin-right: 5px;
+}

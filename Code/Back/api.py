@@ -1,16 +1,14 @@
 import json
-import sys
 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-sys.path.append('../Core')
-
-from printer import Printer
 from comparator import Comparator
 from complicator import Complicator
 from examiner import Examiner
 from lower import Lower
+from printer import Printer
 from refiner import Refiner
 
 app = FastAPI()
@@ -61,3 +59,7 @@ def get_answer_check(user_id: int, question_id: int, user_input: str):
     a = Printer.format_message_to_api(question.references, index, correction, ratio)
 
     return {"question_id": 1, "answer": json.dumps(a)}
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)

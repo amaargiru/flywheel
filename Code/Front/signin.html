@@ -54,6 +54,9 @@
         if (response.status === 200) {
           console.log("Registration Successful, you can now login");
           document.getElementById('signin_title').innerText = "Welcome!"
+          let access_token = response.data.access_token;
+          console.log(access_token);
+          localStorage.setItem('flywheelJwtToken', access_token);
         } else {
           console.log("Registration Failed, please try again");
           document.getElementById('signin_title').innerText = "Sign in"

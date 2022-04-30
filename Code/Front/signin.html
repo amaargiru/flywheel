@@ -9,27 +9,21 @@
   <link href="styles/sign.css" rel="stylesheet" type="text/css">
 </head>
 
-
 <body>
   <div class="signupFrm">
     <div class="wrapper">
-      
-        <div class="title" id="signin_title">
-          Sign in
-        </div>
-
-        <div class="inputContainer">
-          <input type="text" class="input" placeholder="a" id="username">
-          <label for="" class="label">Username</label>
-        </div>
-
-        <div class="inputContainer">
-          <input type="text" class="input" placeholder="a" id="password">
-          <label for="" class="label">Password</label>
-        </div>
-
-        <input type="submit" class="submitBtn" value="Sign in" onclick="signin()">
-      
+      <div class="title" id="signin_title">
+        Sign in
+      </div>
+      <div class="inputContainer">
+        <input type="text" class="input" placeholder="a" id="username">
+        <label for="" class="label">Username</label>
+      </div>
+      <div class="inputContainer">
+        <input type="password" class="input" placeholder="a" id="password">
+        <label for="" class="label">Password</label>
+      </div>
+      <input type="submit" class="submitBtn" value="Sign in" onclick="signin()">
     </div>
   </div>
 </body>
@@ -52,17 +46,23 @@
     })
       .then(response => {
         if (response.status === 200) {
-          console.log("Registration Successful, you can now login");
+          console.log("Login successful, you can now login");
           document.getElementById('signin_title').innerText = "Welcome!"
+          document.getElementById('password').value = "";
           let access_token = response.data.access_token;
           console.log(access_token);
           localStorage.setItem('flywheelJwtToken', access_token);
         } else {
-          console.log("Registration Failed, please try again");
-          document.getElementById('signin_title').innerText = "Sign in"
+          console.log("Login failed, please try again");
+          document.getElementById('signin_title').innerText = "Sorry, try again"
+          document.getElementById('password').value = "";
         }
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        document.getElementById('signin_title').innerText = "Sorry, try again"
+        document.getElementById('password').value = "";
+      });
   }
 </script>
 

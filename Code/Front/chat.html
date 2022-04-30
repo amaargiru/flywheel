@@ -43,12 +43,24 @@
   }
 
   function startMessage() {
+    if (localStorage.getItem("flywheelJwtToken") === null) {
+      document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__message-content">
+          Вы можете <a href="signin.html">войти в свой аккаунт</a> или <a href="signup.html">создать новый аккаунт</a>. 
+          Тогда бот определит темы занятий именно под ваш уровень владения английским языком, 
+          каждый следующий вопрос будет подобран индивидуально и ваш прогресс значительно ускорится.<br>
+          Если вы продолжите учиться без аккаунта, то, к сожалению, вопросы будут задаваться в случайном порядке, 
+          а информация о вашем прогрессе не будет сохранена.
+        </div></div></div></div>`
+    }
+
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     return axios.post("http://127.0.0.1:8000/get_next_question?user_id=1")
       .then(response => {
         console.log(response.data);
-        //localStorage.getItem('flywheelJwtToken')
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>

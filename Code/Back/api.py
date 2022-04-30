@@ -20,7 +20,7 @@ from refiner import Refiner
 # openssl rand -hex 32
 SECRET_KEY = "f6e936d318b4103412c142893d7331fb83c2228fc31155a8f96de27c3afdeea7"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 7 * 24 * 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 10 * 365 * 24 * 60
 
 fake_users_db = {
     "johndoe": {
@@ -75,11 +75,12 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-
 # http://127.0.0.1:8000/docs
+'''
 @app.get("/")
 async def read_root():
     return {"Hello!": "Please read the docs: http://127.0.0.1:8000/docs"}
+'''
 
 
 # Example: http://127.0.0.1:8000/get_next_question?user_id=1
@@ -167,6 +168,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
     return current_user
 
 
+'''
 @app.post("/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(fake_users_db, form_data.username, form_data.password)
@@ -179,6 +181,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
     return {"access_token": access_token,
             "token_type": "bearer"}
+'''
 
 
 @app.post("/signin", response_model=Token)

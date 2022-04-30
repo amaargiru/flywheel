@@ -9,7 +9,7 @@
   <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
-<body onload="getQuestion()">
+<body onload="startMessage()">
   <div id="wrapper">
     <div id="menu">
       <p class="welcome" id="header"><b>Flywheel Bot</b></p>
@@ -33,52 +33,26 @@
 
   async function updateChat() {
     document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
-      <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
-    
-      <div class="chat__messages">
-        <div class="chat__message">
-          <div class="chat__message-time">9:05</div>
-          <div class="chat__message-content">${document.getElementById('usermsg').value}</div>
-        </div>
-        
-      </div>
-    </div>`
-
-
-
-
-
-
-
-
-
+      <img src="images/user_small.png" class="chat__person-avatar">
+      <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:05</div>
+      <div class="chat__message-content">${document.getElementById('usermsg').value}</div></div></div></div>`
 
     chainReq();
     document.getElementById('usermsg').value = "";
     return false;
   }
 
-  function getQuestion() {
+  function startMessage() {
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
     return axios.post("http://127.0.0.1:8000/get_next_question?user_id=1")
       .then(response => {
         console.log(response.data);
-        document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
-    <div class="chat__item">
-      <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
-    
-      <div class="chat__messages">
-        <div class="chat__message">
-          <div class="chat__message-time">9:03</div>
-          <div class="chat__message-content">Enter phrase \"${response.data.native_phrase}\" in english</div>
-        </div>
-      </div>
-    </div>`
-
-
-
-
+        //localStorage.getItem('flywheelJwtToken')
+        document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__message-content">Enter phrase \"${response.data.native_phrase}\" in english</div></div></div></div>`
 
         question_id = response.data.question_id
 
@@ -110,37 +84,16 @@
           else
             hint += `<font color="green">${asa.hint.charAt(i)}</font>`
         }
-        document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
-    <div class="chat__item">
-      <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
-    
-      <div class="chat__messages">
-        <div class="chat__message">
-          <div class="chat__message-time">9:03</div>
-          <div class="chat__message-content">Правильный ответ: ${hint}</div>
-        </div>
-      </div>
-    </div>`
-
-
+        document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__message-content">Правильный ответ: ${hint}</div></div></div></div>`
 
         console.log(secondResponse.data);
-        document.getElementById('chatbox').innerHTML += ` <div class="chat__content">
-    <div class="chat__item">
-      <img src="http://placekitten.com/40/50" alt="photo" class="chat__person-avatar">
-    
-      <div class="chat__messages">
-        <div class="chat__message">
-          <div class="chat__message-time">9:03</div>
-          <div class="chat__message-content">Enter phrase \"${secondResponse.data.native_phrase}\" in english</div>
-        </div>
-      </div>
-    </div>`
-
-
-
-
-
+        document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__message-content">Enter phrase \"${secondResponse.data.native_phrase}\" in english</div></div></div></div>`
 
         question_id = secondResponse.data.question_id
 
@@ -148,19 +101,6 @@
         objDiv.scrollTop = objDiv.scrollHeight;
       }))
       .catch(error => console.log(error));
-  }
-
-  function sleep(milliseconds) {
-    var start = new Date().getTime();
-    for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds) {
-        break;
-      }
-    }
-  }
-
-  function safer(str) {
-    return String(str).replace(/&/g, '').replace(/</g, '').replace(/>/g, '').replace(/"/g, '').replace(' ', "%20");
   }
 </script>
 

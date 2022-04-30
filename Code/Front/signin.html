@@ -14,7 +14,9 @@
   <div class="signupFrm">
     <div class="wrapper">
       
-        <h1 class="title">Sign in</h1>
+        <div class="title" id="signin_title">
+          Sign in
+        </div>
 
         <div class="inputContainer">
           <input type="text" class="input" placeholder="a" id="username">
@@ -36,29 +38,29 @@
 
   function signin() {
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    //axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
     var form_data = new FormData()
-    form_data.append("username", "johndoe");// document.getElementById('username').value
-    form_data.append("password", "secret")//document.getElementById('password').value
+    form_data.append("username", document.getElementById('username').value);
+    form_data.append("password", document.getElementById('password').value);
 
     axios({
       method: "post",
-      url: "http://127.0.0.1:8000/token",
+      url: "http://127.0.0.1:8000/signin",
       data: form_data,
       headers: { "Content-Type": "multipart/form-data" }
     })
       .then(response => {
         if (response.status === 200) {
           console.log("Registration Successful, you can now login");
+          document.getElementById('signin_title').innerText = "Welcome!"
         } else {
           console.log("Registration Failed, please try again");
+          document.getElementById('signin_title').innerText = "Sign in"
         }
       })
       .catch(error => console.error(error));
   }
-
-
 </script>
 
 </html>

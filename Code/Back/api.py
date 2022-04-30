@@ -78,13 +78,13 @@ app.add_middleware(
 
 # http://127.0.0.1:8000/docs
 @app.get("/")
-def read_root():
+async def read_root():
     return {"Hello!": "Please read the docs: http://127.0.0.1:8000/docs"}
 
 
 # Example: http://127.0.0.1:8000/get_next_question?user_id=1
 @app.post("/get_next_question")
-def get_next_question(user_id: int):
+async def get_next_question(user_id: int):
     question_id = Examiner.define_next_question_num(user_id)
     question = Examiner.get_question(question_id)
 
@@ -94,7 +94,7 @@ def get_next_question(user_id: int):
 
 # Example: http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=1&user_input=qq
 @app.post("/get_answer_check")
-def get_answer_check(user_id: int, question_id: int, user_input: str):
+async def get_answer_check(user_id: int, question_id: int, user_input: str):
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
@@ -168,7 +168,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 
 
 @app.post("/token", response_model=Token)
-def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
+async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(fake_users_db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
@@ -182,7 +182,7 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 @app.post("/signin", response_model=Token)
-def signin(form_data: OAuth2PasswordRequestForm = Depends()):
+async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
     user = authenticate_user(fake_users_db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
@@ -196,7 +196,7 @@ def signin(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 @app.post("/signup", response_model=Token)
-def signup(form_data: OAuth2PasswordRequestForm = Depends()):
+async def signup(form_data: OAuth2PasswordRequestForm = Depends()):
     pass
 
 

@@ -85,7 +85,7 @@ async def read_root():
 
 
 # Example: http://127.0.0.1:8000/get_next_question?user_id=1
-@app.post("/get_next_question")
+@app.post("/get_next_question_anonymous")
 async def get_next_question(user_id: int):
     question_id = Examiner.define_next_question_num(user_id)
     question = Examiner.get_question(question_id)
@@ -95,7 +95,7 @@ async def get_next_question(user_id: int):
 
 
 # Example: http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=1&user_input=qq
-@app.post("/get_answer_check")
+@app.post("/get_answer_check_anonymous")
 async def get_answer_check(user_id: int, question_id: int, user_input: str):
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)

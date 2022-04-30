@@ -58,7 +58,7 @@
 
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    return axios.post("http://127.0.0.1:8000/get_next_question?user_id=1")
+    return axios.post("http://127.0.0.1:8000/get_next_question_anonymous?user_id=1")
       .then(response => {
         console.log(response.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
@@ -79,8 +79,8 @@
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
     axios.all(
-      [axios.post(`http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`),
-      axios.post("http://127.0.0.1:8000/get_next_question?user_id=1")])
+      [axios.post(`http://127.0.0.1:8000/get_answer_check_anonymous?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`),
+      axios.post("http://127.0.0.1:8000/get_next_question_anonymous?user_id=1")])
       .then(axios.spread((firstResponse, secondResponse) => {
         console.log(firstResponse.data, secondResponse.data);
 

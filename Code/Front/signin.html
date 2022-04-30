@@ -29,40 +29,45 @@
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-
   function signin() {
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    if ((document.getElementById('username').value === "")
+      || (document.getElementById('password').value === "")) {
+      document.getElementById('signin_title').innerText = "Заполните все поля!";
+    }
+    else {
+      axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-    var form_data = new FormData()
-    form_data.append("username", document.getElementById('username').value);
-    form_data.append("password", document.getElementById('password').value);
+      var form_data = new FormData()
+      form_data.append("username", document.getElementById('username').value);
+      form_data.append("password", document.getElementById('password').value);
 
-    axios({
-      method: "post",
-      url: "http://127.0.0.1:8000/signin",
-      data: form_data,
-      headers: { "Content-Type": "multipart/form-data" }
-    })
-      .then(response => {
-        if (response.status === 200) {
-          console.log("Login successful, you can now login");
-          document.getElementById('signin_title').innerText = "Welcome!"
-          document.getElementById('password').value = "";
-          let access_token = response.data.access_token;
-          console.log(access_token);
-          localStorage.setItem('flywheelJwtToken', access_token);
-        } else {
-          console.log("Login failed, please try again");
+      axios({
+        method: "post",
+        url: "http://127.0.0.1:8000/signin",
+        data: form_data,
+        headers: { "Content-Type": "multipart/form-data" }
+      })
+        .then(response => {
+          if (response.status === 200) {
+            console.log("Login successful, you can now login");
+            document.getElementById('signin_title').innerText = "Welcome!"
+            document.getElementById('password').value = "";
+            let access_token = response.data.access_token;
+            console.log(access_token);
+            localStorage.setItem('flywheelJwtToken', access_token);
+          } else {
+            console.log("Login failed, please try again");
+            document.getElementById('signin_title').innerText = "Sorry, try again"
+            document.getElementById('password').value = "";
+          }
+        })
+        .catch(error => {
+          console.error(error);
           document.getElementById('signin_title').innerText = "Sorry, try again"
           document.getElementById('password').value = "";
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        document.getElementById('signin_title').innerText = "Sorry, try again"
-        document.getElementById('password').value = "";
-      });
+        });
+    }
   }
 </script>
 

@@ -2,44 +2,75 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>English Flywheel. Sign Up</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="images/icon.png" />
-    <link href="styles/sign.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+  <title>English Flywheel. Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link href="styles/sign.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
 
 <body>
   <div class="signupFrm">
     <div class="wrapper">
-    
-      <h1 class="title">Sign up</h1>
-
+      <div class="title" id="signup_title">
+        Sign up
+      </div>
       <div class="inputContainer">
-        <input type="text" class="input" placeholder="a">
+        <input type="text" class="input" placeholder="a" id="email">
         <label for="" class="label">Email</label>
       </div>
-
       <div class="inputContainer">
-        <input type="text" class="input" placeholder="a">
+        <input type="text" class="input" placeholder="a" id="username">
         <label for="" class="label">Username</label>
       </div>
-
       <div class="inputContainer">
-        <input type="text" class="input" placeholder="a">
+        <input type="password" class="input" placeholder="a" id="password">
         <label for="" class="label">Password</label>
       </div>
-
       <div class="inputContainer">
-        <input type="text" class="input" placeholder="a">
+        <input type="password" class="input" placeholder="a" id="confirm_password">
         <label for="" class="label">Confirm Password</label>
       </div>
-
-      <input type="submit" class="submitBtn" value="Sign up">
-    
+      <input type="submit" class="submitBtn" value="Sign up" onclick="signup()">
     </div>
   </div>
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+  function signup() {
+    if ((document.getElementById('email').value === "")
+      || (document.getElementById('username').value === "")
+      || (document.getElementById('password').value === "")
+      || (document.getElementById('confirm_password').value === "")) {
+      document.getElementById('signup_title').innerText = "Заполните все поля!";
+    }
+    else if (document.getElementById('password').value === document.getElementById('confirm_password').value) {
+      axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+      return axios.post(`http://127.0.0.1:8000/signup?username=${(document.getElementById('username').value)}&email=${(document.getElementById('email').value)}&password=${(document.getElementById('password').value)}`)
+        .then(response => {
+          console.log(response.data);
+          if (response.data.result === "User exist") {
+            document.getElementById('signup_title').innerText = "Такой пользователь уже существует";
+            document.getElementById('password').value = "";
+            document.getElementById('confirm_password').value = "";
+          }
+          else if (response.data.result === "New user created successfully") {
+            document.getElementById('signup_title').innerText = "Добро пожаловать!";
+            document.getElementById('password').value = "";
+            document.getElementById('confirm_password').value = "";
+          }
+        })
+        .catch(error => console.error(error));
+    }
+    else {
+      document.getElementById('signup_title').innerText = "Повторите пароль!"
+      document.getElementById('password').value = "";
+      document.getElementById('confirm_password').value = "";
+    }
+  }
+</script>
+
 </html>

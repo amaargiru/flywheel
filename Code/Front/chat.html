@@ -48,7 +48,7 @@
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
         <div class="chat__message-content">
-          Вы можете <a href="signin.html">войти в свой аккаунт</a> или <a href="signup.html">создать новый аккаунт</a>. 
+          Привет! Вы можете <a href="signin.html">войти в свой аккаунт</a> или <a href="signup.html">создать новый аккаунт</a>. 
           Тогда бот определит темы занятий именно под ваш уровень владения английским языком, 
           каждый следующий вопрос будет подобран индивидуально и ваш прогресс значительно ускорится.<br>
           Если вы продолжите учиться без аккаунта, то, к сожалению, вопросы будут задаваться в случайном порядке, 
@@ -64,7 +64,7 @@
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
-        <div class="chat__message-content">Enter phrase \"${response.data.native_phrase}\" in english</div></div></div></div>`
+        <div class="chat__message-content">Напишите на английском фразу <b>\"${response.data.native_phrase}\"</b>.</div></div></div></div>`
 
         question_id = response.data.question_id
 
@@ -105,7 +105,7 @@
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
-        <div class="chat__message-content">Enter phrase \"${secondResponse.data.native_phrase}\" in english</div></div></div></div>`
+        <div class="chat__message-content">Напишите на английском фразу <b>\"${secondResponse.data.native_phrase}\"</b>.</div></div></div></div>`
 
         question_id = secondResponse.data.question_id
 

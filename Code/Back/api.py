@@ -1,4 +1,5 @@
 import json
+import random
 from datetime import datetime, timedelta
 
 import uvicorn
@@ -143,11 +144,9 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
+    credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                                          detail="Could not validate credentials",
+                                          headers={"WWW-Authenticate": "Bearer"})
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
@@ -198,9 +197,16 @@ async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
             "token_type": "bearer"}
 
 
-@app.post("/signup", response_model=Token)
-async def signup(form_data: OAuth2PasswordRequestForm = Depends()):
-    pass
+@app.post("/signup")
+async def signup(username: str, email: str, password: str):
+    res: bool = random.choice([True, False])
+
+    if res:
+        return {"result": "New user created successfully",
+                "user": username}
+    else:
+        return {"result": "User exist",
+                "user": username}
 
 
 @app.get("/users/me/", response_model=User)

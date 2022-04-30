@@ -2,34 +2,63 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>English Flywheel. Sign In</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="images/icon.png" />
-    <link href="styles/sign.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
+  <meta charset="utf-8">
+  <title>English Flywheel. Sign In</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/icon.png" />
+  <link href="styles/sign.css" rel="stylesheet" type="text/css">
 </head>
 
 
 <body>
   <div class="signupFrm">
     <div class="wrapper">
-    <form action="" class="form">
-      <h1 class="title">Sign in</h1>
+      
+        <h1 class="title">Sign in</h1>
 
-      <div class="inputContainer">
-        <input type="text" class="input" placeholder="a">
-        <label for="" class="label">Username</label>
-      </div>
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="a" id="username">
+          <label for="" class="label">Username</label>
+        </div>
 
-      <div class="inputContainer">
-        <input type="text" class="input" placeholder="a">
-        <label for="" class="label">Password</label>
-      </div>
+        <div class="inputContainer">
+          <input type="text" class="input" placeholder="a" id="password">
+          <label for="" class="label">Password</label>
+        </div>
 
-      <input type="submit" class="submitBtn" value="Sign in">
-    </form>
+        <input type="submit" class="submitBtn" value="Sign in" onclick="signin()">
+      
     </div>
   </div>
 </body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+  function signin() {
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    //axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+    var form_data = new FormData()
+    form_data.append("username", "johndoe");// document.getElementById('username').value
+    form_data.append("password", "secret")//document.getElementById('password').value
+
+    axios({
+      method: "post",
+      url: "http://127.0.0.1:8000/token",
+      data: form_data,
+      headers: { "Content-Type": "multipart/form-data" }
+    })
+      .then(response => {
+        if (response.status === 200) {
+          console.log("Registration Successful, you can now login");
+        } else {
+          console.log("Registration Failed, please try again");
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
+
+</script>
+
 </html>

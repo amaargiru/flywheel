@@ -219,6 +219,20 @@ async def get_next_question(current_user: LocalUser = Depends(get_current_user))
             "native_phrase": f"{question.native_phrase}"}
 
 
+@app.post("/get_answer_check")
+async def get_answer_check(user_id: int, question_id: int, user_input: str, current_user: LocalUser = Depends(get_current_user)):
+    # return [{"item_id": "Foo", "owner": current_user.username}]
+    question = Examiner.get_question(question_id)
+    user_input_cleaned = Refiner.refine_user_input(user_input)
+    user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
+    user_input_without_punctuation_lower = Lower.list_lower(user_input_complex.user_input_without_punctuation)
+    references_lower = Lower.references_lower(question.references)
+    index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
+    correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
+    a = Printer.format_message_to_api(question.references, index, correction, ratio)
+
+    return {"question_id": 1, "answer": json.dumps(a)}
+
 if __name__ == "__main__":
     try:
         path = pathlib.Path(log_file_path)  # Создаем путь к файлу логов, если он не существует

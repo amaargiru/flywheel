@@ -93,7 +93,7 @@ async def read_root():
 
 # Example: http://127.0.0.1:8000/get_next_question?user_id=1
 @app.post("/get_next_question_anonymous")
-async def get_next_question(user_id: int):
+async def get_next_question_anonymous(user_id: int):
     question_id = Examiner.define_next_question_num(user_id)
     question = Examiner.get_question(question_id)
 
@@ -103,7 +103,7 @@ async def get_next_question(user_id: int):
 
 # Example: http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=1&user_input=qq
 @app.post("/get_answer_check_anonymous")
-async def get_answer_check(user_id: int, question_id: int, user_input: str):
+async def get_answer_check_anonymous(user_id: int, question_id: int, user_input: str):
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
@@ -192,8 +192,13 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
 
 @app.post("/signin", response_model=Token)
 async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
-    if not user:
+    user = None
+    try:
+        user = User.get(User.username == form_data.username)
+    except Exception as e:
+        logger.error(f"Ошибка \"{str(e)}\" при попытке найти пользователя в БД.")
+
+    if user is None or not pwd_context.verify(form_data.password, user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                             detail="Incorrect username or password",
                             headers={"WWW-Authenticate": "Bearer"})
@@ -206,17 +211,15 @@ async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
 
 @app.post("/signup")
 async def signup(username: str, email: str, password: str):
-    # res: bool = random.choice([True, False])
-
     res: bool = False
 
-    try_get_user = None
+    user = None
     try:
-        try_get_user = User.get(User.username == username).username
+        user = User.get(User.username == username)
     except Exception as e:
-        logger.error(f"Ошибка \"{str(e)}\" при попытке определить наличие пользователя в БД.")
+        logger.error(f"Ошибка \"{str(e)}\" при попытке найти пользователя в БД.")
 
-    if try_get_user is None:
+    if user is None:
         User.create(username=username, email=email, password_hash=pwd_context.hash(password))
         res = True
 

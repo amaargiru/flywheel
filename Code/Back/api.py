@@ -1,5 +1,6 @@
 import json
-import random
+import pathlib
+import sys
 from datetime import datetime, timedelta
 
 import uvicorn
@@ -8,16 +9,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from pydantic import BaseModel
+from pydantic import BaseModel as bmodel
 
 from comparator import Comparator
 from complicator import Complicator
+from db_schema import *
 from examiner import Examiner
+from fw_logger import FlyWheelLogger
 from lower import Lower
 from printer import Printer
 from refiner import Refiner
 
-# to get a string like this run:
+log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов
+log_max_file_count = 10  # Максимальное количество файлов логов
+log_file_path = "logs//api.log"
+
+# To get a string like this run:
 # openssl rand -hex 32
 SECRET_KEY = "f6e936d318b4103412c142893d7331fb83c2228fc31155a8f96de27c3afdeea7"
 ALGORITHM = "HS256"
@@ -34,23 +41,23 @@ fake_users_db = {
 }
 
 
-class Token(BaseModel):
+class Token(bmodel):
     access_token: str
     token_type: str
 
 
-class TokenData(BaseModel):
+class TokenData(bmodel):
     username: str | None = None
 
 
-class User(BaseModel):
+class LocalUser(bmodel):
     username: str
     email: str | None = None
     full_name: str | None = None
     disabled: bool | None = None
 
 
-class UserInDB(User):
+class UserInDB(LocalUser):
     hashed_password: str
 
 
@@ -161,7 +168,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     return user
 
 
-async def get_current_active_user(current_user: User = Depends(get_current_user)):
+async def get_current_active_user(current_user: LocalUser = Depends(get_current_user)):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user
@@ -199,7 +206,19 @@ async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
 
 @app.post("/signup")
 async def signup(username: str, email: str, password: str):
-    res: bool = random.choice([True, False])
+    # res: bool = random.choice([True, False])
+
+    res: bool = False
+
+    try_get_user = None
+    try:
+        try_get_user = User.get(User.username == username).username
+    except Exception as e:
+        logger.error(f"Ошибка \"{str(e)}\" при попытке определить наличие пользователя в БД.")
+
+    if try_get_user is None:
+        User.create(username=username, email=email, password_hash=pwd_context.hash(password))
+        res = True
 
     if res:
         return {"result": "New user created successfully",
@@ -209,15 +228,23 @@ async def signup(username: str, email: str, password: str):
                 "user": username}
 
 
-@app.get("/users/me/", response_model=User)
-async def read_users_me(current_user: User = Depends(get_current_active_user)):
+@app.get("/users/me/", response_model=LocalUser)
+async def read_users_me(current_user: LocalUser = Depends(get_current_active_user)):
     return current_user
 
 
 @app.get("/users/me/items/")
-async def read_own_items(current_user: User = Depends(get_current_active_user)):
+async def read_own_items(current_user: LocalUser = Depends(get_current_active_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]
 
 
 if __name__ == "__main__":
+    try:
+        path = pathlib.Path(log_file_path)  # Создаем путь к файлу логов, если он не существует
+        path.parent.mkdir(parents=True, exist_ok=True)
+        logger = FlyWheelLogger.get_logger(log_file_path, log_max_file_size, log_max_file_count)
+    except Exception as err:
+        print(f"Error when trying to create log directory {str(err)}")
+        sys.exit()  # Аварийный выход
+
     uvicorn.run(app, host="0.0.0.0", port=8000)

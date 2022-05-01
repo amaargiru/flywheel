@@ -3,4 +3,5 @@ Back: заменить длинное условие в refiner.py на regexp (
 Back: в Complicator.complicate_user_input используются List'ы, попробовать заменить на Matrix из numpy (с замером производительности)
 Back: разобраться с проблемой чтения серий данных при помощи peewee (https://docs.peewee-orm.com/en/latest/peewee/quickstart.html)
 Back + Front: усложнить условия создания нового пользователя (валидация написания email), длина пароля, длина имени
-Back: Медленные запросы, 250 - 500 мс
+Back: Медленные запросы, 250 - 500 мс (peewee?)
+Back: FastAPI не рекомендует peewee для новых разработок. Надо либо заменить peewee на SQLAlchemy, либо согласовать FastAPI с peewee (https://fastapi.tiangolo.com/advanced/sql-databases-peewee/)

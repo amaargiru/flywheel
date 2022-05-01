@@ -1,6 +1,7 @@
 import json
 import pathlib
 import sys
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 
 import uvicorn
@@ -9,7 +10,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
 from passlib.context import CryptContext
-from pydantic import BaseModel as bmodel
 
 from comparator import Comparator
 from complicator import Complicator
@@ -41,24 +41,24 @@ fake_users_db = {
 }
 
 
-class Token(bmodel):
+@dataclass
+class Token:
     access_token: str
     token_type: str
 
 
-class TokenData(bmodel):
+@dataclass
+class TokenData:
     username: str | None = None
 
 
-class LocalUser(bmodel):
+@dataclass
+class LocalUser:
     username: str
     email: str | None = None
     full_name: str | None = None
     disabled: bool | None = None
-
-
-class UserInDB(LocalUser):
-    hashed_password: str
+    hashed_password: str | None = None
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -83,14 +83,8 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+
 # http://127.0.0.1:8000/docs
-'''
-@app.get("/")
-async def read_root():
-    return {"Hello!": "Please read the docs: http://127.0.0.1:8000/docs"}
-'''
-
-
 # Example: http://127.0.0.1:8000/get_next_question?user_id=1
 @app.post("/get_next_question_anonymous")
 async def get_next_question_anonymous(user_id: int):
@@ -127,7 +121,7 @@ def get_password_hash(password):
 def get_user(db, username: str):
     if username in db:
         user_dict = db[username]
-        return UserInDB(**user_dict)
+        return LocalUser(**user_dict)
 
 
 def authenticate_user(fake_db, username: str, password: str):
@@ -166,28 +160,6 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     if user is None:
         raise credentials_exception
     return user
-
-
-async def get_current_active_user(current_user: LocalUser = Depends(get_current_user)):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
-    return current_user
-
-
-'''
-@app.post("/token", response_model=Token)
-async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                            detail="Incorrect username or password",
-                            headers={"WWW-Authenticate": "Bearer"})
-
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(data={"sub": user.username}, expires_delta=access_token_expires)
-    return {"access_token": access_token,
-            "token_type": "bearer"}
-'''
 
 
 @app.post("/signin", response_model=Token)
@@ -231,13 +203,8 @@ async def signup(username: str, email: str, password: str):
                 "user": username}
 
 
-@app.get("/users/me/", response_model=LocalUser)
-async def read_users_me(current_user: LocalUser = Depends(get_current_active_user)):
-    return current_user
-
-
 @app.get("/users/me/items/")
-async def read_own_items(current_user: LocalUser = Depends(get_current_active_user)):
+async def read_own_items(current_user: LocalUser = Depends(get_current_user)):
     return [{"item_id": "Foo", "owner": current_user.username}]
 
 

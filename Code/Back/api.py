@@ -156,7 +156,13 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = get_user(fake_users_db, username=token_data.username)
+
+    user = None
+    try:
+        user = User.get(User.username == token_data.username)
+    except Exception as e:
+        logger.error(f"Ошибка \"{str(e)}\" при попытке найти пользователя в БД.")
+
     if user is None:
         raise credentials_exception
     return user
@@ -203,9 +209,14 @@ async def signup(username: str, email: str, password: str):
                 "user": username}
 
 
-@app.get("/users/me/items/")
-async def read_own_items(current_user: LocalUser = Depends(get_current_user)):
-    return [{"item_id": "Foo", "owner": current_user.username}]
+@app.post("/get_next_question")
+async def get_next_question(current_user: LocalUser = Depends(get_current_user)):
+    # return [{"item_id": "Foo", "owner": current_user.username}]
+    question_id = Examiner.define_next_question_num(1)
+    question = Examiner.get_question(question_id)
+
+    return {"question_id": question_id,
+            "native_phrase": f"{question.native_phrase}"}
 
 
 if __name__ == "__main__":

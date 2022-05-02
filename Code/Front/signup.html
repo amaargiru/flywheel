@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link href="styles/sign.css" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
 
@@ -58,7 +57,7 @@
             document.getElementById('confirm_password').value = "";
           }
           else if (response.data.result === "New user created successfully") {
-            document.getElementById('signup_title').innerText = "Добро пожаловать!";
+            document.getElementById('signup_title').innerHTML = 'Welcome to <a href="chat.html">chat</a>!'
             document.getElementById('password').value = "";
             document.getElementById('confirm_password').value = "";
           }

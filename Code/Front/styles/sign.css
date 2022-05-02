@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
-
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   background-color: white;
-  font-family: "lato", sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
 .signupFrm {
@@ -74,7 +73,7 @@ body {
   margin-left: auto;
   padding: 15px 30px;
   border: none;
-  background-color: purple;
+  background-color: #58cc02;
   color: white;
   border-radius: 6px;
   cursor: pointer;
@@ -83,7 +82,7 @@ body {
 }
 
 .submitBtn:hover {
-  background-color: #9867C5;
+  background-color: #89e219;
   transform: translateY(-2px);
 }
 .input:focus + .label {
@@ -92,7 +91,7 @@ body {
   z-index: 10;
   font-size: 14px;
   font-weight: 600;
-  color: purple;
+  color: #58cc02;
 }
 
 .input:not(:placeholder-shown)+ .label {
@@ -104,5 +103,5 @@ body {
 }
 
 .input:focus {
-  border: 2px solid purple;
+  border: 2px solid #58cc02;
 }

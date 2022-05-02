@@ -6,18 +6,20 @@
   <title>English Flywheel. Chat</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link href="styles/style.css" rel="stylesheet" type="text/css">
-  <link href='https://fonts.googleapis.com/css2?family=Roboto' rel='stylesheet' type='text/css'>
 </head>
 
 <body onload="startMessage()">
   <div id="wrapper">
     <div id="menu">
       <p class="welcome" id="header"><b>Flywheel Bot</b></p>
+      <a href="signin.html">Вход</a> &nbsp;&nbsp;&nbsp; <a href="signup.html">Регистрация</a>
     </div>
     <div id="chatbox"></div>
 
-    <input name="usermsg" type="text" id="usermsg" />
-    <input type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
+    <div class="usermsgwrapper">
+      <input class="usermsg" name="usermsg" type="text" id="usermsg" />
+      <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
+    </div>
   </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -133,7 +135,7 @@
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-        <div class="chat__message-content">${motivation_msg} ${hint}</div></div></div></div>`
+        <div class="chat__message-content">${motivation_msg} ${hint}.</div></div></div></div>`
 
         console.log(secondResponse.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">

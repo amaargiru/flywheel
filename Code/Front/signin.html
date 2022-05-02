@@ -51,20 +51,20 @@
         .then(response => {
           if (response.status === 200) {
             console.log("Login successful, you can now login");
-            document.getElementById('signin_title').innerText = "Welcome!"
+            document.getElementById('signin_title').innerHTML = 'Welcome to <a href="chat.html">chat</a>!'
             document.getElementById('password').value = "";
             let access_token = response.data.access_token;
             console.log(access_token);
             localStorage.setItem('flywheelJwtToken', access_token);
           } else {
             console.log("Login failed, please try again");
-            document.getElementById('signin_title').innerText = "Sorry, try again"
+            document.getElementById('signin_title').innerText = "Попробуйте еще раз"
             document.getElementById('password').value = "";
           }
         })
         .catch(error => {
           console.error(error);
-          document.getElementById('signin_title').innerText = "Sorry, try again"
+          document.getElementById('signin_title').innerText = "Попробуйте еще раз"
           document.getElementById('password').value = "";
         });
     }

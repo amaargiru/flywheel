@@ -34,7 +34,7 @@
   async function updateChat() {
     document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
       <img src="images/user_small.png" class="chat__person-avatar">
-      <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:05</div>
+      <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
       <div class="chat__message-content">${document.getElementById('usermsg').value}</div></div></div></div>`
 
     chainReq();
@@ -44,9 +44,9 @@
 
   function startMessage() {
     if (localStorage.getItem("flywheelJwtToken") === null) {
-      document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+      document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
-        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">
           Привет! Вы можете <a href="signin.html">войти в свой аккаунт</a> или <a href="signup.html">создать новый аккаунт</a>. 
           Тогда бот определит темы занятий именно под ваш уровень владения английским языком, 
@@ -70,7 +70,7 @@
         console.log(response.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
-        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">Напишите на английском фразу <b>\"${response.data.native_phrase}\"</b>.</div></div></div></div>`
 
         question_id = response.data.question_id
@@ -132,13 +132,13 @@
 
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
-        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">${motivation_msg} ${hint}</div></div></div></div>`
 
         console.log(secondResponse.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
-        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">Напишите на английском фразу <b>\"${secondResponse.data.native_phrase}\"</b>.</div></div></div></div>`
 
         question_id = secondResponse.data.question_id
@@ -147,6 +147,14 @@
         objDiv.scrollTop = objDiv.scrollHeight;
       }))
       .catch(error => console.log(error));
+  }
+
+  function getcurrentTime() {
+    return new Date().toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: "numeric",
+      minute: "numeric"
+    });
   }
 </script>
 

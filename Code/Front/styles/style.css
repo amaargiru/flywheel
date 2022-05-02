@@ -207,7 +207,7 @@ a#exit {
 .chat__message-content {
   border-radius: 5px;
   padding: 7px;
-  background-color: #ccc;
+  background-color: #eee;
   display: inline-block;
 
   margin-left: 5px;
@@ -224,4 +224,5 @@ a#exit {
 .chat__item--responder .chat__message-content {
   margin-left: 0;
   margin-right: 5px;
+  background-color: #ccffbb;
 }

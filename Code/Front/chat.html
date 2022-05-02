@@ -100,22 +100,40 @@
       .then(axios.spread((firstResponse, secondResponse) => {
         console.log(firstResponse.data, secondResponse.data);
 
-        var asa = JSON.parse(firstResponse.data.answer);
-
-        hint = "";
-        for (var i = 0; i < asa.hint.length; i++) {
-          b = asa.hint.charAt(i);
-          if (b == '/') {
-            hint += `<font color="red">${asa.hint.charAt(i + 1)}</font>`
-            i++;
-          }
-          else
-            hint += `<font color="green">${asa.hint.charAt(i)}</font>`
+        let ans = JSON.parse(firstResponse.data.answer);
+        let motivation_msg = "";
+        switch (ans.score) {
+          case 4:
+            motivation_msg = "Правильно!";
+            break;
+          case 3:
+            motivation_msg = "Почти правильно. Правильный ответ:";
+            break;
+          case 2:
+            motivation_msg = "Неплохо. Правильный ответ:";
+            break;
+          case 1:
+            motivation_msg = "Правильный ответ:";
+            break;
         }
+
+        let hint = "";
+        if ((ans.score >= 1) && (ans.score <= 3)) {
+          for (let i = 0; i < ans.hint.length; i++) {
+            b = ans.hint.charAt(i);
+            if (b == '/') {
+              hint += `<font color="red">${ans.hint.charAt(i + 1)}</font>`
+              i++;
+            }
+            else
+              hint += `<font color="green">${ans.hint.charAt(i)}</font>`
+          }
+        }
+
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">9:03</div>
-        <div class="chat__message-content">Правильный ответ: ${hint}</div></div></div></div>`
+        <div class="chat__message-content">${motivation_msg} ${hint}</div></div></div></div>`
 
         console.log(secondResponse.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">

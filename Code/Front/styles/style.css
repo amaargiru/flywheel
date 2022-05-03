@@ -219,6 +219,7 @@ a#exit {
   display: flex;
   align-items: center;
   margin-right: 10px;
+  margin: 3px;
 }
 
 .chat__message-content {
@@ -242,4 +243,28 @@ a#exit {
   margin-left: 0;
   margin-right: 5px;
   background-color: #89e219;
+}
+
+/* Specifies the size of the audio container */
+audio {
+  width: 120px;
+  height: 25px;
+}
+
+audio::-webkit-media-controls-panel {
+  -webkit-justify-content: center;
+  height: 25px;
+}
+
+/* Removes the timeline */
+audio::-webkit-media-controls-timeline {
+  display: none !important;
+}
+
+/* Removes the time stamp */
+audio::-webkit-media-controls-current-time-display {
+  display: none;
+}
+audio::-webkit-media-controls-time-remaining-display {
+  display: none;
 }

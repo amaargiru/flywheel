@@ -54,7 +54,9 @@
           Тогда бот определит темы занятий именно под ваш уровень владения английским языком, 
           каждый следующий вопрос будет подобран индивидуально и ваш прогресс значительно ускорится.<br>
           Если вы продолжите учиться без аккаунта, то, к сожалению, вопросы будут задаваться в случайном порядке, 
-          а информация о вашем прогрессе не будет сохранена.
+          а информация о вашем прогрессе не будет сохранена.<br>
+          Плюс, к правильным ответам добавятся ссылки на аудиофайлы с примером правильного произношения:<br> <audio controls>
+            <source src="https://www.flywheelang.com/MP3/ServiceMP3/Wake_up_Neo_The_Matrix_has_you_follow_the_white_rabbit.mp3" /></audio>
         </div></div></div></div>`
     }
 
@@ -130,12 +132,13 @@
             else
               hint += `<font color="green">${ans.hint.charAt(i)}</font>`
           }
+          hint += ".";
         }
 
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-        <div class="chat__message-content">${motivation_msg} ${hint}.</div></div></div></div>`
+        <div class="chat__message-content">${motivation_msg} ${hint}</div></div></div></div>`
 
         console.log(secondResponse.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">

@@ -13,7 +13,7 @@ from passlib.context import CryptContext
 
 from comparator import Comparator
 from complicator import Complicator
-from db_schema import *
+from db_schema import User
 from examiner import Examiner
 from fw_logger import FlyWheelLogger
 from lower import Lower
@@ -97,7 +97,7 @@ async def get_answer_check_anonymous(user_id: int, question_id: int, user_input:
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
     a = Printer.format_message_to_api(question.references, index, correction, ratio)
 
-    return {"question_id": 1, "answer": json.dumps(a)}
+    return {"question_id": question_id, "answer": json.dumps(a)}
 
 
 def verify_password(plain_password, hashed_password):
@@ -206,7 +206,7 @@ async def get_answer_check(user_id: int, question_id: int, user_input: str, curr
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
     a = Printer.format_message_to_api(question.references, index, correction, ratio)
 
-    return {"question_id": 1, "answer": json.dumps(a)}
+    return {"question_id": question_id, "answer": json.dumps(a), "link_to_audio": question.links_to_audio[index]}
 
 
 if __name__ == "__main__":

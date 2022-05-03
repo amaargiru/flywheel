@@ -135,10 +135,14 @@
           hint += ".";
         }
 
-        document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        if (firstResponse.data.link_to_audio != "") {
+          var speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`
+        }
+
+        document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-        <div class="chat__message-content">${motivation_msg} ${hint}</div></div></div></div>`
+        <div class="chat__message-content">${motivation_msg} ${hint} ${speech}</div></div></div></div>`
 
         console.log(secondResponse.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">

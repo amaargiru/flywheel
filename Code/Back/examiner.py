@@ -1,13 +1,14 @@
 import secrets
 from dataclasses import dataclass
 
-from db_schema import *
+from db_schema import database, Question, Answer
 
 
 @dataclass
 class UserQuestion:
     native_phrase: str
     references: list[str]
+    links_to_audio: list[str]
 
 
 class Examiner:
@@ -26,4 +27,8 @@ class Examiner:
         for ref in query:
             references.append(ref.english_phrase)
 
-        return UserQuestion(native_phrase, references)
+        links_to_audio = []
+        for ref in query:
+            links_to_audio.append(ref.link_to_audio)
+
+        return UserQuestion(native_phrase, references, links_to_audio)

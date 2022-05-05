@@ -1,0 +1,10 @@
+PHPMyAdmin:
+    - URL:      http://31.31.202.41/phpmyadmin/
+    - Username: mysqladmin
+    - Password: Peigha3eigha
+
+download flywheel.sql
+sudo apt install pip
+pip install -r requirements.txt
+sudo ufw allow 8000
+uvicorn api:app --host 0.0.0.0 --port 8000

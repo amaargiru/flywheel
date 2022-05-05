@@ -1,10 +1,11 @@
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
 class ComplexUserInput:
-    user_input_without_punctuation: list[str]
-    transformation_matrix: list[list[int]]
+    user_input_without_punctuation: List[str]
+    transformation_matrix: List[List[int]]
 
 
 class Complicator:

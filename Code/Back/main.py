@@ -1,12 +1,12 @@
 import pathlib
 import sys
 
-from printer import Printer
 from comparator import Comparator
 from complicator import Complicator
 from examiner import Examiner
 from fw_logger import FlyWheelLogger
 from lower import Lower
+from printer import Printer
 from refiner import Refiner
 
 log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов

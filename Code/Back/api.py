@@ -3,6 +3,7 @@ import pathlib
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from typing import Optional
 
 import uvicorn
 from fastapi import Depends, FastAPI, HTTPException, status
@@ -39,16 +40,16 @@ class Token:
 
 @dataclass
 class TokenData:
-    username: str | None = None
+    username: Optional[str] = None
 
 
 @dataclass
 class LocalUser:
     username: str
-    email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
-    hashed_password: str | None = None
+    email: Optional[str] = None
+    full_name: Optional[str] = None
+    disabled: Optional[bool] = None
+    hashed_password: Optional[str] = None
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -108,7 +109,7 @@ def get_password_hash(password):
     return pwd_context.hash(password)
 
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta

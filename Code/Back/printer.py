@@ -1,9 +1,11 @@
+from typing import List
+
 from colorama import init, Fore, Style
 
 
 class Printer:
     @staticmethod
-    def color_print_message_to_user(references: list[str], index: int, correction: list[bool], ratio: float) -> None:
+    def color_print_message_to_user(references: List[str], index: int, correction: List[bool], ratio: float) -> None:
         init()
 
         if ratio > 0.99:
@@ -41,7 +43,7 @@ class Printer:
                             print(Fore.RED + " ", end='')
 
     @staticmethod
-    def format_message_to_api(references: list[str], index: int, correction: list[bool], ratio: float) -> dict:
+    def format_message_to_api(references: List[str], index: int, correction: List[bool], ratio: float) -> dict:
         message_to_user = {"hint": Printer.__create_hint(correction, index, references)}
 
         if ratio > 0.99:

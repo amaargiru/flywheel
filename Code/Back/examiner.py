@@ -1,5 +1,6 @@
 import secrets
 from dataclasses import dataclass
+from typing import List
 
 from db_schema import database, Question, Answer
 
@@ -7,8 +8,8 @@ from db_schema import database, Question, Answer
 @dataclass
 class UserQuestion:
     native_phrase: str
-    references: list[str]
-    links_to_audio: list[str]
+    references: List[str]
+    links_to_audio: List[str]
 
 
 class Examiner:

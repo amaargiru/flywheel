@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Lower:
     @staticmethod
     def list_lower(input_list: list) -> list:
@@ -9,8 +12,8 @@ class Lower:
         return lower_list
 
     @staticmethod
-    def references_lower(references: list[str]) -> list[str]:
-        references_lower: list[str] = []
+    def references_lower(references: List[str]) -> List[str]:
+        references_lower: List[str] = []
 
         for ref in references:
             references_lower.append(ref.lower())

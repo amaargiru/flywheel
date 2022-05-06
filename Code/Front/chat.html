@@ -6,19 +6,21 @@
   <title>English Flywheel. Chat</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link href="styles/style.css" rel="stylesheet" type="text/css">
-  <script>
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-      document.getElementsByTagName("html")[0].style["font-size"] = "3vmax";
-    }
-    else {
-      document.getElementsByTagName("html")[0].style["font-size"] = "1vmax";
-    }
-  </script>
 </head>
 
 <body onload="startMessage()">
+  <script>
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    console.log(document.body.style.fontSize);
+
+    if (isMobile) {
+      document.body.style.fontSize = "2vmax";
+    }
+    else {
+      document.body.style.fontSize = "1.2vmax";
+    }
+  </script>
   <table id="wrapper" border="0">
     <tr style="height: 0;">
       <td valign="top">

@@ -28,6 +28,7 @@
   </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="config.js"></script>
 <script type="text/javascript">
   function signin() {
     if ((document.getElementById('username').value === "")
@@ -44,7 +45,7 @@
 
       axios({
         method: "post",
-        url: "http://127.0.0.1:8000/signin",
+        url: `${app_config.base_url}/signin`,
         data: form_data,
         headers: { "Content-Type": "multipart/form-data" }
       })
@@ -58,13 +59,13 @@
             localStorage.setItem('flywheelJwtToken', access_token);
           } else {
             console.log("Login failed, please try again");
-            document.getElementById('signin_title').innerText = "Попробуйте еще раз"
+            document.getElementById('signin_title').innerText = "Попробуйте еще раз";
             document.getElementById('password').value = "";
           }
         })
         .catch(error => {
           console.error(error);
-          document.getElementById('signin_title').innerText = "Попробуйте еще раз"
+          document.getElementById('signin_title').innerText = "Попробуйте еще раз";
           document.getElementById('password').value = "";
         });
     }

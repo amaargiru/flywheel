@@ -37,6 +37,7 @@
   </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="config.js"></script>
 <script type="text/javascript">
   function signup() {
     if ((document.getElementById('email').value === "")
@@ -48,7 +49,7 @@
     else if (document.getElementById('password').value === document.getElementById('confirm_password').value) {
       axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
       axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-      return axios.post(`http://127.0.0.1:8000/signup?username=${(document.getElementById('username').value)}&email=${(document.getElementById('email').value)}&password=${(document.getElementById('password').value)}`)
+      return axios.post(`${app_config.base_url}/signup?username=${(document.getElementById('username').value)}&email=${(document.getElementById('email').value)}&password=${(document.getElementById('password').value)}`)
         .then(response => {
           console.log(response.data);
           if (response.data.result === "User exist") {

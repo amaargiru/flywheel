@@ -23,6 +23,7 @@
   </div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="config.js"></script>
 <script type="text/javascript">
   question_id = 1;
 
@@ -37,7 +38,7 @@
     document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
       <img src="images/user_small.png" class="chat__person-avatar">
       <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-      <div class="chat__message-content">${document.getElementById('usermsg').value}</div></div></div></div>`
+      <div class="chat__message-content">${document.getElementById('usermsg').value}</div></div></div></div>`;
 
     chainReq();
     document.getElementById('usermsg').value = "";
@@ -57,13 +58,13 @@
           а информация о вашем прогрессе не будет сохранена.<br>
           Плюс, к правильным ответам добавятся ссылки на аудиофайлы с примером правильного произношения:<br> <audio controls>
             <source src="https://www.flywheelang.com/MP3/ServiceMP3/Wake_up_Neo_The_Matrix_has_you_follow_the_white_rabbit.mp3" /></audio>
-        </div></div></div></div>`
+        </div></div></div></div>`;
     }
 
     if (localStorage.getItem("flywheelJwtToken") === null)
-      req = "http://127.0.0.1:8000/get_next_question_anonymous?user_id=1";
+      req = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
     else {
-      req = "http://127.0.0.1:8000/get_next_question";
+      req = `${app_config.base_url}/get_next_question`;
       axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
     }
 
@@ -75,9 +76,9 @@
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-        <div class="chat__message-content">Напишите на английском фразу <b>\"${response.data.native_phrase}\"</b>.</div></div></div></div>`
+        <div class="chat__message-content">Напишите на английском фразу <b>\"${response.data.native_phrase}\"</b>.</div></div></div></div>`;
 
-        question_id = response.data.question_id
+        question_id = response.data.question_id;
 
         var objDiv = document.getElementById("chatbox");
         objDiv.scrollTop = objDiv.scrollHeight;
@@ -90,12 +91,12 @@
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
     if (localStorage.getItem("flywheelJwtToken") === null) {
-      req1 = `http://127.0.0.1:8000/get_answer_check_anonymous?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
-      req2 = "http://127.0.0.1:8000/get_next_question_anonymous?user_id=1";
+      req1 = `${app_config.base_url}/get_answer_check_anonymous?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
+      req2 = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
     }
     else {
-      req1 = `http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
-      req2 = "http://127.0.0.1:8000/get_next_question";
+      req1 = `${app_config.base_url}/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
+      req2 = `${app_config.base_url}/get_next_question`;
       axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
     }
 
@@ -126,32 +127,32 @@
           for (let i = 0; i < ans.hint.length; i++) {
             b = ans.hint.charAt(i);
             if (b == '/') {
-              hint += `<font color="red">${ans.hint.charAt(i + 1)}</font>`
+              hint += `<font color="red">${ans.hint.charAt(i + 1)}</font>`;
               i++;
             }
             else
-              hint += `<font color="green">${ans.hint.charAt(i)}</font>`
+              hint += `<font color="green">${ans.hint.charAt(i)}</font>`;
           }
           hint += ".";
         }
 
         var speech = "";
         if ((firstResponse.data.link_to_audio != "") && (firstResponse.data.link_to_audio !== undefined)){
-          speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`
+          speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`;
         }
 
         document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-        <div class="chat__message-content">${motivation_msg} ${hint} ${speech}</div></div></div></div>`
+        <div class="chat__message-content">${motivation_msg} ${hint} ${speech}</div></div></div></div>`;
 
         console.log(secondResponse.data);
         document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
-        <div class="chat__message-content">Напишите на английском фразу <b>\"${secondResponse.data.native_phrase}\"</b>.</div></div></div></div>`
+        <div class="chat__message-content">Напишите на английском фразу <b>\"${secondResponse.data.native_phrase}\"</b>.</div></div></div></div>`;
 
-        question_id = secondResponse.data.question_id
+        question_id = secondResponse.data.question_id;
 
         var objDiv = document.getElementById("chatbox");
         objDiv.scrollTop = objDiv.scrollHeight;

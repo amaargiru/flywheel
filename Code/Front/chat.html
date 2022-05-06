@@ -6,21 +6,42 @@
   <title>English Flywheel. Chat</title>
   <link rel="icon" type="image/png" href="images/icon.png" />
   <link href="styles/style.css" rel="stylesheet" type="text/css">
+  <script>
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      document.getElementsByTagName("html")[0].style["font-size"] = "3vmax";
+    }
+    else {
+      document.getElementsByTagName("html")[0].style["font-size"] = "1vmax";
+    }
+  </script>
 </head>
 
 <body onload="startMessage()">
-  <div id="wrapper">
-    <div id="menu">
-      <p class="welcome" id="header"><b>Flywheel Bot</b></p>
-      <a href="signin.html">Вход</a> &nbsp;&nbsp;&nbsp; <a href="signup.html">Регистрация</a>
-    </div>
-    <div id="chatbox"></div>
-
-    <div class="usermsgwrapper">
-      <input class="usermsg" name="usermsg" type="text" id="usermsg" />
-      <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
-    </div>
-  </div>
+  <table id="wrapper" border="0">
+    <tr style="height: 0;">
+      <td valign="top">
+        <div id="menu">
+          <p class="welcome" id="header"><b>Flywheel Bot</b></p>
+          <a href="signin.html">Вход</a> &nbsp;&nbsp;&nbsp; <a href="signup.html">Регистрация</a>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td valign="center">
+        <div id="chatbox"></div>
+      </td>
+    </tr>
+    <tr style="height: 0;">
+      <td valign="bottom">
+        <div class="usermsgwrapper">
+          <input class="usermsg" name="usermsg" type="text" id="usermsg" />
+          <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
+        </div>
+      </td>
+    </tr>
+  </table>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="config.js"></script>
@@ -137,7 +158,7 @@
         }
 
         var speech = "";
-        if ((firstResponse.data.link_to_audio != "") && (firstResponse.data.link_to_audio !== undefined)){
+        if ((firstResponse.data.link_to_audio != "") && (firstResponse.data.link_to_audio !== undefined)) {
           speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`;
         }
 

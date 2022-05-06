@@ -18,10 +18,33 @@ uvicorn api:app --host 0.0.0.0 --port 8000
 If you've already started the process, and don't want to kill it and restart under nohup, you can send it to the background, then disown it.
 Ctrl+Z (suspend the process)
 bg (restart the process in the background
-disown %1 (assuming this is job #1, use jobs to determine)
+disown nnn (assuming this is job #1, use jobs to determine)
 
 Посмотреть список процессов в background
-sudo ps -aux | less
+sudo ps -aux (д. б. примерно root 1024  0.2  4.4  54440 44976 ? S 08:04 0:38 /usr/bin/python3 /usr/local/bin/uvicorn api:app --host 0.0.0.0 --port 8000)
 
+Мягко убить процесс:
+kill -TERM 1024
 
-sudo reboot
+Добить процесс, если не выгружается
+kill -KILL 1024
+
+sudo reboot (при необходимости)
+
+															Установка SSL-сертификата
+															sudo apt install snapd
+															sudo snap install --classic certbot
+															sudo certbot certonly --standalone
+															Сертификаты должны осесть в папке etc/letsencrypt
+
+Letsencrypt не работает на IP без доменного имени, поэтому ставим mkcert (https://github.com/FiloSottile/mkcert)
+
+sudo apt install libnss3-tools
+
+curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+chmod +x mkcert-v*-linux-amd64
+sudo cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+
+mkcert -install
+mkcert 0.0.0.0
+uvicorn --ssl-keyfile=0.0.0.0-key.pem --ssl-certfile=0.0.0.0.pem api:app --host 0.0.0.0 --port 8000

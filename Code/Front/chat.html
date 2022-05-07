@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>English Flywheel. Chat</title>
     <link rel="icon" type="image/png" href="images/icon.png"/>
     <link href="styles/style.css" rel="stylesheet" type="text/css">
@@ -15,7 +16,7 @@
     console.log(document.body.style.fontSize);
 
     if (isMobile) {
-        document.body.style.fontSize = "2vmax";
+        document.body.style.fontSize = "2.2vmax";
     } else {
         document.body.style.fontSize = "1.2vmax";
     }
@@ -37,8 +38,8 @@
     <tr style="height: 0;">
         <td valign="bottom">
             <div class="usermsgwrapper">
-                <input class="usermsg" name="usermsg" type="text" id="usermsg"/>
-                <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send"/>
+                <input class="usermsg" name="usermsg" type="text" id="usermsg" style="font-size:2vmax"/>
+                <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" style="font-size:2vmax"/>
             </div>
         </td>
     </tr>

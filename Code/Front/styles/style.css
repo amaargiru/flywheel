@@ -10,10 +10,6 @@ html, body {
     height: 100%;
 }
 
-body {
-    font-family: "Lato";
-}
-
 form {
     padding: 15px 25px;
     display: flex;
@@ -21,17 +17,8 @@ form {
     justify-content: center;
 }
 
-form label {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-input {
-    font-family: "Lato";
-}
-
 a {
-    color: #0000ff;
+    color: #43c000;
     text-decoration: none;
 }
 
@@ -74,15 +61,6 @@ a:hover {
     padding: 2px 8px;
 }
 
-#enter {
-    background: #ff9800;
-    border: 2px solid #e65100;
-    color: white;
-    padding: 4px 10px;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
 #usermsgwrapper {
     position: relative;
     bottom: 20px;
@@ -90,6 +68,7 @@ a:hover {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    font-size: 300%;
 }
 
 #usermsg {
@@ -99,7 +78,6 @@ a:hover {
     border-radius: 2px;
     border: 2px solid #43c000;
     margin: 10px;
-    font-family: "Lato", sans-serif;
 }
 
 #submitmsg {
@@ -109,7 +87,6 @@ a:hover {
     border: 2px solid #43c000;
     color: white;
     padding: 4px 10px;
-    font-weight: bold;
     border-radius: 2px;
 }
 
@@ -124,14 +101,6 @@ a:hover {
 
 #menu p.welcome {
     flex: 1;
-}
-
-a#exit {
-    color: white;
-    background: #c62828;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
 }
 
 .msgln {

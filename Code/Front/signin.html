@@ -1,75 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>English Flywheel. Sign In</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="images/icon.png" />
-  <link href="styles/sign.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>English Flywheel. Sign In</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icon.png"/>
+    <link href="styles/sign.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-  <div class="signupFrm">
+<div class="signupFrm">
     <div class="wrapper">
-      <div class="title" id="signin_title">
-        Sign in
-      </div>
-      <div class="inputContainer">
-        <input type="text" class="input" placeholder="a" id="username">
-        <label for="" class="label">Username</label>
-      </div>
-      <div class="inputContainer">
-        <input type="password" class="input" placeholder="a" id="password">
-        <label for="" class="label">Password</label>
-      </div>
-      <input type="submit" class="submitBtn" value="Sign in" onclick="signin()">
+        <div class="title" id="signin_title">
+            Sign in
+        </div>
+        <div class="inputContainer">
+            <input type="text" class="input" placeholder="a" id="username">
+            <label class="label" for="">Username</label>
+        </div>
+        <div class="inputContainer">
+            <input type="password" class="input" placeholder="a" id="password">
+            <label for="" class="label">Password</label>
+        </div>
+        <input type="submit" class="submitBtn" value="Sign in" onclick="signin()">
     </div>
-  </div>
+</div>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="config.js"></script>
 <script type="text/javascript">
-  function signin() {
-    if ((document.getElementById('username').value === "")
-      || (document.getElementById('password').value === "")) {
-      document.getElementById('signin_title').innerText = "Заполните все поля!";
-    }
-    else {
-      axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+    function signin() {
+        if ((document.getElementById('username').value === "")
+            || (document.getElementById('password').value === "")) {
+            document.getElementById('signin_title').innerText = "Заполните все поля!";
+        } else {
+            axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+            axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-      var form_data = new FormData()
-      form_data.append("username", document.getElementById('username').value);
-      form_data.append("password", document.getElementById('password').value);
+            const form_data = new FormData();
+            form_data.append("username", document.getElementById('username').value);
+            form_data.append("password", document.getElementById('password').value);
 
-      axios({
-        method: "post",
-        url: `${app_config.base_url}/signin`,
-        data: form_data,
-        headers: { "Content-Type": "multipart/form-data" }
-      })
-        .then(response => {
-          if (response.status === 200) {
-            console.log("Login successful, you can now login");
-            document.getElementById('signin_title').innerHTML = 'Welcome to <a href="chat.html">chat</a>!'
-            document.getElementById('password').value = "";
-            let access_token = response.data.access_token;
-            console.log(access_token);
-            localStorage.setItem('flywheelJwtToken', access_token);
-          } else {
-            console.log("Login failed, please try again");
-            document.getElementById('signin_title').innerText = "Попробуйте еще раз";
-            document.getElementById('password').value = "";
-          }
-        })
-        .catch(error => {
-          console.error(error);
-          document.getElementById('signin_title').innerText = "Попробуйте еще раз";
-          document.getElementById('password').value = "";
-        });
+            axios({
+                method: "post",
+                url: `${app_config.base_url}/signin`,
+                data: form_data,
+                headers: {"Content-Type": "multipart/form-data"}
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log("Login successful, you can now login");
+                        document.getElementById('signin_title').innerHTML = 'Welcome to <a href="chat.html">chat</a>!'
+                        document.getElementById('password').value = "";
+                        let access_token = response.data.access_token;
+                        console.log(access_token);
+                        localStorage.setItem('flywheelJwtToken', access_token);
+                    } else {
+                        console.log("Login failed, please try again");
+                        document.getElementById('signin_title').innerText = "Попробуйте еще раз";
+                        document.getElementById('password').value = "";
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                    document.getElementById('signin_title').innerText = "Попробуйте еще раз";
+                    document.getElementById('password').value = "";
+                });
+        }
     }
-  }
 </script>
 
 </html>

@@ -1,235 +1,233 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: "Lato", sans-serif;
 }
 
 html, body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
-  font-family: "Lato";
+    font-family: "Lato";
 }
 
 form {
-  padding: 15px 25px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
+    padding: 15px 25px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
 }
 
 form label {
-  font-size: 1.5rem;
-  font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 input {
-  font-family: "Lato";
+    font-family: "Lato";
 }
 
 a {
-  color: #0000ff;
-  text-decoration: none;
+    color: #0000ff;
+    text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 #wrapper {
-  margin: 0 auto;
-  margin-top: 1%;
-  background: #f7f7f7;
-  width: 90%;
-  border: 2px solid #212121;
-  border-radius: 4px;
-  height: 95%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    margin: 1% auto 0;
+    background: #f7f7f7;
+    width: 90%;
+    border: 2px solid #212121;
+    border-radius: 4px;
+    height: 95%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #chatbox {
-  table-layout: fixed;
-  text-align: left;
-  margin: 0 auto;
-  padding: -10px;
-  background: #FFF;
-  height: 100%;
-  width: 80%;
-  border: 2px solid #a7a7a7;
-  overflow: auto;
-  border-radius: 4px;
-  border-bottom: 4px solid #a7a7a7;
-  position: relative;
+    table-layout: fixed;
+    text-align: left;
+    margin: 0 auto;
+    padding: -10px;
+    background: #FFF;
+    height: 100%;
+    width: 80%;
+    border: 2px solid #a7a7a7;
+    overflow: auto;
+    border-radius: 4px;
+    border-bottom: 4px solid #a7a7a7;
+    position: relative;
 }
 
 #name {
-  border-radius: 4px;
-  border: 1px solid #ff9800;
-  padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #ff9800;
+    padding: 2px 8px;
 }
 
 #enter {
-  background: #ff9800;
-  border: 2px solid #e65100;
-  color: white;
-  padding: 4px 10px;
-  font-weight: bold;
-  border-radius: 4px;
+    background: #ff9800;
+    border: 2px solid #e65100;
+    color: white;
+    padding: 4px 10px;
+    font-weight: bold;
+    border-radius: 4px;
 }
 
 #usermsgwrapper {
-  position: relative;
-  bottom: 20px;
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
+    position: relative;
+    bottom: 20px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #usermsg {
-  width: 75%;
-  padding-left: 5px;
-  line-height: 25px;
-  border-radius: 2px;
-  border: 2px solid #43c000;
-  margin: 10px;
-  font-family: "Lato", sans-serif;
+    width: 75%;
+    padding-left: 5px;
+    line-height: 25px;
+    border-radius: 2px;
+    border: 2px solid #43c000;
+    margin: 10px;
+    font-family: "Lato", sans-serif;
 }
 
 #submitmsg {
-  margin: 10px;
-  width: 15%;
-  background: #58cc02;
-  border: 2px solid #43c000;
-  color: white;
-  padding: 4px 10px;
-  font-weight: bold;
-  border-radius: 2px;
+    margin: 10px;
+    width: 15%;
+    background: #58cc02;
+    border: 2px solid #43c000;
+    color: white;
+    padding: 4px 10px;
+    font-weight: bold;
+    border-radius: 2px;
 }
 
 .error {
-  color: #ff0000;
+    color: #ff0000;
 }
 
 #menu {
-  padding: 15px 25px;
-  display: flex;
+    padding: 15px 25px;
+    display: flex;
 }
 
 #menu p.welcome {
-  flex: 1;
+    flex: 1;
 }
 
 a#exit {
-  color: white;
-  background: #c62828;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: bold;
+    color: white;
+    background: #c62828;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
 .msgln {
-  margin: 0 0 5px 0;
+    margin: 0 0 5px 0;
 }
 
 .msgln span.left-info {
-  color: orangered;
+    color: orangered;
 }
 
 .msgln span.chat-time {
-  color: #666;
-  vertical-align: super;
+    color: #666;
+    vertical-align: super;
 }
 
 .msgln b.user-name,
 .msgln b.user-name-left {
-  font-weight: bold;
-  background: #546e7a;
-  color: white;
-  padding: 2px 4px;
-  border-radius: 4px;
-  margin: 0 5px 0 0;
+    font-weight: bold;
+    background: #546e7a;
+    color: white;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin: 0 5px 0 0;
 }
 
 .msgln b.user-name-left {
-  background: orangered;
+    background: orangered;
 }
 
 .chat__header {
-  text-align: center;
+    text-align: center;
 }
 
 .chat__item {
-  display: flex;
-  align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
 }
 
 .chat__person-avatar {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .chat__messages {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .chat__message {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
-  margin: 3px;
+    display: flex;
+    align-items: center;
+    margin: 3px;
 }
 
 .chat__message-content {
-  border-radius: 5px;
-  padding: 7px;
-  background-color: #e5e5e5;
-  display: inline-block;
+    border-radius: 5px;
+    padding: 7px;
+    background-color: #e5e5e5;
+    display: inline-block;
 
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 .chat__item--responder {
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
 
 .chat__item--responder .chat__message {
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
 
 .chat__item--responder .chat__message-content {
-  margin-left: 0;
-  margin-right: 5px;
-  background-color: #89e219;
+    margin-left: 0;
+    margin-right: 5px;
+    background-color: #89e219;
 }
 
 /* Specifies the size of the audio container */
 audio {
-  width: 120px;
-  height: 25px;
+    width: 120px;
+    height: 25px;
 }
 
 audio::-webkit-media-controls-panel {
-  -webkit-justify-content: center;
-  height: 25px;
+    -webkit-justify-content: center;
+    height: 25px;
 }
 
 /* Removes the timeline */
 audio::-webkit-media-controls-timeline {
-  display: none !important;
+    display: none !important;
 }
 
 /* Removes the time stamp */
 audio::-webkit-media-controls-current-time-display {
-  display: none;
+    display: none;
 }
 
 audio::-webkit-media-controls-time-remaining-display {
-  display: none;
+    display: none;
 }

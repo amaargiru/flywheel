@@ -1,76 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <title>English Flywheel. Chat</title>
-  <link rel="icon" type="image/png" href="images/icon.png" />
-  <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>English Flywheel. Chat</title>
+    <link rel="icon" type="image/png" href="images/icon.png"/>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body onload="startMessage()">
-  <script>
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+<script>
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     console.log(document.body.style.fontSize);
 
     if (isMobile) {
-      document.body.style.fontSize = "2vmax";
+        document.body.style.fontSize = "2vmax";
+    } else {
+        document.body.style.fontSize = "1.2vmax";
     }
-    else {
-      document.body.style.fontSize = "1.2vmax";
-    }
-  </script>
-  <table id="wrapper" border="0">
+</script>
+<table id="wrapper" border="0">
     <tr style="height: 0;">
-      <td valign="top">
-        <div id="menu">
-          <p class="welcome" id="header"><b>Flywheel Bot</b></p>
-          <a href="signin.html">Вход</a> &nbsp;&nbsp;&nbsp; <a href="signup.html">Регистрация</a>
-        </div>
-      </td>
+        <td valign="top">
+            <div id="menu">
+                <p class="welcome" id="header"><b>Flywheel Bot</b></p>
+                <a href="signin.html">Вход</a> &nbsp;&nbsp;&nbsp; <a href="signup.html">Регистрация</a>
+            </div>
+        </td>
     </tr>
     <tr>
-      <td valign="center">
-        <div id="chatbox"></div>
-      </td>
+        <td valign="center">
+            <div id="chatbox"></div>
+        </td>
     </tr>
     <tr style="height: 0;">
-      <td valign="bottom">
-        <div class="usermsgwrapper">
-          <input class="usermsg" name="usermsg" type="text" id="usermsg" />
-          <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" />
-        </div>
-      </td>
+        <td valign="bottom">
+            <div class="usermsgwrapper">
+                <input class="usermsg" name="usermsg" type="text" id="usermsg"/>
+                <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send"/>
+            </div>
+        </td>
     </tr>
-  </table>
+</table>
 </body>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="config.js"></script>
 <script type="text/javascript">
-  question_id = 1;
+    question_id = 1;
 
-  const usermsgnode = document.getElementById('usermsg');
-  usermsgnode.addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-      updateChat();
-    }
-  });
+    const usermsgnode = document.getElementById('usermsg');
+    usermsgnode.addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            updateChat();
+        }
+    });
 
-  async function updateChat() {
-    document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
-      <img src="images/user_small.png" class="chat__person-avatar">
+    async function updateChat() {
+        document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
+      <img src="images/user_small.png" class="chat__person-avatar" alt="User avatar">
       <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
       <div class="chat__message-content">${document.getElementById('usermsg').value}</div></div></div></div>`;
 
-    chainReq();
-    document.getElementById('usermsg').value = "";
-    return false;
-  }
+        chainReq();
+        document.getElementById('usermsg').value = "";
+        return false;
+    }
 
-  function startMessage() {
-    if (localStorage.getItem("flywheelJwtToken") === null) {
-      document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
+    function startMessage() {
+        if (localStorage.getItem("flywheelJwtToken") === null) {
+            document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">
@@ -82,114 +81,115 @@
           Плюс, к правильным ответам добавятся ссылки на аудиофайлы с примером правильного произношения:<br> <audio controls>
             <source src="https://www.flywheelang.com/MP3/ServiceMP3/Wake_up_Neo_The_Matrix_has_you_follow_the_white_rabbit.mp3" /></audio>
         </div></div></div></div>`;
-    }
+        }
 
-    if (localStorage.getItem("flywheelJwtToken") === null)
-      req = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
-    else {
-      req = `${app_config.base_url}/get_next_question`;
-      axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
-    }
+        let req;
+        if (localStorage.getItem("flywheelJwtToken") === null)
+            req = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
+        else {
+            req = `${app_config.base_url}/get_next_question`;
+            axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
+        }
 
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-    return axios.post(req)
-      .then(response => {
-        console.log(response.data);
-        document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+        return axios.post(req)
+            .then(response => {
+                console.log(response.data);
+                document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">Напишите на английском фразу <b>\"${response.data.native_phrase}\"</b>.</div></div></div></div>`;
 
-        question_id = response.data.question_id;
+                const question_id = response.data.question_id;
 
-        var objDiv = document.getElementById("chatbox");
-        objDiv.scrollTop = objDiv.scrollHeight;
-      })
-      .catch(error => console.error(error));
-  }
-
-  function chainReq() {
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-    axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-    if (localStorage.getItem("flywheelJwtToken") === null) {
-      req1 = `${app_config.base_url}/get_answer_check_anonymous?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
-      req2 = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
-    }
-    else {
-      req1 = `${app_config.base_url}/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
-      req2 = `${app_config.base_url}/get_next_question`;
-      axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
+                const objDiv = document.getElementById("chatbox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            })
+            .catch(error => console.error(error));
     }
 
-    axios.all(
-      [axios.post(req1), axios.post(req2)])
-      .then(axios.spread((firstResponse, secondResponse) => {
-        console.log(firstResponse.data, secondResponse.data);
+    function chainReq() {
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-        let ans = JSON.parse(firstResponse.data.answer);
-        let motivation_msg = "";
-        switch (ans.score) {
-          case 4:
-            motivation_msg = "Правильно!";
-            break;
-          case 3:
-            motivation_msg = "Почти правильно. Правильный ответ:";
-            break;
-          case 2:
-            motivation_msg = "Неплохо. Правильный ответ:";
-            break;
-          case 1:
-            motivation_msg = "Правильный ответ:";
-            break;
+        let req1;
+        let req2;
+        if (localStorage.getItem("flywheelJwtToken") === null) {
+            req1 = `${app_config.base_url}/get_answer_check_anonymous?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
+            req2 = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
+        } else {
+            req1 = `${app_config.base_url}/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
+            req2 = `${app_config.base_url}/get_next_question`;
+            axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
         }
 
-        let hint = "";
-        if ((ans.score >= 1) && (ans.score <= 3)) {
-          for (let i = 0; i < ans.hint.length; i++) {
-            b = ans.hint.charAt(i);
-            if (b == '/') {
-              hint += `<font color="red">${ans.hint.charAt(i + 1)}</font>`;
-              i++;
-            }
-            else
-              hint += `<font color="green">${ans.hint.charAt(i)}</font>`;
-          }
-          hint += ".";
-        }
+        axios.all(
+            [axios.post(req1), axios.post(req2)])
+            .then(axios.spread((firstResponse, secondResponse) => {
+                console.log(firstResponse.data, secondResponse.data);
 
-        var speech = "";
-        if ((firstResponse.data.link_to_audio != "") && (firstResponse.data.link_to_audio !== undefined)) {
-          speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`;
-        }
+                let ans = JSON.parse(firstResponse.data.answer);
+                let motivation_msg = "";
+                switch (ans.score) {
+                    case 4:
+                        motivation_msg = "Правильно!";
+                        break;
+                    case 3:
+                        motivation_msg = "Почти правильно. Правильный ответ:";
+                        break;
+                    case 2:
+                        motivation_msg = "Неплохо. Правильный ответ:";
+                        break;
+                    case 1:
+                        motivation_msg = "Правильный ответ:";
+                        break;
+                }
 
-        document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
+                let hint = "";
+                if ((ans.score >= 1) && (ans.score <= 3)) {
+                    for (let i = 0; i < ans.hint.length; i++) {
+                        b = ans.hint.charAt(i);
+                        if (b === '/') {
+                            hint += `<span style="color: red; ">${ans.hint.charAt(i + 1)}</span>`;
+                            i++;
+                        } else
+                            hint += `<span style="color: green; ">${ans.hint.charAt(i)}</span>`;
+                    }
+                    hint += ".";
+                }
+
+                let speech = "";
+                if ((firstResponse.data.link_to_audio !== "") && (firstResponse.data.link_to_audio !== undefined)) {
+                    speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`;
+                }
+
+                document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">${motivation_msg} ${hint} ${speech}</div></div></div></div>`;
 
-        console.log(secondResponse.data);
-        document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+                console.log(secondResponse.data);
+                document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
         <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">Напишите на английском фразу <b>\"${secondResponse.data.native_phrase}\"</b>.</div></div></div></div>`;
 
-        question_id = secondResponse.data.question_id;
+                const question_id = secondResponse.data.question_id;
 
-        var objDiv = document.getElementById("chatbox");
-        objDiv.scrollTop = objDiv.scrollHeight;
-      }))
-      .catch(error => console.log(error));
-  }
+                const objDiv = document.getElementById("chatbox");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }))
+            .catch(error => console.log(error));
+    }
 
-  function getcurrentTime() {
-    return new Date().toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: "numeric",
-      minute: "numeric"
-    });
-  }
+    function getcurrentTime() {
+        return new Date().toLocaleTimeString('en-US', {
+            hour12: false,
+            hour: "numeric",
+            minute: "numeric"
+        });
+    }
 </script>
 
 </html>

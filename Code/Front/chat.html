@@ -38,8 +38,8 @@
     <tr style="height: 0;">
         <td valign="bottom">
             <div class="usermsgwrapper">
-                <input class="usermsg" name="usermsg" type="text" id="usermsg" style="font-size:2vmax"/>
-                <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" style="font-size:2vmax"/>
+                <input class="usermsg" name="usermsg" type="text" id="usermsg" style="font-size:2.2vmax"/>
+                <input class="submitmsg" type="submit" id="submitmsg" onclick="updateChat()" value="Send" style="font-size:2.2vmax"/>
             </div>
         </td>
     </tr>
@@ -80,7 +80,7 @@
           Если вы продолжите учиться без аккаунта, то, к сожалению, вопросы будут задаваться в случайном порядке, 
           а информация о вашем прогрессе не будет сохранена.<br>
           Плюс, к правильным ответам добавятся ссылки на аудиофайлы с примером правильного произношения:<br> <audio controls>
-            <source src="https://www.flywheelang.com/MP3/ServiceMP3/Wake_up_Neo_The_Matrix_has_you_follow_the_white_rabbit.mp3" /></audio>
+            <source src="${app_config.mp3_url}/MP3/ServiceMP3/Wake_up_Neo_The_Matrix_has_you_follow_the_white_rabbit.mp3" /></audio>
         </div></div></div></div>`;
         }
 
@@ -102,7 +102,7 @@
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">Напишите на английском фразу <b>\"${response.data.native_phrase}\"</b>.</div></div></div></div>`;
 
-                const question_id = response.data.question_id;
+                question_id = response.data.question_id;
 
                 const objDiv = document.getElementById("chatbox");
                 objDiv.scrollTop = objDiv.scrollHeight;
@@ -162,7 +162,7 @@
 
                 let speech = "";
                 if ((firstResponse.data.link_to_audio !== "") && (firstResponse.data.link_to_audio !== undefined)) {
-                    speech = `<br> <audio controls> <source src="https://www.flywheelang.com/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`;
+                    speech = `<br> <audio controls> <source src="${app_config.mp3_url}/MP3/AnswersMP3/${firstResponse.data.link_to_audio}" /></audio>`;
                 }
 
                 document.getElementById('chatbox').innerHTML += `<div class="chat__content"><div class="chat__item">
@@ -176,7 +176,7 @@
         <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
         <div class="chat__message-content">Напишите на английском фразу <b>\"${secondResponse.data.native_phrase}\"</b>.</div></div></div></div>`;
 
-                const question_id = secondResponse.data.question_id;
+                question_id = secondResponse.data.question_id;
 
                 const objDiv = document.getElementById("chatbox");
                 objDiv.scrollTop = objDiv.scrollHeight;

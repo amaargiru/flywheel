@@ -3,7 +3,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Lato", sans-serif;
+    font-family: "Lato", Verdana;
 }
 
 html, body {
@@ -73,7 +73,7 @@ a:hover {
 
 #usermsg {
     width: 75%;
-    padding-left: 5px;
+    padding: 5px 10px;
     line-height: 25px;
     border-radius: 2px;
     border: 2px solid #43c000;

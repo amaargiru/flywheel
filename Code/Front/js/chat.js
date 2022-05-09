@@ -7,7 +7,7 @@ usermsgnode.addEventListener("keyup", function (event) {
     }
 });
 
-async function updateChat() {
+function updateChat() {
     document.getElementById('chatbox').innerHTML += `<div class="chat__item chat__item--responder">
       <img src="images/user_small.png" class="chat__person-avatar" alt="User avatar">
       <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
@@ -98,14 +98,26 @@ function chainReq() {
             }
 
             let hint = "";
-            if ((ans.score >= 1) && (ans.score <= 3)) {
+            if ((ans.score > 1) && (ans.score <= 3)) {
                 for (let i = 0; i < ans.hint.length; i++) {
                     b = ans.hint.charAt(i);
                     if (b === '/') {
-                        hint += `<span style="color: red; ">${ans.hint.charAt(i + 1)}</span>`;
+                        hint += `<span style="color: red; font-weight: bold;">${ans.hint.charAt(i + 1)}</span>`;
                         i++;
                     } else
-                        hint += `<span style="color: green; ">${ans.hint.charAt(i)}</span>`;
+                        hint += `<span style="color: green; font-weight: bold;">${ans.hint.charAt(i)}</span>`;
+                }
+                hint += ".";
+            }
+            else if (ans.score == 1)
+            {
+                for (let i = 0; i < ans.hint.length; i++) {
+                    b = ans.hint.charAt(i);
+                    if (b === '/') {
+                        hint += `<span style="color: green; font-weight: bold;">${ans.hint.charAt(i + 1)}</span>`;
+                        i++;
+                    } else
+                        hint += `<span style="color: green; font-weight: bold;">${ans.hint.charAt(i)}</span>`;
                 }
                 hint += ".";
             }

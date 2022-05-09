@@ -1,11 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-
 body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   background-color: white;
-  font-family: "Lato", sans-serif;
+  font-family: Verdana;
 }
 
 .signupFrm {

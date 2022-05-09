@@ -27,7 +27,7 @@ a:hover {
 #wrapper {
     margin: 1% auto 0;
     background: #f7f7f7;
-    width: 90%;
+    width: 98%;
     border: 2px solid #212121;
     border-radius: 4px;
     height: 95%;
@@ -45,11 +45,10 @@ a:hover {
     padding: -10px;
     background: #FFF;
     height: 100%;
-    width: 80%;
-    border: 2px solid #a7a7a7;
+    width: 98%;
+    border: 1px solid #a7a7a7;
     overflow: auto;
     border-radius: 4px;
-    border-bottom: 4px solid #a7a7a7;
     position: relative;
 }
 
@@ -59,33 +58,27 @@ a:hover {
     padding: 2px 8px;
 }
 
-#usermsgwrapper {
-    position: relative;
-    bottom: 20px;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 300%;
+input[type="text"] {
+    width: 98%;
+    box-sizing: border-box
 }
 
 #usermsg {
-    width: 75%;
-    padding: 5px 10px;
-    line-height: 25px;
+    padding: 10px 10px;
     border-radius: 2px;
     border: 2px solid #43c000;
     margin: 10px;
+    float: left;
 }
 
 #submitmsg {
     margin: 10px;
-    width: 15%;
     background: #58cc02;
     border: 2px solid #43c000;
     color: white;
-    padding: 4px 10px;
+    padding: 5px 50px;
     border-radius: 2px;
+    float: right;
 }
 
 .error {
@@ -93,25 +86,12 @@ a:hover {
 }
 
 #menu {
-    padding: 15px 25px;
+    padding: 15px 35px;
     display: flex;
 }
 
 #menu p.welcome {
     flex: 1;
-}
-
-.msgln {
-    margin: 0 0 5px 0;
-}
-
-.msgln span.left-info {
-    color: orangered;
-}
-
-.msgln span.chat-time {
-    color: #666;
-    vertical-align: super;
 }
 
 .msgln b.user-name,
@@ -138,11 +118,17 @@ a:hover {
 }
 
 .chat__person-avatar {
+    padding: 3px;
     border-radius: 50%;
 }
 
 .chat__messages {
-    margin-left: 10px;
+    margin-left: 5px;
+}
+
+.chat__message-time {
+    color: #a7a7a7;
+    font-size: 70%;
 }
 
 .chat__message {
@@ -156,7 +142,6 @@ a:hover {
     padding: 7px;
     background-color: #e5e5e5;
     display: inline-block;
-
     margin-left: 5px;
 }
 
@@ -177,7 +162,7 @@ a:hover {
 /* Specifies the size of the audio container */
 audio {
     width: 120px;
-    height: 25px;
+    height: 30px;
 }
 
 audio::-webkit-media-controls-panel {

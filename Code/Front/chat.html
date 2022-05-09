@@ -11,26 +11,26 @@
 
 <body onload="startMessage()">
 <script src="js/checkIsMobile.js" type="text/javascript"></script>
-<table border="0" id="wrapper">
+<table id="wrapper">
     <tr style="height: 0;">
-        <td valign="top">
+        <td colspan="2">
             <div id="menu">
-                <p class="welcome" id="header"><b>Flywheel Bot</b></p>
+                <p class="welcome" id="header"><b>Flywheel English Bot</b></p>
                 <a href="signin.html">Вход</a> &nbsp;&nbsp;&nbsp; <a href="signup.html">Регистрация</a>
             </div>
         </td>
     </tr>
     <tr>
-        <td valign="center">
+        <td colspan="2">
             <div id="chatbox"></div>
         </td>
     </tr>
     <tr style="height: 0;">
-        <td valign="bottom">
-            <div class="usermsgwrapper">
-                <input class="usermsg" id="usermsg" name="usermsg" style="font-size:2.2vmax" type="text"/>
-                <input class="submitmsg" id="submitmsg" onclick="updateChat()" style="font-size:2.2vmax" type="submit" value="Send"/>
-            </div>
+        <td>
+            <input class="usermsg" id="usermsg" name="usermsg" style="font-size:3vmax" type="text"/>
+        </td>
+        <td style="width: 0;">
+            <input type="image" class="submitmsg" id="submitmsg" onclick="updateChat()" type="submit" src="images/send_small.png"/>
         </td>
     </tr>
 </table>

@@ -29,7 +29,7 @@ CREATE TABLE `answer` (
   `linkToAudio` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `questionIdIndex` (`questionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `answer` (
 
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
-INSERT INTO `answer` VALUES (1,1,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(2,1,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(3,1,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(4,1,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(5,2,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(6,2,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(7,2,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(8,2,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(9,3,'I am an engineer','9_I_am_an_engineer.mp3'),(10,3,'I\'m an engineer','10_I_m_an_engineer.mp3');
+INSERT INTO `answer` VALUES (1,1,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(2,1,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(3,1,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(4,1,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(5,2,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(6,2,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(7,2,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(8,2,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(9,3,'I am an engineer','9_I_am_an_engineer.mp3'),(10,3,'I\'m an engineer','10_I_m_an_engineer.mp3'),(11,4,'I am an electronics engineer','11_I_am_an_electronics_engineer.mp3'),(12,4,'I\'m an electronics engineer','12_I_m_an_electronics_engineer.mp3');
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `question` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nativePhrase` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,'Кошка сидит на столе'),(2,'Кот сидит на столе'),(3,'Я инженер');
+INSERT INTO `question` VALUES (1,'Кошка сидит на столе'),(2,'Кот сидит на столе'),(3,'Я инженер'),(4,'Я инженер-электронщик');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,7 +157,7 @@ CREATE TABLE `questiontogrammartheme` (
   `themeId` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `themeIdIndex` (`themeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +166,7 @@ CREATE TABLE `questiontogrammartheme` (
 
 LOCK TABLES `questiontogrammartheme` WRITE;
 /*!40000 ALTER TABLE `questiontogrammartheme` DISABLE KEYS */;
-INSERT INTO `questiontogrammartheme` VALUES (1,1,3),(2,1,5),(3,2,3),(4,2,5),(5,3,1);
+INSERT INTO `questiontogrammartheme` VALUES (1,1,3),(2,1,5),(3,2,3),(4,2,5),(5,3,1),(6,4,1);
 /*!40000 ALTER TABLE `questiontogrammartheme` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +183,7 @@ CREATE TABLE `questiontoword` (
   `wordId` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `wordIdIndex` (`wordId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `questiontoword` (
 
 LOCK TABLES `questiontoword` WRITE;
 /*!40000 ALTER TABLE `questiontoword` DISABLE KEYS */;
-INSERT INTO `questiontoword` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(10,2,5),(11,3,6);
+INSERT INTO `questiontoword` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,2,1),(7,2,2),(8,2,3),(9,2,4),(10,2,5),(11,3,6),(12,4,7),(13,4,6);
 /*!40000 ALTER TABLE `questiontoword` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,7 +264,7 @@ CREATE TABLE `word` (
   `word` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `wordIndex` (`word`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,7 +273,7 @@ CREATE TABLE `word` (
 
 LOCK TABLES `word` WRITE;
 /*!40000 ALTER TABLE `word` DISABLE KEYS */;
-INSERT INTO `word` VALUES (1,'cat'),(6,'engineer'),(4,'on'),(2,'sit'),(3,'sitting'),(5,'table');
+INSERT INTO `word` VALUES (1,'cat'),(7,'electronics'),(6,'engineer'),(4,'on'),(2,'sit'),(3,'sitting'),(5,'table');
 /*!40000 ALTER TABLE `word` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,4 +363,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-05 15:49:15
+-- Dump completed on 2022-05-09 20:05:25

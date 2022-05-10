@@ -16,7 +16,6 @@ from comparator import Comparator
 from complicator import Complicator
 from db_schema import User
 from examiner import Examiner
-from fw_logger import FlyWheelLogger
 from lower import Lower
 from printer import Printer
 from refiner import Refiner
@@ -137,7 +136,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         user = User.get(User.username == token_data.username)
     except Exception as e:
-        logger.error(f"Ошибка \"{str(e)}\" при попытке найти пользователя в БД.")
+        pass
 
     if user is None:
         raise credentials_exception
@@ -150,7 +149,7 @@ async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
     try:
         user = User.get(User.username == form_data.username)
     except Exception as e:
-        logger.error(f"Ошибка \"{str(e)}\" при попытке найти пользователя в БД.")
+        pass
 
     if user is None or not pwd_context.verify(form_data.password, user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
@@ -171,7 +170,7 @@ async def signup(username: str, email: str, password: str):
     try:
         user = User.get(User.username == username)
     except Exception as e:
-        logger.error(f"Ошибка \"{str(e)}\" при попытке найти пользователя в БД.")
+        pass
 
     if user is None:
         User.create(username=username, email=email, password_hash=pwd_context.hash(password))
@@ -211,12 +210,4 @@ async def get_answer_check(user_id: int, question_id: int, user_input: str, curr
 
 
 if __name__ == "__main__":
-    try:
-        path = pathlib.Path(log_file_path)  # Создаем путь к файлу логов, если он не существует
-        path.parent.mkdir(parents=True, exist_ok=True)
-        logger = FlyWheelLogger.get_logger(log_file_path, log_max_file_size, log_max_file_count)
-    except Exception as err:
-        print(f"Error when trying to create log directory {str(err)}")
-        sys.exit()  # Аварийный выход
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

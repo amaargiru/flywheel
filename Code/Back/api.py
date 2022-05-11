@@ -75,19 +75,19 @@ app.add_middleware(
 
 
 # http://127.0.0.1:8000/docs
-# Example: http://127.0.0.1:8000/get_next_question?user_id=1
+# Example: http://127.0.0.1:8000/get_next_question
 @app.post("/get_next_question_anonymous")
-async def get_next_question_anonymous(user_id: int):
-    question_id = Examiner.define_next_question_num(user_id)
+async def get_next_question_anonymous():
+    question_id = Examiner.define_next_question_num()
     question = Examiner.get_question(question_id)
 
     return {"question_id": question_id,
             "native_phrase": f"{question.native_phrase}"}
 
 
-# Example: http://127.0.0.1:8000/get_answer_check?user_id=1&question_id=1&user_input=qq
+# Example: http://127.0.0.1:8000/get_answer_check?question_id=1&user_input=qq
 @app.post("/get_answer_check_anonymous")
-async def get_answer_check_anonymous(user_id: int, question_id: int, user_input: str):
+async def get_answer_check_anonymous(question_id: int, user_input: str):
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
@@ -195,7 +195,7 @@ async def get_next_question(current_user: LocalUser = Depends(get_current_user))
 
 
 @app.post("/get_answer_check")
-async def get_answer_check(user_id: int, question_id: int, user_input: str, current_user: LocalUser = Depends(get_current_user)):
+async def get_answer_check(question_id: int, user_input: str, current_user: LocalUser = Depends(get_current_user)):
     # return [{"item_id": "Foo", "owner": current_user.username}]
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)

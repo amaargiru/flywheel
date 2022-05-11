@@ -36,7 +36,7 @@ function startMessage() {
 
     let req;
     if (localStorage.getItem("flywheelJwtToken") === null)
-        req = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
+        req = `${app_config.base_url}/get_next_question_anonymous`;
     else {
         req = `${app_config.base_url}/get_next_question`;
         axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
@@ -67,10 +67,10 @@ function chainReq() {
     let req1;
     let req2;
     if (localStorage.getItem("flywheelJwtToken") === null) {
-        req1 = `${app_config.base_url}/get_answer_check_anonymous?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
-        req2 = `${app_config.base_url}/get_next_question_anonymous?user_id=1`;
+        req1 = `${app_config.base_url}/get_answer_check_anonymous?question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
+        req2 = `${app_config.base_url}/get_next_question_anonymous`;
     } else {
-        req1 = `${app_config.base_url}/get_answer_check?user_id=1&question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
+        req1 = `${app_config.base_url}/get_answer_check?question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
         req2 = `${app_config.base_url}/get_next_question`;
         axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
     }

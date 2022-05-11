@@ -75,12 +75,12 @@ DROP TABLE IF EXISTS `grammarthemestat`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `grammarthemestat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int unsigned NOT NULL,
+  `username` varchar(200) NOT NULL,
   `themeId` int unsigned NOT NULL,
   `themeStat` int unsigned NOT NULL,
   `lastAttempt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `userIdIndex` (`userId`)
+  KEY `userIdIndex` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,12 +126,12 @@ DROP TABLE IF EXISTS `questionstat`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `questionstat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int unsigned NOT NULL,
+  `username` varchar(200) NOT NULL,
   `questionId` int unsigned NOT NULL,
   `questionStat` int unsigned NOT NULL,
   `lastAttempt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userIdIndex` (`userId`)
+  KEY `userIdIndex` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -231,7 +231,6 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(200) NOT NULL,
-  `full_name` varchar(200) DEFAULT NULL,
   `email` varchar(200) NOT NULL,
   `passwordHash` varchar(200) NOT NULL,
   `level` int unsigned DEFAULT NULL,
@@ -248,7 +247,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'johndoe','John Doe','johndoe@example.com','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,'johndoe','johndoe@example.com','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -286,12 +285,12 @@ DROP TABLE IF EXISTS `wordstat`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `wordstat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int unsigned NOT NULL,
+  `username` varchar(200) NOT NULL,
   `wordId` int unsigned NOT NULL,
   `wordStat` int unsigned NOT NULL,
   `lastAttempt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userIdIndex` (`userId`) /*!80000 INVISIBLE */
+  KEY `userIdIndex` (`username`) /*!80000 INVISIBLE */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -336,12 +335,12 @@ DROP TABLE IF EXISTS `wordthemestat`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `wordthemestat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int unsigned NOT NULL,
+  `username` varchar(200) NOT NULL,
   `themeId` int unsigned NOT NULL,
   `themeStat` int unsigned NOT NULL,
   `lastAttempt` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `userIdIndex` (`userId`)
+  KEY `userIdIndex` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -363,4 +362,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-09 20:05:25
+-- Dump completed on 2022-05-11 17:41:54

@@ -33,7 +33,7 @@ class Grammarthemestat(BaseModel):
     last_attempt = DateTimeField(column_name='lastAttempt', null=True)
     theme_id = IntegerField(column_name='themeId')
     theme_stat = IntegerField(column_name='themeStat')
-    user_id = IntegerField(column_name='userId', index=True)
+    username = CharField(index=True)
 
     class Meta:
         table_name = 'grammarthemestat'
@@ -50,7 +50,7 @@ class Questionstat(BaseModel):
     last_attempt = DateTimeField(column_name='lastAttempt')
     question_id = IntegerField(column_name='questionId')
     question_stat = IntegerField(column_name='questionStat')
-    user_id = IntegerField(column_name='userId', index=True)
+    username = CharField(index=True)
 
     class Meta:
         table_name = 'questionstat'
@@ -83,7 +83,6 @@ class Questiontowordtheme(BaseModel):
 class User(BaseModel):
     attempts = IntegerField(null=True)
     email = CharField()
-    full_name = CharField(null=True)
     last_visit = DateTimeField(column_name='lastVisit', null=True)
     level = IntegerField(null=True)
     password_hash = CharField(column_name='passwordHash')
@@ -102,7 +101,7 @@ class Word(BaseModel):
 
 class Wordstat(BaseModel):
     last_attempt = DateTimeField(column_name='lastAttempt')
-    user_id = IntegerField(column_name='userId', index=True)
+    username = CharField(index=True)
     word_id = IntegerField(column_name='wordId')
     word_stat = IntegerField(column_name='wordStat')
 
@@ -121,7 +120,7 @@ class Wordthemestat(BaseModel):
     last_attempt = DateTimeField(column_name='lastAttempt')
     theme_id = IntegerField(column_name='themeId')
     theme_stat = IntegerField(column_name='themeStat')
-    user_id = IntegerField(column_name='userId', index=True)
+    username = CharField(index=True)
 
     class Meta:
         table_name = 'wordthemestat'

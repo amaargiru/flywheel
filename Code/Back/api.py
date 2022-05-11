@@ -1,4 +1,6 @@
+import datetime
 import json
+import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
@@ -169,6 +171,12 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
     a = Printer.format_message_to_api(question.references, index, correction, ratio)
+
+    # Refresh user data in DB
+    current_user.attempts = int(current_user.attempts or 0) + 1
+    time.strftime('%Y-%m-%d %H:%M:%S')
+    current_user.last_visit = datetime.now()
+    current_user.save(only=[User.attempts, User.last_visit])
 
     return {"question_id": question_id, "answer": json.dumps(a), "link_to_audio": question.links_to_audio[index]}
 

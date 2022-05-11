@@ -35,15 +35,6 @@ class TokenData:
     username: Optional[str] = None
 
 
-@dataclass
-class LocalUser:
-    username: str
-    email: Optional[str] = None
-    full_name: Optional[str] = None
-    disabled: Optional[bool] = None
-    hashed_password: Optional[str] = None
-
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="signin")
@@ -158,7 +149,7 @@ async def signup(username: str, email: str, password: str):
 
 
 @app.post("/get_next_question")
-async def get_next_question(current_user: LocalUser = Depends(get_current_user)):
+async def get_next_question(current_user: User = Depends(get_current_user)):
     # return [{"item_id": "Foo", "owner": current_user.username}]
     question_id = Examiner.define_next_question_num(1)
     question = Examiner.get_question(question_id)
@@ -168,7 +159,7 @@ async def get_next_question(current_user: LocalUser = Depends(get_current_user))
 
 
 @app.post("/get_answer_check")
-async def get_answer_check(question_id: int, user_input: str, current_user: LocalUser = Depends(get_current_user)):
+async def get_answer_check(question_id: int, user_input: str, current_user: User = Depends(get_current_user)):
     # return [{"item_id": "Foo", "owner": current_user.username}]
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)

@@ -1,6 +1,4 @@
 import json
-import pathlib
-import sys
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Optional
@@ -20,12 +18,7 @@ from lower import Lower
 from printer import Printer
 from refiner import Refiner
 
-log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов
-log_max_file_count = 10  # Максимальное количество файлов логов
-log_file_path = "logs//api.log"
-
-# To get a string like this run:
-# openssl rand -hex 32
+# To get a string like this run: openssl rand -hex 32
 SECRET_KEY = "f6e936d318b4103412c142893d7331fb83c2228fc31155a8f96de27c3afdeea7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 10 * 365 * 24 * 60
@@ -57,24 +50,14 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="signin")
 
 app = FastAPI()
 
-origins = [
-    "http://domainname.com",
-    "https://domainname.com",
-    "http://localhost",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # = origins
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
+app.add_middleware(CORSMiddleware,
+                   allow_origins=["*"],
+                   allow_credentials=True,
+                   allow_methods=["*"],
+                   allow_headers=["*"])
 
 
-# http://127.0.0.1:8000/docs
+# Docs: http://127.0.0.1:8000/docs
 # Example: http://127.0.0.1:8000/get_next_question
 @app.post("/get_next_question_anonymous")
 async def get_next_question_anonymous():
@@ -100,14 +83,6 @@ async def get_answer_check_anonymous(question_id: int, user_input: str):
     return {"question_id": question_id, "answer": json.dumps(a)}
 
 
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
-
-
-def get_password_hash(password):
-    return pwd_context.hash(password)
-
-
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
@@ -117,6 +92,16 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
+
+def get_user(username) -> User:
+    user = None
+    try:
+        user = User.get(User.username == username)
+    except Exception:
+        pass
+
+    return user
 
 
 async def get_current_user(token: str = Depends(oauth2_scheme)):
@@ -132,11 +117,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     except JWTError:
         raise credentials_exception
 
-    user = None
-    try:
-        user = User.get(User.username == token_data.username)
-    except Exception as e:
-        pass
+    user = get_user(token_data.username)
 
     if user is None:
         raise credentials_exception
@@ -145,11 +126,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 @app.post("/signin", response_model=Token)
 async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
-    user = None
-    try:
-        user = User.get(User.username == form_data.username)
-    except Exception as e:
-        pass
+    user = get_user(form_data.username)
 
     if user is None or not pwd_context.verify(form_data.password, user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
@@ -166,11 +143,7 @@ async def signin(form_data: OAuth2PasswordRequestForm = Depends()):
 async def signup(username: str, email: str, password: str):
     res: bool = False
 
-    user = None
-    try:
-        user = User.get(User.username == username)
-    except Exception as e:
-        pass
+    user = get_user(username)
 
     if user is None:
         User.create(username=username, email=email, password_hash=pwd_context.hash(password))

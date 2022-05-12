@@ -14,7 +14,7 @@ from passlib.context import CryptContext
 
 from comparator import Comparator
 from complicator import Complicator
-from db_schema import User
+from db_schema import User, Questionstat
 from examiner import Examiner
 from lower import Lower
 from printer import Printer
@@ -178,8 +178,22 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     current_user.last_visit = datetime.now()
     current_user.save(only=[User.attempts, User.last_visit])
 
+    question_stat: Questionstat
+    result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+
+    if result is not None:
+        question_stat = result
+        question_stat.question_stat = int(question_stat.question_stat or 0) + 1
+    else:
+        question_stat = Questionstat.create(last_attempt=datetime.now(),
+                                            question_id=question_id,
+                                            question_stat=1,
+                                            username=current_user.username)
+
+    question_stat.save()
+
     return {"question_id": question_id, "answer": json.dumps(a), "link_to_audio": question.links_to_audio[index]}
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app)

@@ -56,8 +56,15 @@ function startMessage() {
 
             const objDiv = document.getElementById("chatbox");
             objDiv.scrollTop = objDiv.scrollHeight;
-        })
-        .catch(error => console.error(error));
+        }, error => {
+            if (error.response.status === 401) {
+                document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
+        <div class="chat__message-content">Привет! Пожалуйста, <a href="signin.html">войдите в свой аккаунт</a>.</div></div></div></div>`;
+            }
+            return error;
+        });
 }
 
 function chainReq() {
@@ -69,7 +76,8 @@ function chainReq() {
     if (localStorage.getItem("flywheelJwtToken") === null) {
         req1 = `${app_config.base_url}/get_answer_check_anonymous?question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
         req2 = `${app_config.base_url}/get_next_question_anonymous`;
-    } else {
+    }
+    else {
         req1 = `${app_config.base_url}/get_answer_check?question_id=${question_id}&user_input=${(document.getElementById('usermsg').value)}`;
         req2 = `${app_config.base_url}/get_next_question`;
         axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
@@ -104,20 +112,23 @@ function chainReq() {
                     if (b === '/') {
                         hint += `<span style="color: red; font-weight: bold;">${ans.hint.charAt(i + 1)}</span>`;
                         i++;
-                    } else
+                    }
+                    else {
                         hint += `<span style="color: green; font-weight: bold;">${ans.hint.charAt(i)}</span>`;
+                    }
                 }
                 hint += ".";
             }
-            else if (ans.score == 1)
-            {
+            else if (ans.score == 1) {
                 for (let i = 0; i < ans.hint.length; i++) {
                     b = ans.hint.charAt(i);
                     if (b === '/') {
                         hint += `<span style="color: green; font-weight: bold;">${ans.hint.charAt(i + 1)}</span>`;
                         i++;
-                    } else
+                    }
+                    else {
                         hint += `<span style="color: green; font-weight: bold;">${ans.hint.charAt(i)}</span>`;
+                    }
                 }
                 hint += ".";
             }
@@ -142,8 +153,15 @@ function chainReq() {
 
             const objDiv = document.getElementById("chatbox");
             objDiv.scrollTop = objDiv.scrollHeight;
-        }))
-        .catch(error => console.log(error));
+        }, error => {
+            if (error.response.status === 401) {
+                document.getElementById('chatbox').innerHTML += ` <div class="chat__content"><div class="chat__item">
+        <img src="images/icon_small.png" alt="Flywheel english bot" class="chat__person-avatar">
+        <div class="chat__messages"><div class="chat__message"><div class="chat__message-time">${getcurrentTime()}</div>
+        <div class="chat__message-content">Привет! Пожалуйста, <a href="signin.html">войдите в свой аккаунт</a>.</div></div></div></div>`;
+            }
+            return error;
+        }));
 }
 
 function getcurrentTime() {

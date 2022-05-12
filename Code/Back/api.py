@@ -184,6 +184,7 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     if result is not None:
         question_stat = result
         question_stat.question_stat = int(question_stat.question_stat or 0) + 1
+        question_stat.last_attempt = datetime.now()
     else:
         question_stat = Questionstat.create(last_attempt=datetime.now(),
                                             question_id=question_id,

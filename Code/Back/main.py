@@ -1,8 +1,11 @@
+import datetime
 import pathlib
 import sys
+import time
 
 from comparator import Comparator
 from complicator import Complicator
+from db_schema import User, Questionstat
 from examiner import Examiner
 from fw_logger import FlyWheelLogger
 from lower import Lower
@@ -39,4 +42,25 @@ if __name__ == '__main__':
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
     Printer.color_print_message_to_user(question.references, index, correction, ratio)
     a = Printer.format_message_to_api(question.references, index, correction, ratio)
-    pass
+
+    current_user = User.get(User.username == "johndoe")
+    # Refresh user data in DB
+    current_user.attempts = int(current_user.attempts or 0) + 1
+    time.strftime('%Y-%m-%d %H:%M:%S')
+    current_user.last_visit = datetime.datetime.now()
+    current_user.save(only=[User.attempts, User.last_visit])
+
+    question_stat: Questionstat
+    result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+
+    if result is not None:
+        question_stat = result
+        question_stat.question_stat = int(question_stat.question_stat or 0) + 1
+        question_stat.last_attempt = datetime.datetime.now()
+    else:
+        question_stat = Questionstat.create(last_attempt=datetime.datetime.now(),
+                                            question_id=question_id,
+                                            question_stat=1,
+                                            username=current_user.username)
+
+    question_stat.save()

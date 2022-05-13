@@ -179,7 +179,12 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     current_user.save(only=[User.attempts, User.last_visit])
 
     question_stat: Questionstat
-    result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+    result = None
+
+    try:
+        result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+    except Exception:
+        pass
 
     if result is not None:
         question_stat = result

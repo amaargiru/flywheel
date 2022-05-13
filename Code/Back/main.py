@@ -51,7 +51,12 @@ if __name__ == '__main__':
     current_user.save(only=[User.attempts, User.last_visit])
 
     question_stat: Questionstat
-    result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+    result = None
+
+    try:
+        result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+    except Exception as err:
+        logger.error(f"Error when trying to load question_stat: {str(err)}")
 
     if result is not None:
         question_stat = result

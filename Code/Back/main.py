@@ -30,42 +30,44 @@ if __name__ == '__main__':
 
     logger.info("Старт")
 
-    question_id = Examiner.define_next_question_num(user_id)
-    question = Examiner.get_question(question_id)
-    user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
-    user_input_cleaned = Refiner.refine_user_input(user_input)
-    user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
-    user_input_without_punctuation_lower = Lower.list_lower(user_input_complex.user_input_without_punctuation)
-    references_lower = Lower.references_lower(question.references)
+    while True:
+        question_id = Examiner.define_next_question_num(user_id)
+        question = Examiner.get_question(question_id)
+        user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
+        user_input_cleaned = Refiner.refine_user_input(user_input)
+        user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
+        user_input_without_punctuation_lower = Lower.list_lower(user_input_complex.user_input_without_punctuation)
+        references_lower = Lower.references_lower(question.references)
 
-    index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
-    correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
-    Printer.color_print_message_to_user(question.references, index, correction, ratio)
-    a = Printer.format_message_to_api(question.references, index, correction, ratio)
+        index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
+        correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
+        Printer.color_print_message_to_user(question.references, index, correction, ratio)
+        a = Printer.format_message_to_api(question.references, index, correction, ratio)
 
-    current_user = User.get(User.username == "johndoe")
-    # Refresh user data in DB
-    current_user.attempts = int(current_user.attempts or 0) + 1
-    time.strftime('%Y-%m-%d %H:%M:%S')
-    current_user.last_visit = datetime.datetime.now()
-    current_user.save(only=[User.attempts, User.last_visit])
+        current_user = User.get(User.username == "johndoe")
 
-    question_stat: Questionstat
-    result = None
+        # Refresh user data in DB
+        current_user.attempts = int(current_user.attempts or 0) + 1
+        time.strftime('%Y-%m-%d %H:%M:%S')
+        current_user.last_visit = datetime.datetime.now()
+        current_user.save(only=[User.attempts, User.last_visit])
 
-    try:
-        result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
-    except Exception as err:
-        logger.error(f"Error when trying to load question_stat: {str(err)}")
+        question_stat: Questionstat
+        result = None
 
-    if result is not None:
-        question_stat = result
-        question_stat.question_stat = int(question_stat.question_stat or 0) + 1
-        question_stat.last_attempt = datetime.datetime.now()
-    else:
-        question_stat = Questionstat.create(last_attempt=datetime.datetime.now(),
-                                            question_id=question_id,
-                                            question_stat=1,
-                                            username=current_user.username)
+        try:
+            result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
+        except Exception as err:
+            logger.error(f"Error when trying to load question_stat: {str(err)}")
 
-    question_stat.save()
+        if result is not None:
+            question_stat = result
+            question_stat.question_stat = int(question_stat.question_stat or 0) + 1
+            question_stat.last_attempt = datetime.datetime.now()
+        else:
+            question_stat = Questionstat.create(last_attempt=datetime.datetime.now(),
+                                                question_id=question_id,
+                                                question_stat=1,
+                                                username=current_user.username)
+
+        question_stat.save()

@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import pathlib
 import sys
 import time
@@ -49,7 +49,7 @@ if __name__ == '__main__':
         # Refresh user data in DB
         current_user.attempts = int(current_user.attempts or 0) + 1
         time.strftime('%Y-%m-%d %H:%M:%S')
-        current_user.last_visit = datetime.datetime.now()
+        current_user.last_visit = datetime.now()
         current_user.save(only=[User.attempts, User.last_visit])
 
         question_stat: Questionstat
@@ -58,16 +58,20 @@ if __name__ == '__main__':
         try:
             result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
         except Exception as err:
-            logger.error(f"Error when trying to load question_stat: {str(err)}")
+            logger.warning(f"Can't load question_stat: {str(err)}")
+
+        score: int = 1 if ratio > Printer.level4ratio else 0
 
         if result is not None:
             question_stat = result
-            question_stat.question_stat = int(question_stat.question_stat or 0) + 1
-            question_stat.last_attempt = datetime.datetime.now()
+            question_stat.attempts = int(question_stat.attempts or 0) + 1
+            question_stat.score = int(question_stat.score or 0) + score
+            question_stat.last_attempt = datetime.now()
         else:
-            question_stat = Questionstat.create(last_attempt=datetime.datetime.now(),
+            question_stat = Questionstat.create(last_attempt=datetime.now(),
                                                 question_id=question_id,
-                                                question_stat=1,
+                                                attempts=1,
+                                                score=score,
                                                 username=current_user.username)
 
         question_stat.save()

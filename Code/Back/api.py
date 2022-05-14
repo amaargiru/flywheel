@@ -170,7 +170,7 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     references_lower = Lower.references_lower(question.references)
     index, ratio = Comparator.find_nearest_reference_index(user_input_without_punctuation_lower, references_lower)
     correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
-    a = Printer.format_message_to_api(question.references, index, correction, ratio)
+    message_to_user = Printer.format_message_to_api(question.references, index, correction, ratio)
 
     # Refresh user data in DB
     current_user.attempts = int(current_user.attempts or 0) + 1
@@ -183,22 +183,28 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
 
     try:
         result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
-    except Exception:
+    except Exception as err:
         pass
+
+    score: int = 1 if ratio > Printer.level4ratio else 0
 
     if result is not None:
         question_stat = result
-        question_stat.question_stat = int(question_stat.question_stat or 0) + 1
+        question_stat.attempts = int(question_stat.attempts or 0) + 1
+        question_stat.score = int(question_stat.score or 0) + score
         question_stat.last_attempt = datetime.now()
     else:
         question_stat = Questionstat.create(last_attempt=datetime.now(),
                                             question_id=question_id,
-                                            question_stat=1,
+                                            attempts=1,
+                                            score=score,
                                             username=current_user.username)
 
     question_stat.save()
 
-    return {"question_id": question_id, "answer": json.dumps(a), "link_to_audio": question.links_to_audio[index]}
+    return {"question_id": question_id,
+            "answer": json.dumps(message_to_user),
+            "link_to_audio": question.links_to_audio[index]}
 
 
 if __name__ == "__main__":

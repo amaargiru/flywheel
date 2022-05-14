@@ -4,18 +4,22 @@ from colorama import init, Fore, Style
 
 
 class Printer:
+    level4ratio: float = 0.99
+    level3ratio: float = 0.97
+    level2ratio: float = 0.65
+
     @staticmethod
     def color_print_message_to_user(references: List[str], index: int, correction: List[bool], ratio: float) -> None:
         init()
 
-        if ratio > 0.99:
+        if ratio > Printer.level4ratio:
             print(Fore.GREEN + "Correct.")
 
-        elif ratio > 0.97:  # Во фразах очень много общего, показываем пользователю diff
+        elif ratio > Printer.level3ratio:  # Во фразах очень много общего, показываем пользователю diff
             print(Fore.BLACK + "Almost correct. Right answer is: ", end='')
             Printer.__print_colored_diff(correction, index, references)
 
-        elif ratio > 0.65:  # Во фразах много общего, можно попробовать вывести пользователю diff
+        elif ratio > Printer.level2ratio:  # Во фразах много общего, можно попробовать вывести пользователю diff
             print(Fore.BLACK + "Not bad. ", end='')
             print(Fore.BLACK + "Right answer is: ", end='')
             Printer.__print_colored_diff(correction, index, references)
@@ -46,16 +50,16 @@ class Printer:
     def format_message_to_api(references: List[str], index: int, correction: List[bool], ratio: float) -> dict:
         message_to_user = {"hint": Printer.__create_hint(correction, index, references)}
 
-        if ratio > 0.99:
+        if ratio > Printer.level4ratio:
             message_to_user["score"] = 4
 
-        elif ratio > 0.97:  # Во фразах очень много общего, показываем пользователю diff
+        elif ratio > Printer.level3ratio:  # Во фразах очень много общего, показываем пользователю diff
             message_to_user["score"] = 3
 
-        elif ratio > 0.65:  # Во фразах много общего, можно попробовать вывести пользователю diff
+        elif ratio > Printer.level2ratio:  # Во фразах много общего, можно попробовать вывести пользователю diff
             message_to_user["score"] = 2
 
-        else:
+        else:  # Много ошибок, не пытаемся показать diff
             message_to_user["score"] = 1
 
         return message_to_user

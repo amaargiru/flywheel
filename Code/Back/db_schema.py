@@ -47,9 +47,10 @@ class Question(BaseModel):
 
 
 class Questionstat(BaseModel):
+    attempts = IntegerField()
     last_attempt = DateTimeField(column_name='lastAttempt')
     question_id = IntegerField(column_name='questionId')
-    question_stat = IntegerField(column_name='questionStat')
+    score = IntegerField()
     username = CharField(index=True)
 
     class Meta:

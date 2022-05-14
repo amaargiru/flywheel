@@ -128,11 +128,12 @@ CREATE TABLE `questionstat` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(200) NOT NULL,
   `questionId` int unsigned NOT NULL,
-  `questionStat` int unsigned NOT NULL,
+  `attempts` int unsigned NOT NULL,
   `lastAttempt` datetime NOT NULL,
+  `score` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userIdIndex` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,6 +142,7 @@ CREATE TABLE `questionstat` (
 
 LOCK TABLES `questionstat` WRITE;
 /*!40000 ALTER TABLE `questionstat` DISABLE KEYS */;
+INSERT INTO `questionstat` VALUES (5,'johndoe',4,2,'2022-05-14 20:18:47',0),(6,'johndoe',3,3,'2022-05-14 20:18:51',0),(7,'johndoe',1,2,'2022-05-14 20:18:53',0),(8,'johndoe',2,1,'2022-05-14 20:18:54',0);
 /*!40000 ALTER TABLE `questionstat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +249,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'johndoe','johndoe@example.com','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',NULL,NULL,NULL);
+INSERT INTO `user` VALUES (1,'johndoe','johndoe@example.com','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',NULL,37,'2022-05-14 20:18:54');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,4 +364,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-11 17:41:54
+-- Dump completed on 2022-05-14 20:21:41

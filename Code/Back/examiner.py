@@ -23,12 +23,15 @@ class Examiner:
         except Exception:
             return 1  # Stat is empty now
 
-        min_next_question_time = datetime.now() + timedelta(days=1)
+        min_next_question_time = datetime.now() + timedelta(days=1000000)
         for question_candidate in current_user_question_stat:
             if question_candidate.score >= 0:
                 final_coeff = question_candidate.score * current_user_memory_coeff
             else:
                 final_coeff = question_candidate.score / current_user_memory_coeff
+
+            if final_coeff >= 9:  # Дальше 512 дней вряд ли стоит заглядывать
+                final_coeff = 9
 
             question_candidate_required_datetime = question_candidate.last_attempt + timedelta(days=2 ** final_coeff)
             if question_candidate_required_datetime <= min_next_question_time:

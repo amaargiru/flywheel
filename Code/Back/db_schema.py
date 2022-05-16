@@ -82,10 +82,10 @@ class Questiontowordtheme(BaseModel):
 
 
 class User(BaseModel):
-    attempts = IntegerField(null=True)
+    attempts = IntegerField()
     email = CharField()
-    last_visit = DateTimeField(column_name='lastVisit', null=True)
-    level = IntegerField(null=True)
+    last_visit = DateTimeField(column_name='lastVisit')
+    memory_coeff = FloatField(column_name='memoryCoeff')
     password_hash = CharField(column_name='passwordHash')
     username = CharField(index=True)
 

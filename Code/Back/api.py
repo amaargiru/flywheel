@@ -139,7 +139,13 @@ async def signup(username: str, email: str, password: str):
     user = get_user(username)
 
     if user is None:
-        User.create(username=username, email=email, password_hash=pwd_context.hash(password))
+        time.strftime('%Y-%m-%d %H:%M:%S')
+        User.create(username=username,
+                    email=email,
+                    password_hash=pwd_context.hash(password),
+                    memory_coeff=1,
+                    last_visit=datetime.now(),
+                    attempts=0)
         res = True
 
     if res:
@@ -152,7 +158,6 @@ async def signup(username: str, email: str, password: str):
 
 @app.post("/get_next_question")
 async def get_next_question(current_user: User = Depends(get_current_user)):
-    # return [{"item_id": "Foo", "owner": current_user.username}]
     question_id = Examiner.define_next_question_num(1)
     question = Examiner.get_question(question_id)
 
@@ -162,7 +167,6 @@ async def get_next_question(current_user: User = Depends(get_current_user)):
 
 @app.post("/get_answer_check")
 async def get_answer_check(question_id: int, user_input: str, current_user: User = Depends(get_current_user)):
-    # return [{"item_id": "Foo", "owner": current_user.username}]
     question = Examiner.get_question(question_id)
     user_input_cleaned = Refiner.refine_user_input(user_input)
     user_input_complex = Complicator.complicate_user_input(user_input_cleaned)
@@ -176,28 +180,33 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     current_user.attempts = int(current_user.attempts or 0) + 1
     time.strftime('%Y-%m-%d %H:%M:%S')
     current_user.last_visit = datetime.now()
-    current_user.save(only=[User.attempts, User.last_visit])
+
+    memory_coeff = float(current_user.memory_coeff)
+    memory_coeff = 1.01 * memory_coeff if ratio > Printer.level4ratio else 0.99 * memory_coeff
+    current_user.memory_coeff = memory_coeff
+
+    current_user.save(only=[User.attempts, User.last_visit, User.memory_coeff])
 
     question_stat: Questionstat
     result = None
 
     try:
         result = Questionstat.get(Questionstat.username == current_user.username and Questionstat.question_id == question_id)
-    except Exception as err:
+    except Exception:
         pass
 
-    score: int = 1 if ratio > Printer.level4ratio else 0
+    current_score: int = 1 if ratio > Printer.level4ratio else -1
 
     if result is not None:
         question_stat = result
         question_stat.attempts = int(question_stat.attempts or 0) + 1
-        question_stat.score = int(question_stat.score or 0) + score
+        question_stat.score = int(question_stat.score or 0) + current_score
         question_stat.last_attempt = datetime.now()
     else:
         question_stat = Questionstat.create(last_attempt=datetime.now(),
                                             question_id=question_id,
                                             attempts=1,
-                                            score=score,
+                                            score=current_score,
                                             username=current_user.username)
 
     question_stat.save()

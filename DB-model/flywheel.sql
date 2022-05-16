@@ -130,10 +130,10 @@ CREATE TABLE `questionstat` (
   `questionId` int unsigned NOT NULL,
   `attempts` int unsigned NOT NULL,
   `lastAttempt` datetime NOT NULL,
-  `score` int unsigned NOT NULL,
+  `score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userIdIndex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `questionstat` (
 
 LOCK TABLES `questionstat` WRITE;
 /*!40000 ALTER TABLE `questionstat` DISABLE KEYS */;
-INSERT INTO `questionstat` VALUES (5,'johndoe',4,2,'2022-05-14 20:18:47',0),(6,'johndoe',3,3,'2022-05-14 20:18:51',0),(7,'johndoe',1,2,'2022-05-14 20:18:53',0),(8,'johndoe',2,1,'2022-05-14 20:18:54',0);
+INSERT INTO `questionstat` VALUES (1,'johndoe',3,4,'2022-05-16 15:53:33',-4),(2,'johndoe',2,1,'2022-05-16 15:53:29',-1),(3,'johndoe',1,1,'2022-05-16 15:53:35',-1);
 /*!40000 ALTER TABLE `questionstat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,9 +235,9 @@ CREATE TABLE `user` (
   `username` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `passwordHash` varchar(200) NOT NULL,
-  `level` int unsigned DEFAULT NULL,
-  `attempts` int unsigned DEFAULT NULL,
-  `lastVisit` datetime DEFAULT NULL,
+  `memoryCoeff` double NOT NULL,
+  `attempts` int unsigned NOT NULL,
+  `lastVisit` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usernameIndex` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
@@ -249,7 +249,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'johndoe','johndoe@example.com','$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW',NULL,37,'2022-05-14 20:18:54');
+INSERT INTO `user` VALUES (1,'johndoe','johndoe@example.com','$2b$12$OlO.tcjEVkF1SNCqvsdtHODZQGlN8cMjppxxtIKxJearhmaVKPqJy',0.9509900498999999,6,'2022-05-16 15:53:35');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,4 +364,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-14 20:21:41
+-- Dump completed on 2022-05-16 15:58:00

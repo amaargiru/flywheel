@@ -83,8 +83,7 @@ function chainReq() {
         axios.defaults.headers.post['Authorization'] = `Bearer ${localStorage.getItem('flywheelJwtToken')}`;
     }
 
-    axios.all(
-        [axios.post(req1), axios.post(req2)])
+    axios.all([axios.post(req1), axios.post(req2)])
         .then(axios.spread((firstResponse, secondResponse) => {
             console.log(firstResponse.data, secondResponse.data);
 

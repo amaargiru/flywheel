@@ -1,4 +1,3 @@
-import datetime
 import json
 import time
 from dataclasses import dataclass
@@ -158,7 +157,7 @@ async def signup(username: str, email: str, password: str):
 
 @app.post("/get_next_question")
 async def get_next_question(current_user: User = Depends(get_current_user)):
-    question_id = Examiner.define_next_question_num(1)
+    question_id = Examiner.define_next_question_num(current_user)
     question = Examiner.get_question(question_id)
 
     return {"question_id": question_id,
@@ -195,18 +194,23 @@ async def get_answer_check(question_id: int, user_input: str, current_user: User
     except Exception:
         pass
 
-    current_score: int = 1 if ratio > Printer.level4ratio else -1
-
     if result is not None:
         question_stat = result
         question_stat.attempts = int(question_stat.attempts or 0) + 1
-        question_stat.score = int(question_stat.score or 0) + current_score
+
+        if ratio <= Printer.level4ratio:
+            question_stat.score = int(question_stat.score or 0) - 1
+        elif question_stat.score < 0:
+            question_stat.score = 1  # Наконец-то правильный ответ, прощаем все предыдущие неправильные ответы
+        else:
+            question_stat.score = int(question_stat.score or 0) + 1
+
         question_stat.last_attempt = datetime.now()
     else:
         question_stat = Questionstat.create(last_attempt=datetime.now(),
                                             question_id=question_id,
                                             attempts=1,
-                                            score=current_score,
+                                            score=1 if ratio > Printer.level4ratio else -1,
                                             username=current_user.username)
 
     question_stat.save()

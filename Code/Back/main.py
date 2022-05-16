@@ -31,7 +31,9 @@ if __name__ == '__main__':
     logger.info("Старт")
 
     while True:
-        question_id = Examiner.define_next_question_num(user_id)
+        current_user = User.get(User.username == "johndoe")
+
+        question_id = Examiner.define_next_question_num(current_user)
         question = Examiner.get_question(question_id)
         user_input: str = input(f"Enter phrase \"{question.native_phrase}\" in english: ")
         user_input_cleaned = Refiner.refine_user_input(user_input)
@@ -43,8 +45,6 @@ if __name__ == '__main__':
         correction = Comparator.find_matching_blocks(user_input_without_punctuation_lower, references_lower, index)
         Printer.color_print_message_to_user(question.references, index, correction, ratio)
         a = Printer.format_message_to_api(question.references, index, correction, ratio)
-
-        current_user = User.get(User.username == "johndoe")
 
         # Refresh user data in DB
         current_user.attempts = int(current_user.attempts or 0) + 1
@@ -65,18 +65,23 @@ if __name__ == '__main__':
         except Exception:
             pass
 
-        current_score: int = 1 if ratio > Printer.level4ratio else -1
-
         if result is not None:
             question_stat = result
             question_stat.attempts = int(question_stat.attempts or 0) + 1
-            question_stat.score = int(question_stat.score or 0) + current_score
+
+            if ratio <= Printer.level4ratio:
+                question_stat.score = int(question_stat.score or 0) - 1
+            elif question_stat.score < 0:
+                question_stat.score = 1  # Наконец-то правильный ответ, прощаем все предыдущие неправильные ответы
+            else:
+                question_stat.score = int(question_stat.score or 0) + 1
+
             question_stat.last_attempt = datetime.now()
         else:
             question_stat = Questionstat.create(last_attempt=datetime.now(),
                                                 question_id=question_id,
                                                 attempts=1,
-                                                score=current_score,
+                                                score=1 if ratio > Printer.level4ratio else -1,
                                                 username=current_user.username)
 
         question_stat.save()

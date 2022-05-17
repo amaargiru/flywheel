@@ -37,7 +37,7 @@ sudo snap install --classic certbot
 sudo certbot certonly --standalone
 Сертификаты должны осесть в папке etc/letsencrypt
 
-uvicorn --reload --timeout-keep-alive 2 --ssl-keyfile=privkey.pem --ssl-certfile=fullchain.pem api:app --host 0.0.0.0 --port 8000 >uvicorn.log 2>&1 &
+uvicorn --reload --timeout-keep-alive 2 --ssl-keyfile=privkey.pem --ssl-certfile=fullchain.pem api:app --host 0.0.0.0 --port 8000 --log-level debug >uvicorn.log 2>&1 &
 
 BD: u1669542_amaargiru_wordpress
 user: u1669542_amaargi

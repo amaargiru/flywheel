@@ -29,7 +29,7 @@ CREATE TABLE `answer` (
   `linkToAudio` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `questionIdIndex` (`questionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `answer` (
 
 LOCK TABLES `answer` WRITE;
 /*!40000 ALTER TABLE `answer` DISABLE KEYS */;
-INSERT INTO `answer` VALUES (1,1,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(2,1,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(3,1,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(4,1,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(5,2,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(6,2,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(7,2,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(8,2,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(9,3,'I am an engineer','9_I_am_an_engineer.mp3'),(10,3,'I\'m an engineer','10_I_m_an_engineer.mp3'),(11,4,'I am an electronics engineer','11_I_am_an_electronics_engineer.mp3'),(12,4,'I\'m an electronics engineer','12_I_m_an_electronics_engineer.mp3');
+INSERT INTO `answer` VALUES (1,1,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(2,1,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(3,1,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(4,1,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(5,2,'A cat sits on the table','1_A_cat_sits_on_the_table.mp3'),(6,2,'The cat sits on the table','2_The_cat_sits_on_the_table.mp3'),(7,2,'A cat is sitting on the table','3_A_cat_is_sitting_on_the_table.mp3'),(8,2,'The cat is sitting on the table','4_The_cat_is_sitting_on_the_table.mp3'),(9,3,'I am an engineer','9_I_am_an_engineer.mp3'),(10,3,'I\'m an engineer','10_I_m_an_engineer.mp3'),(11,4,'I am an electronics engineer','11_I_am_an_electronics_engineer.mp3'),(12,4,'I\'m an electronics engineer','12_I_m_an_electronics_engineer.mp3'),(13,5,'My name is Michael','13_My_name_is_Michael.mp3'),(14,5,'My name\'s Michael','14_My_name_s_Michael.mp3'),(15,6,'Hello, I am from Chicago','15_Hello_I_am_from_Chicago.mp3'),(16,6,'Hello, I\'m from Chicago','16_Hello_I_m_from_Chicago.mp3'),(17,6,'Hi, I am from Chicago','17_Hi_I_am_from_Chicago.mp3'),(18,6,'Hi, I\'m from Chicago','18_Hi_I_m_from_Chicago.mp3'),(19,7,'I am a software developer','19_I_am_a_software_developer.mp3'),(20,7,'I\'m a software developer','20_I_m_a_software_developer.mp3'),(21,7,'I am a software engineer','21_I_am_a_software_engineer.mp3'),(22,7,'I\'m a software engineer','22_I_m_a_software_engineer.mp3'),(23,8,'I am a student','23_I_am_a_student.mp3'),(24,8,'I\'m a student','24_I_m_a_student.mp3'),(25,9,'My father is a database administrator','25_My_father_is_a_database_administrator.mp3'),(26,9,'My dad is a database administrator','26_My_dad_is_a_database_administrator.mp3'),(27,10,'My mother is a quality assurance engineer','27_My_mother_is_a_quality_assurance_engineer.mp3'),(28,10,'My mom is a quality assurance engineer','28_My_mom_is_a_quality_assurance_engineer.mp3'),(29,11,'My favorite color is pale green','29_My_favorite_color_is_pale_green.mp3'),(30,12,'I am interested in programming','30_I_am_interested_in_programming.mp3'),(31,12,'I\'m interested in programming','31_I_m_interested_in_programming.mp3'),(32,13,'I am tired','32_I_am_tired.mp3'),(33,13,'I\'m tired','33_I_m_tired.mp3'),(34,14,'I am not hungry','34_I_am_not_hungry.mp3'),(35,14,'I\'m not hungry','35_I_m_not_hungry.mp3');
 /*!40000 ALTER TABLE `answer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,7 +104,7 @@ CREATE TABLE `question` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nativePhrase` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `question` (
 
 LOCK TABLES `question` WRITE;
 /*!40000 ALTER TABLE `question` DISABLE KEYS */;
-INSERT INTO `question` VALUES (1,'Кошка сидит на столе'),(2,'Кот сидит на столе'),(3,'Я инженер'),(4,'Я инженер-электронщик');
+INSERT INTO `question` VALUES (1,'Кошка сидит на столе'),(2,'Кот сидит на столе'),(3,'Я инженер'),(4,'Я инженер-электронщик'),(5,'Меня зовут Майкл'),(6,'Привет, я из Чикаго'),(7,'Я программист'),(8,'Я студент'),(9,'Мой папа — администратор баз данных'),(10,'Моя мама — тестировщик программного обеспечения'),(11,'Мой любимый цвет — бледно-зеленый'),(12,'Меня интересует программирование'),(13,'Я устал'),(14,'Я не голоден');
 /*!40000 ALTER TABLE `question` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +133,7 @@ CREATE TABLE `questionstat` (
   `score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userIdIndex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,6 @@ CREATE TABLE `questionstat` (
 
 LOCK TABLES `questionstat` WRITE;
 /*!40000 ALTER TABLE `questionstat` DISABLE KEYS */;
-INSERT INTO `questionstat` VALUES (1,'johndoe',3,4,'2022-05-16 15:53:33',-4),(2,'johndoe',2,1,'2022-05-16 15:53:29',-1),(3,'johndoe',1,1,'2022-05-16 15:53:35',-1);
 /*!40000 ALTER TABLE `questionstat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +239,7 @@ CREATE TABLE `user` (
   `lastVisit` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `usernameIndex` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +248,6 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'johndoe','johndoe@example.com','$2b$12$OlO.tcjEVkF1SNCqvsdtHODZQGlN8cMjppxxtIKxJearhmaVKPqJy',0.9509900498999999,6,'2022-05-16 15:53:35');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -364,4 +362,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-16 15:58:00
+-- Dump completed on 2022-05-17 21:41:26

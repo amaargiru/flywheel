@@ -4,4 +4,15 @@ Back: в Complicator.complicate_user_input используются List'ы, п�
 Back: разобраться с проблемой чтения серий данных при помощи peewee (https://docs.peewee-orm.com/en/latest/peewee/quickstart.html)
 Back + Front: усложнить условия создания нового пользователя (валидация написания email), длина пароля, длина имени
 Back: Медленные запросы, 250 - 500 мс (через Swagger UI запросы быстрее, 10-15 мс)
-Back: FastAPI не рекомендует peewee для новых разработок. Надо либо заменить peewee на SQLAlchemy, либо согласовать FastAPI с peewee (https://fastapi.tiangolo.com/advanced/sql-databases-peewee/)
+Back: FastAPI не рекомендует peewee. Надо либо заменить peewee на SQLAlchemy, либо согласовать FastAPI с peewee (https://fastapi.tiangolo.com/advanced/sql-databases-peewee/)
+Back: Extract database user to separate file (one user for dev and another for production)
+Front: Check email during signup
+Back: Check email during signup
+Front: Clear pass fields after signup
+General: Add Tg channel
+General: Add Tg group
+Front: Migrate from JS to TS
+Back: Migrate from MySQL to PostgreSQL
+Back: Migrate from peewee to SQLAlchemy
+General: Create tool (WPF) for adding questions to DB
+Front: Migrate to Vue.js

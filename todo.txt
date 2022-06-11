@@ -1,18 +1,13 @@
-Back: убрать лишние преобразования, которые были подготовительным этапом к "раскрашиванию" пользовательского ответа, сейчас мы "раскрашиваем" ответ из базы
-Back: заменить длинное условие в refiner.py на regexp (с замером производительности)
-Back: в Complicator.complicate_user_input используются List'ы, попробовать заменить на Matrix из numpy (с замером производительности)
-Back: разобраться с проблемой чтения серий данных при помощи peewee (https://docs.peewee-orm.com/en/latest/peewee/quickstart.html)
-Back + Front: усложнить условия создания нового пользователя (валидация написания email), длина пароля, длина имени
-Back: Медленные запросы, 250 - 500 мс (через Swagger UI запросы быстрее, 10-15 мс)
-Back: FastAPI не рекомендует peewee. Надо либо заменить peewee на SQLAlchemy, либо согласовать FastAPI с peewee (https://fastapi.tiangolo.com/advanced/sql-databases-peewee/)
+Back: remove unnecessary transformations, which were a preparatory step for "coloring" the user's answer, now we are "coloring" the answer from the database
+Back: refiner.py, replace long if statement to regexp
+Back + Front: check new user parameters (email validation, name length, password length)
+Back: Slow requests, 250 - 500 ms (but 10-15 ms through Swagger UI)
+Back: FastAPI does not recommend peewee.  Migrate from peewee to SQLAlchemy
 Back: Extract database user to separate file (one user for dev and another for production)
-Front: Check email during signup
-Back: Check email during signup
 Front: Clear pass fields after signup
 General: Add Tg channel
 General: Add Tg group
 Front: Migrate from JS to TS
 Back: Migrate from MySQL to PostgreSQL
-Back: Migrate from peewee to SQLAlchemy
-General: Create tool (WPF) for adding questions to DB
+General: Create tool (WPF?) for adding questions to DB
 Front: Migrate to Vue.js

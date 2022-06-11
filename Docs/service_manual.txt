@@ -1,0 +1,37 @@
+Ubuntu 20.04 LTS with LAMP
+Bind IP to site name (for example https://dnsadmin.hosting.reg.ru/manager/ispmgr)
+Start PuTTY
+sudo apt update -y && sudo apt full-upgrade -y && sudo apt autoremove -y && sudo apt clean -y && sudo apt autoclean -y
+sudo apt install mc -y
+sudo mkdir py
+cd py
+copy backend files to 'py' folder via ssh
+change database user in db_schema.py
+sudo apt install pip -y
+sudo pip install -r requirements.txt
+
+Install SSL certificates:
+	sudo service apache2 stop
+
+	sudo apt install snapd -y
+	sudo snap install --classic certbot
+	sudo certbot certonly --standalone
+
+	sudo service apache2 start
+
+Copy SSL certificates 'privkey.pem' and 'fullchain.pem' from /etc/letsencrypt/live/apittractor.com to /root/py
+
+Download flywheel.sql.zip via phpMyAdmin
+Add wait_timeout = 2147483 in /etc/mysql/mysql.conf.d/mysqld.cnf
+sudo ufw allow 8000
+
+reboot
+
+cd py
+uvicorn --reload --ssl-keyfile=privkey.pem --ssl-certfile=fullchain.pem api:app --host 0.0.0.0 --port 8000 >uvicorn.log 2>&1 &
+sudo ps -aux
+disown nnn
+
+
+sudo kill -TERM nnn
+sudo kill -KILL nnn

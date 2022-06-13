@@ -31,7 +31,7 @@ if __name__ == '__main__':
     logger.info("Старт")
 
     while True:
-        current_user = User.get(User.username == "johndoe")
+        current_user = User.get(User.username == "amaargiru")
 
         question_id = Examiner.define_next_question_num(current_user)
         question = Examiner.get_question(question_id)

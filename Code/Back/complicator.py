@@ -15,7 +15,7 @@ class Complicator:
         j: int = 0
 
         for i, ch in enumerate(user_input_cleaned):
-            if ch.isalnum() or ch == " " or ch == "'":
+            if ch.isalnum() or ch == " " or ch == "'" or ch == ",":
                 complex_user_input.user_input_without_punctuation.append(ch)
                 complex_user_input.transformation_matrix.append([i, j])
                 j += 1

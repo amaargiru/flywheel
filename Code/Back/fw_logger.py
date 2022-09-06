@@ -6,7 +6,6 @@ from colorlog import ColoredFormatter
 
 
 class FlyWheelLogger:
-
     @staticmethod
     def get_logger(path_to_log_file: str, max_file_size: int, max_file_count: int) -> logging.Logger:
         logger = logging.getLogger("gateway_logger")

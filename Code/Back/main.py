@@ -1,7 +1,7 @@
-from datetime import datetime
 import pathlib
 import sys
 import time
+from datetime import datetime
 
 from comparator import Comparator
 from complicator import Complicator
@@ -16,7 +16,7 @@ log_max_file_size = 1024 ** 2  # Максимальный размер одно�
 log_max_file_count = 10  # Максимальное количество файлов логов
 log_file_path = "logs//fw.log"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     try:
         path = pathlib.Path(log_file_path)  # Создаем путь к файлу логов, если он не существует
@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
         # Refresh user data in DB
         current_user.attempts = int(current_user.attempts or 0) + 1
-        time.strftime('%Y-%m-%d %H:%M:%S')
+        time.strftime("%Y-%m-%d %H:%M:%S")
         current_user.last_visit = datetime.now()
 
         memory_coeff = float(current_user.memory_coeff)

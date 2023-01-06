@@ -1,13 +1,14 @@
-Back: remove unnecessary transformations, which were a preparatory step for "coloring" the user's answer, now we are "coloring" the answer from the database
-Back: refiner.py, replace long if statement to regexp
-Back + Front: check new user parameters (email validation, name length, password length)
-Back: Slow requests, 250 - 500 ms (but 10-15 ms through Swagger UI)
-Back: FastAPI does not recommend peewee.  Migrate from peewee to SQLAlchemy
-Back: Extract database user to separate file (one user for dev and another for production)
-Front: Clear pass fields after signup
-General: Add Tg channel
-General: Add Tg group
-Front: Migrate from JS to TS
-Back: Migrate from MySQL to PostgreSQL
-General: Create tool (WPF?) for adding questions to DB
-Front: Migrate to Vue.js
+[-] General: Update base of russian-english phrases.
+[-] Back: remove unnecessary transformations, which were a preparatory step for "coloring" the user's answer, now we are "coloring" the answer from the database.
+[-] Back: refiner.py, replace long if statement to regexp.
+[-] Back + Front: check new user parameters (email validation, name length, password length).
+[-] Back: Slow requests, 250 - 500 ms (but 10-15 ms through Swagger UI).
+[-] Back: FastAPI does not recommend peewee.  Migrate from peewee to SQLAlchemy.
+[-] Back: Extract database user to separate file (one user for dev and another for production).
+[-] Front: Clear pass fields after signup.
+[-] General: Add Telegram channel.
+[-] General: Add Telegram group.
+[-] Front: Migrate from JS to TS.
+[-] Back: Migrate from MySQL to PostgreSQL.
+[-] General: Create tool (WPF?) for adding questions to DB.
+[-] Front: Migrate to Vue.js.

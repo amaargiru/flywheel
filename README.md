@@ -1,3 +1,3 @@
 ## Flywheel
 
-Проект по созданию микроаналога платформы изучения языков [Duolingo](https://www.duolingo.com/).
+Language learning platform inspired by [Duolingo](https://www.duolingo.com/).

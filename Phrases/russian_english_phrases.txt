@@ -1,5 +1,3 @@
-Present Simple
-
 Я работаю | I work
 Мы работаем | We work
 Ты работаешь | You work
@@ -34,7 +32,6 @@ Present Simple
 Мы живём здесь | We live here
 Я живу в этом городе | I live in this city
 Мы живём в этой стране | We live in this country
-
 Я помню это | I remember it
 Я понимаю тебя | I understand you
 Мы говорим по английски | We speak English

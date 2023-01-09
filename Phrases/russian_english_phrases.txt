@@ -50,12 +50,13 @@
 Я учусь здесь | I study here
 Мы думаем так | We think so
 Я учусь там | I study there
-You know it
-I live in this country
-We live in Russia
-I have a sister
-You see it
-I go to school
-I understand
-We live in this country
-I see it
+Ты знаешь это | You know it
+Я живу в этой стране | I live in this country
+Мы живем в России | We live in Russia
+У меня есть сестра | I have a sister
+Ты видишь это | You see it
+Я иду в школу | I go to school
+Я понимаю | I understand
+Мы живем в этой стране | We live in this country
+Я вижу это | I see it
+Кошка сидит на столе | A cat sits on the table | The cat sits on the table

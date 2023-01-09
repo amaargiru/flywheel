@@ -12,23 +12,23 @@ from lower import Lower
 from printer import Printer
 from refiner import Refiner
 
-log_max_file_size = 1024 ** 2  # Максимальный размер одного файла логов
-log_max_file_count = 10  # Максимальное количество файлов логов
+log_max_file_size = 1024 ** 2  # Maximum size of one log file
+log_max_file_count = 10  # Maximum number of log files
 log_file_path = "logs//fw.log"
 
 if __name__ == "__main__":
 
     try:
-        path = pathlib.Path(log_file_path)  # Создаем путь к файлу логов, если он не существует
+        path = pathlib.Path(log_file_path)  # Create a path to the log file if it doesn't exist
         path.parent.mkdir(parents=True, exist_ok=True)
         logger = FlyWheelLogger.get_logger(log_file_path, log_max_file_size, log_max_file_count)
     except Exception as err:
         print(f"Error when trying to create log directory {str(err)}")
-        sys.exit()  # Аварийный выход
+        sys.exit(1)  # Emergency exit with non-zero code
 
     user_id: int = 1
 
-    logger.info("Старт")
+    logger.info("Start")
 
     while True:
         current_user = User.get(User.username == "amaargiru")
@@ -72,7 +72,7 @@ if __name__ == "__main__":
             if ratio <= Printer.level4ratio:
                 question_stat.score = int(question_stat.score or 0) - 1
             elif question_stat.score < 0:
-                question_stat.score = 1  # Наконец-то правильный ответ, прощаем все предыдущие неправильные ответы
+                question_stat.score = 1  # Finally the right answer, forgetting all the previous wrong answers
             else:
                 question_stat.score = int(question_stat.score or 0) + 1
 

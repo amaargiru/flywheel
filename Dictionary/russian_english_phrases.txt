@@ -54,6 +54,7 @@
 Ты видишь это || You see it
 Я иду в школу || I go to school
 Мы живем в этой стране || We live in this country
+Собака сидит на столе || A dog sits on the table | The dog sits on the table
 Кот сидит на столе | Кошка сидит на столе || A cat sits on the table | The cat sits on the table
 Мы хотим это || We want it
 Ты работаешь очень усердно || You work very hard

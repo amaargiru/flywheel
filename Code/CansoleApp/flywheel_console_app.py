@@ -40,15 +40,31 @@ with (open(find_file_in_project_directories(phrases_file), "r+", encoding="utf-8
                 duplicates_and_errors.append(f"Error. String contains {len(phrases_list)} '||' delimeters: " + string +
                                              ". String must contains only one '||' delimeter between phrases in different languages")
             else:
-                phrase_rus, phrases_eng = phrases_list[0], phrases_list[1]
+                rus_part, eng_part = phrases_list[0], phrases_list[1]
 
-                if phrase_mapping[phrase_rus] != "":  # Search for duplicates
-                    duplicates_and_errors.append(f"Duplicate: {string}")
-                else:
-                    phrase_mapping[phrase_rus] = phrases_eng
-                    # Save delimited text without duplicates (text cleanup)
-                    # Text is compiled from different sources and definitely contains duplicates
-                    phrf.write(string)
+                if "|" in eng_part:  # Multiple english phrases
+                    eng_part = list(map(str.strip, eng_part.split("|")))  # Just split into separate english phrases
+
+                if "|" not in rus_part:  # Single russian phrase
+                    if phrase_mapping[rus_part] != "":  # Search for duplicates
+                        duplicates_and_errors.append(f"Duplicate: {string}")
+                    else:
+                        phrase_mapping[rus_part] = eng_part
+                        # Save delimited text without duplicates (text cleanup)
+                        # Text is compiled from different sources and definitely contains duplicates
+                        phrf.write(string)
+
+                else:  # Multiple russian phrases
+                    rus_part = list(map(str.strip, rus_part.split("|")))  # Split into separate russian phrases...
+                    for rus_phrase in rus_part:
+                        if phrase_mapping[rus_phrase] == eng_part:  # Search for duplicates
+                            duplicates_and_errors.append(f"Duplicate: {string}")
+                        else:
+                            phrase_mapping[rus_phrase] = eng_part  # ... and save separate items
+                            # Save delimited text without duplicates (text cleanup)
+                            # Text is compiled from different sources and definitely contains duplicates
+                            phrf.write(string)
+
         else:
             duplicates_and_errors.append("Error. String doesn't contains '||' delimeter")
 

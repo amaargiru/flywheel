@@ -1,4 +1,4 @@
-[-] General: Update base of russian-english phrases.
+[-] Check remove duplicates for multiple russian and/or multiple english phrases (pytest).
 [-] Back: remove unnecessary transformations, which were a preparatory step for "coloring" the user's answer, now we are "coloring" the answer from the database.
 [-] Back: refiner.py, replace long if statement to regexp.
 [-] Back + Front: check new user parameters (email validation, name length, password length).

@@ -1,22 +1,25 @@
 phrases_file_name = "phrases.txt"
 repetitions_file_name = "repetitions.json"
+from system_level import FileOperations as fop
+from data_level import DataOperations as dop
+from ui_level import UserOperations as uop
 
 if __name__ == "__main__":
-    phrases_file_path = find_or_create_file(phrases_file_name)
-    repetitions_file_path = find_or_create_file(repetitions_file_name)
+    phrases_file_path = fop.find_or_create_file(phrases_file_name)
+    repetitions_file_path = fop.find_or_create_file(repetitions_file_name)
 
-    phrases = read_phrases(phrases_file_path)
-    repetitions = read_repetitions(repetitions_file_path)
-    can_work, error_message = data_assessment(phrases, repetitions)
+    phrases = fop.read_phrases(phrases_file_path)
+    repetitions = fop.read_repetitions(repetitions_file_path)
+    can_work, error_message = dop.data_assessment(phrases, repetitions)
 
     if can_work:
-        message = merge(repetitions, phrases)
+        message = dop.merge(phrases, repetitions)
         print(message)
         while True:
-            current_phrase = determine_current_phrase(repetitions)
-            user_result = user_session(current_phrase)
-            update_repetitions(repetitions, current_phrase, user_result)
-            save_repetitions(repetitions_file_path, repetitions)
+            current_phrase = dop.determine_current_phrase(repetitions)
+            user_result = uop.user_session(current_phrase, repetitions)
+            dop.update_repetitions(repetitions, current_phrase, user_result)
+            fop.save_repetitions(repetitions_file_path, repetitions)
     else:
         print(error_message)
         exit()

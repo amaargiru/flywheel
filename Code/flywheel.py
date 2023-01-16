@@ -1,10 +1,11 @@
-phrases_file_name = "phrases.txt"
-repetitions_file_name = "repetitions.json"
-from system_level import FileOperations as fop
 from data_level import DataOperations as dop
+from system_level import FileOperations as fop
 from ui_level import UserOperations as uop
 
-if __name__ == "__main__":
+phrases_file_name = 'phrases.txt'
+repetitions_file_name = 'repetitions.json'
+
+if __name__ == '__main__':
     phrases_file_path = fop.find_or_create_file(phrases_file_name)
     repetitions_file_path = fop.find_or_create_file(repetitions_file_name)
 

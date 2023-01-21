@@ -22,6 +22,7 @@ class DataOperations:
 
     @staticmethod
     def merge(phrases: dict, repetitions: dict) -> str:
+        """Merge new phrases into general dictionary"""
         no_added_message: str = "No new phrases added"
         new_phrases: int = 0
 
@@ -39,18 +40,19 @@ class DataOperations:
         return no_added_message if new_phrases == 0 else f"Added {new_phrases} new phrases"
 
     @staticmethod
-    def determine_current_phrase(repetitions: dict) -> str:
-        current_phrase: str = ""
-        current_time_to_repeat = datetime.max
+    def determine_next_phrase(repetitions: dict) -> str:
+        """Determine phrase for next user session"""
+        recommended_phrase: str = ""
+        min_time_to_repeat = datetime.max
 
-        for k, v in repetitions.items():
-            time_to_repeat = datetime.strptime(v["time_to_repeat"], datetime_format)
-            if time_to_repeat < current_time_to_repeat:
-                current_phrase = k
-                current_time_to_repeat = time_to_repeat
+        for current_phrase, value in repetitions.items():
+            current_time_to_repeat = datetime.strptime(value["time_to_repeat"], datetime_format)
+            if current_time_to_repeat < min_time_to_repeat:
+                recommended_phrase = current_phrase
+                min_time_to_repeat = current_time_to_repeat
 
-        return current_phrase
+        return recommended_phrase
 
     @staticmethod
-    def update_repetitions(repetitions: dict, current_phrase: str, user_result) -> str:
+    def update_repetitions(repetitions: dict, current_phrase: str, user_result: float) -> str:
         ...

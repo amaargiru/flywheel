@@ -1,16 +1,16 @@
 import json
 import os
-import sys
 from pathlib import Path
 
 
 class FileOperations:
     @staticmethod
-    def find_or_create_file(filename: str, levelup: int = 2) -> str:
+    def find_or_create_file(filename: str, parents_level_up: int = 2) -> str:
+        """Find and open a file if exists (include path's logical parents), or create a new empty file"""
         if os.path.exists(filename):  # If file exist in app directory
             return filename
         else:  # If file doesn't exist in app directory, start search in all project directories
-            for root, dirs, files in os.walk(Path(__file__).parents[levelup]):
+            for root, dirs, files in os.walk(Path(__file__).parents[parents_level_up]):
                 if filename in files:
                     return os.path.join(root, filename)
 
@@ -21,6 +21,7 @@ class FileOperations:
 
     @staticmethod
     def read_phrases(file_path: str) -> dict:
+        """Read new phrases from file"""
         phrase_mapping: dict = {}
 
         try:
@@ -52,6 +53,7 @@ class FileOperations:
 
     @staticmethod
     def read_repetitions(file_path: str) -> dict:
+        """Read repetitions from file"""
         repetitions: dict = {}
 
         try:
@@ -64,4 +66,5 @@ class FileOperations:
 
     @staticmethod
     def save_repetitions(file_path: str, repetitions: dict) -> dict:
+        """Save repetitions to file"""
         ...

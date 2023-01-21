@@ -45,9 +45,8 @@ class FileOperations:
 
                             else:  # Single russian phrase
                                 phrase_mapping[rus_part] = eng_part
-        except IOError:
+        except Exception:
             print(f"Cant open or parse {file_path} file")
-            sys.exit()
 
         return phrase_mapping
 
@@ -58,9 +57,8 @@ class FileOperations:
         try:
             with open(file_path, 'r', encoding='utf-8') as repf:
                 repetitions = json.load(repf)
-        except IOError:
+        except Exception:
             print(f"Cant open or parse {file_path} file")
-            sys.exit()
 
         return repetitions
 

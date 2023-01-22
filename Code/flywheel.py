@@ -1,6 +1,6 @@
 from data_level import DataOperations as dop
 from system_level import FileOperations as fop
-from ui_level import UserOperations as uop
+from ui_level import UiOperations as uop
 
 phrases_file_name: str = 'phrases.txt'
 repetitions_file_name: str = 'repetitions.json'
@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
         while True:
             current_phrase: str = dop.determine_next_phrase(repetitions)
-            user_result: float = uop.user_session(current_phrase, repetitions)
+            user_result: float = uop.user_session(current_phrase, repetitions[current_phrase])
             dop.update_repetitions(repetitions, current_phrase, user_result)
             fop.save_repetitions(repetitions_file_path, repetitions)
     else:

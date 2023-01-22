@@ -1,406 +1,406 @@
 {
   "Я люблю тебя": {
-    "translate": "I love you",
+    "translations": "I love you",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я работаю": {
-    "translate": "I work",
+    "translations": "I work",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы работаем": {
-    "translate": "We work",
+    "translations": "We work",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Ты работаешь": {
-    "translate": "You work",
+    "translations": "You work",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Они работают": {
-    "translate": "They work",
+    "translations": "They work",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я работаю здесь": {
-    "translate": "I work here",
+    "translations": "I work here",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я учусь": {
-    "translate": "I study",
+    "translations": "I study",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я понимаю": {
-    "translate": "I understand",
+    "translations": "I understand",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я понимаю тебя": {
-    "translate": "I understand you",
+    "translations": "I understand you",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я знаю это": {
-    "translate": "I know it",
+    "translations": "I know it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я знаю это очень хорошо": {
-    "translate": "I know it very well",
+    "translations": "I know it very well",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я живу в России": {
-    "translate": "I live in Russia",
+    "translations": "I live in Russia",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я говорю по английски": {
-    "translate": "I speak English",
+    "translations": "I speak English",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я хожу в школу": {
-    "translate": "I go to school",
+    "translations": "I go to school",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я хожу на работу": {
-    "translate": "I go to work",
+    "translations": "I go to work",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "У меня есть брат": {
-    "translate": "I have a brother",
+    "translations": "I have a brother",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "У меня есть идея": {
-    "translate": "I have an idea",
+    "translations": "I have an idea",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "У меня есть сестра": {
-    "translate": "I have a sister",
+    "translations": "I have a sister",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "У меня есть машина": {
-    "translate": "I have a car",
+    "translations": "I have a car",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я так думаю": {
-    "translate": "I think so",
+    "translations": "I think so",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я вижу это": {
-    "translate": "I see it",
+    "translations": "I see it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я хочу это": {
-    "translate": "I want it",
+    "translations": "I want it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я помню это": {
-    "translate": "I remember it",
+    "translations": "I remember it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я помню это очень хорошо": {
-    "translate": "I remember it very well",
+    "translations": "I remember it very well",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы понимаем тебя": {
-    "translate": "We understand you",
+    "translations": "We understand you",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы говорим по-английски": {
-    "translate": "We speak English",
+    "translations": "We speak English",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Ты знаешь это": {
-    "translate": "You know it",
+    "translations": "You know it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Они помогают мне": {
-    "translate": "They help me",
+    "translations": "They help me",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Они ходят на работу": {
-    "translate": "They go to work",
+    "translations": "They go to work",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы помним это": {
-    "translate": "We remember it",
+    "translations": "We remember it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Ты говоришь по английски очень хорошо": {
-    "translate": "You speak English very well",
+    "translations": "You speak English very well",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы живём здесь": {
-    "translate": "We live here",
+    "translations": "We live here",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я живу в этом городе": {
-    "translate": "I live in this city",
+    "translations": "I live in this city",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы живём в этой стране": {
-    "translate": "We live in this country",
+    "translations": "We live in this country",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы говорим по английски": {
-    "translate": "We speak English",
+    "translations": "We speak English",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я очень хорошо знаю это": {
-    "translate": "I know it very well",
+    "translations": "I know it very well",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Ты помогаешь мне": {
-    "translate": "You help me",
+    "translations": "You help me",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я очень хорошо понимаю тебя": {
-    "translate": "I understand you very well",
+    "translations": "I understand you very well",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я работаю там": {
-    "translate": "I work there",
+    "translations": "I work there",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "У меня идея": {
-    "translate": "I have an idea",
+    "translations": "I have an idea",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Они ходят в школу": {
-    "translate": "They go to school",
+    "translations": "They go to school",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я учусь здесь": {
-    "translate": "I study here",
+    "translations": "I study here",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы думаем так": {
-    "translate": "We think so",
+    "translations": "We think so",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я учусь там": {
-    "translate": "I study there",
+    "translations": "I study there",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я живу в этой стране": {
-    "translate": "I live in this country",
+    "translations": "I live in this country",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы живем в России": {
-    "translate": "We live in Russia",
+    "translations": "We live in Russia",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Ты видишь это": {
-    "translate": "You see it",
+    "translations": "You see it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я иду в школу": {
-    "translate": "I go to school",
+    "translations": "I go to school",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы живем в этой стране": {
-    "translate": "We live in this country",
+    "translations": "We live in this country",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Собака сидит на столе": {
-    "translate": [
+    "translations": [
       "A dog sits on the table",
       "The dog sits on the table"
     ],
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Кот сидит на столе": {
-    "translate": [
+    "translations": [
       "A cat sits on the table",
       "The cat sits on the table"
     ],
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Кошка сидит на столе": {
-    "translate": [
+    "translations": [
       "A cat sits on the table",
       "The cat sits on the table"
     ],
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Мы хотим это": {
-    "translate": "We want it",
+    "translations": "We want it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Ты работаешь очень усердно": {
-    "translate": "You work very hard",
+    "translations": "You work very hard",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Они учатся очень усердно": {
-    "translate": "They study very hard",
+    "translations": "They study very hard",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он живет там": {
-    "translate": "He lives there",
+    "translations": "He lives there",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она чувствует себя счастливой": {
-    "translate": "She feels happy",
+    "translations": "She feels happy",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Я чувствую себя счастливым": {
-    "translate": "I feel happy",
+    "translations": "I feel happy",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это помогает мне": {
-    "translate": "It helps me",
+    "translations": "It helps me",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он также работает здесь": {
-    "translate": "He also works here",
+    "translations": "He also works here",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он так думает": {
-    "translate": "He thinks so",
+    "translations": "He thinks so",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он живет в этом доме": {
-    "translate": "He lives in this house",
+    "translations": "He lives in this house",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она помнит это": {
-    "translate": "She remembers it",
+    "translations": "She remembers it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она живет в этом месте": {
-    "translate": "She lives in this place",
+    "translations": "She lives in this place",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она живет в том месте": {
-    "translate": "She lives in that place",
+    "translations": "She lives in that place",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она говорит по английски очень хорошо": {
-    "translate": "She speaks English very well",
+    "translations": "She speaks English very well",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это действительно помогает мне": {
-    "translate": "It really helps me",
+    "translations": "It really helps me",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это выглядит интересным": {
-    "translate": "It looks interesting",
+    "translations": "It looks interesting",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это кажется интересным": {
-    "translate": "It seems interesting",
+    "translations": "It seems interesting",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он читает на английском": {
-    "translate": "He reads in English",
+    "translations": "He reads in English",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она читает английские книги": {
-    "translate": "She reads English books",
+    "translations": "She reads English books",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это выглядит странно": {
-    "translate": "It looks strange",
+    "translations": "It looks strange",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он знает это": {
-    "translate": "He knows it",
+    "translations": "He knows it",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она видит эту ошибку": {
-    "translate": "She sees this mistake",
+    "translations": "She sees this mistake",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он видит эту ошибку": {
-    "translate": "He sees that mistake",
+    "translations": "He sees that mistake",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это случается": {
-    "translate": "It happens",
+    "translations": "It happens",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Он хочет большего": {
-    "translate": "He wants more",
+    "translations": "He wants more",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Она хочет больше практики": {
-    "translate": "She wants more practice",
+    "translations": "She wants more practice",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   },
   "Это действительно случается": {
-    "translate": "It really happens",
+    "translations": "It really happens",
     "attempts": [],
-    "time_to_repeat": "2023.01.22 12:21:33"
+    "time_to_repeat": "2023.01.22 19:36:59"
   }
 }

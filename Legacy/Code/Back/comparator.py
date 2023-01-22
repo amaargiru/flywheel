@@ -26,7 +26,6 @@ class Comparator:
     def find_matching_blocks(user_input_without_punctuation_lower, references_lower: List[str], reference_index):
         seq = SequenceMatcher(None, "".join(user_input_without_punctuation_lower), references_lower[reference_index])
         a = seq.get_matching_blocks()
-
         a = a[:-1]  # Last element is a dummy
 
         answer_length = len(references_lower[reference_index])

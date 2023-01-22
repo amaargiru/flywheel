@@ -21,13 +21,13 @@ class DataOperations:
             return True, "No data assessment errors"
 
     @staticmethod
-    def merge(phrases: dict, repetitions: dict) -> str:
+    def merge(phrases: dict, repetitions: dict) -> (bool, str):
         """Merge new phrases into general dictionary"""
         no_added_message: str = "No new phrases added"
         new_phrases: int = 0
 
         if len(phrases) == 0:
-            return no_added_message
+            return False, no_added_message
         else:
             for rus_part, eng_part in phrases.items():
                 if rus_part not in repetitions:
@@ -37,7 +37,7 @@ class DataOperations:
                         "time_to_repeat": datetime.now().strftime(datetime_format)}  # Recommendation to check this phrase right now
                     new_phrases += 1
 
-        return no_added_message if new_phrases == 0 else f"Added {new_phrases} new phrases"
+        return (False, no_added_message) if new_phrases == 0 else (True, f"Added {new_phrases} new phrases")
 
     @staticmethod
     def determine_next_phrase(repetitions: dict) -> str:

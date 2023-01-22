@@ -47,7 +47,7 @@ class FileOperations:
                             else:  # Single russian phrase
                                 phrase_mapping[rus_part] = eng_part
         except Exception:
-            print(f"Cant open or parse {file_path} file")
+            print(f'Cant open or parse {file_path} file')
 
         return phrase_mapping
 
@@ -60,11 +60,15 @@ class FileOperations:
             with open(file_path, 'r', encoding='utf-8') as repf:
                 repetitions = json.load(repf)
         except Exception:
-            print(f"Cant open or parse {file_path} file")
+            print(f'Cant open or parse {file_path} file')
 
         return repetitions
 
     @staticmethod
-    def save_repetitions(file_path: str, repetitions: dict) -> dict:
+    def save_repetitions(file_path: str, repetitions: dict):
         """Save repetitions to file"""
-        ...
+        try:
+            with open(file_path, 'w', encoding='utf-8') as repf:
+                repf.write(json.dumps(repetitions, ensure_ascii=False, indent=2))
+        except Exception:
+            print(f'Cant save {file_path} file')

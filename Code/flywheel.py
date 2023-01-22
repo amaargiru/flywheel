@@ -14,8 +14,11 @@ if __name__ == '__main__':
     can_work, assesment_error_message = dop.data_assessment(phrases, repetitions)
 
     if can_work:
-        merge_message = dop.merge(phrases, repetitions)
+        is_merged, merge_message = dop.merge(phrases, repetitions)
         print(merge_message)
+        if is_merged:
+            fop.save_repetitions(repetitions_file_path, repetitions)
+
         while True:
             current_phrase: str = dop.determine_next_phrase(repetitions)
             user_result: float = uop.user_session(current_phrase, repetitions)

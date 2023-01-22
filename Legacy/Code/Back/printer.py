@@ -14,16 +14,13 @@ class Printer:
 
         if ratio > Printer.level4ratio:
             print(Fore.GREEN + "Correct.")
-
         elif ratio > Printer.level3ratio:  # Во фразах очень много общего, показываем пользователю diff
             print(Fore.BLACK + "Almost correct. Right answer is: ", end="")
             Printer.__print_colored_diff(correction, index, references)
-
         elif ratio > Printer.level2ratio:  # Во фразах много общего, можно попробовать вывести пользователю diff
             print(Fore.BLACK + "Not bad. ", end="")
             print(Fore.BLACK + "Right answer is: ", end="")
             Printer.__print_colored_diff(correction, index, references)
-
         else:
             print(Fore.RED + "Wrong. ", end="")  # Много ошибок, не пытаемся показать diff
             print(Fore.BLACK + "Right answer is: ", end="")

@@ -1,4 +1,3 @@
-import builtins
 import re
 import sys
 from datetime import datetime
@@ -11,6 +10,10 @@ datetime_format: str = "%Y.%m.%d %H:%M:%S"
 
 
 class DataOperations:
+    level_excellent: float = 0.99
+    level_good: float = 0.97
+    level_mediocre: float = 0.65
+
     @staticmethod
     def data_assessment(phrases: dict, repetitions: dict) -> (bool, str):
         if not isinstance(phrases, dict):
@@ -61,7 +64,7 @@ class DataOperations:
 
     @staticmethod
     def update_repetitions(repetitions: dict, current_phrase: str, user_result: float) -> str:
-        ...
+        repetitions[current_phrase]['attempts'].append((datetime.now().strftime(datetime_format), user_result))
 
     @staticmethod
     def cleanup_user_input(user_input: str) -> str:
@@ -81,7 +84,10 @@ class DataOperations:
     @staticmethod
     def find_max_jaro_distance(user_input: str, translations: str | List[str]) -> (float, str):
         max_distance: float = 0
-        best_translation: int = 0
+        best_translation: str = ''
+
+        if isinstance(translations, str):
+            translations = [translations]
 
         def compact(input_string: str) -> str:
             return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
@@ -90,17 +96,13 @@ class DataOperations:
         user_input = compact(DataOperations.cleanup_user_input(user_input).lower())
 
         # 'Compactify' translations
-        translations = compact(translations.lower()) if isinstance(translations, str) else [compact(t.lower()) for t in translations]
+        translations = [(t, compact(t.lower())) for t in translations]
 
-        if isinstance(translations, str):
-            distance = jellyfish.jaro_distance(user_input, translations)
-            return distance, translations
-        else:
-            for t in translations:
-                current_distance = jellyfish.jaro_distance(user_input, t)
+        for translation, compact_translation in translations:
+            current_distance = jellyfish.jaro_distance(user_input, compact_translation)
 
-                if current_distance > max_distance:
-                    max_distance = current_distance
-                    best_translation = t
+            if current_distance > max_distance:
+                max_distance = current_distance
+                best_translation = translation
 
             return max_distance, best_translation

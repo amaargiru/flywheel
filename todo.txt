@@ -1,7 +1,7 @@
 [-] Add some docstrings.
 [-] Check remove duplicates for multiple russian and/or multiple english phrases (+ pytest).
-[-] Back: remove unnecessary transformations, which were a preparatory step for "coloring" the user's answer, now we are "coloring" the answer from the database.
-[-] Back: refiner.py, replace long if statement to regexp.
+[+] Back: remove unnecessary transformations, which were a preparatory step for "coloring" the user's answer, now we are "coloring" the answer from the database.
+[+] Back: refiner.py, replace long if statement.
 [-] Back + Front: check new user parameters (email validation, name length, password length).
 [-] Back: Slow requests, 250 - 500 ms (but 10-15 ms through Swagger UI).
 [-] Back: FastAPI does not recommend peewee.  Migrate from peewee to SQLAlchemy.

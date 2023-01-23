@@ -77,11 +77,52 @@ class DataOperations:
         repetitions[current_phrase]['attempts'].append((datetime.now().strftime(datetime_format), user_result))
 
         # Update whole repetition data
-        repetitions[current_phrase] = DataOperations.supermemo2(repetitions[current_phrase], user_result)
+        repetitions[current_phrase] = DataOperations._supermemo2(repetitions[current_phrase], user_result)
+
+    @staticmethod
+    def find_max_jaro_distance(user_input: str, translations: str | List[str]) -> (float, str):
+        max_distance: float = 0
+
+        if isinstance(translations, str):
+            translations = [translations]
+        best_translation: str = translations[0]
+
+        def compact(input_string: str) -> str:
+            return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
+
+        # Cleanup and 'compactify' user input ('I   don't know!!!😀' -> 'i dont know')
+        user_input = compact(DataOperations._cleanup_user_input(user_input).lower())
+
+        # 'Compactify' translations
+        translations = [(t, compact(t.lower())) for t in translations]
+
+        for translation, compact_translation in translations:
+            current_distance = jellyfish.jaro_distance(user_input, compact_translation)
+
+            if current_distance > max_distance:
+                max_distance = current_distance
+                best_translation = translation
+
+            return max_distance, best_translation
+
+    @staticmethod
+    def _cleanup_user_input(user_input: str) -> str:
+        MAX_STRING_SIZE: int = 200
+        comma_pattern: Pattern[str] = re.compile(r"(,){2,}")
+        white_list: str = " ?!.,:;'"  # Allow symbols (+ alpha-numeric)
+
+        user_input = user_input[:MAX_STRING_SIZE]  # Length limit
+        user_input = user_input.strip()  # Remove leading and trailing whitespace
+        user_input = ''.join(ch for ch in user_input if ch.isalnum() or ch in white_list)  # Delete all unwanted symbols
+        user_input = user_input.replace("\t", " ")  # Replace tabs with spaces
+        user_input = ' '.join(user_input.split())  # Replace multiple spaces with one
+        user_input = re.sub(comma_pattern, ",", user_input)  # Replace multiple commas with one
+
+        return user_input
 
     @staticmethod
     # https://en.wikipedia.org/wiki/SuperMemo
-    def supermemo2(repetition: dict, user_result: float) -> dict:
+    def _supermemo2(repetition: dict, user_result: float) -> dict:
         if user_result >= DataOperations.level_good:  # Correct response
             if repetition["repetition_number"] == 0:  # + 1 day
                 repetition["time_to_repeat"] = (datetime.now() + timedelta(days=1)).strftime(datetime_format)
@@ -100,44 +141,3 @@ class DataOperations:
         repetition["easiness_factor"] = max(repetition["easiness_factor"], 1.3)
 
         return repetition
-
-    @staticmethod
-    def cleanup_user_input(user_input: str) -> str:
-        MAX_STRING_SIZE: int = 200
-        comma_pattern: Pattern[str] = re.compile(r"(,){2,}")
-        white_list: str = " ?!.,:;'"  # Allow symbols (+ alpha-numeric)
-
-        user_input = user_input[:MAX_STRING_SIZE]  # Length limit
-        user_input = user_input.strip()  # Remove leading and trailing whitespace
-        user_input = ''.join(ch for ch in user_input if ch.isalnum() or ch in white_list)  # Delete all unwanted symbols
-        user_input = user_input.replace("\t", " ")  # Replace tabs with spaces
-        user_input = ' '.join(user_input.split())  # Replace multiple spaces with one
-        user_input = re.sub(comma_pattern, ",", user_input)  # Replace multiple commas with one
-
-        return user_input
-
-    @staticmethod
-    def find_max_jaro_distance(user_input: str, translations: str | List[str]) -> (float, str):
-        max_distance: float = 0
-
-        if isinstance(translations, str):
-            translations = [translations]
-        best_translation: str = translations[0]
-
-        def compact(input_string: str) -> str:
-            return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
-
-        # Cleanup and 'compactify' user input ('I   don't know!!!😀' -> 'i dont know')
-        user_input = compact(DataOperations.cleanup_user_input(user_input).lower())
-
-        # 'Compactify' translations
-        translations = [(t, compact(t.lower())) for t in translations]
-
-        for translation, compact_translation in translations:
-            current_distance = jellyfish.jaro_distance(user_input, compact_translation)
-
-            if current_distance > max_distance:
-                max_distance = current_distance
-                best_translation = translation
-
-            return max_distance, best_translation

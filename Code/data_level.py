@@ -1,6 +1,7 @@
 import re
 import sys
 from datetime import datetime, timedelta
+from difflib import SequenceMatcher
 from re import Pattern
 from typing import List
 
@@ -87,14 +88,11 @@ class DataOperations:
             translations = [translations]
         best_translation: str = translations[0]
 
-        def compact(input_string: str) -> str:
-            return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
-
         # Cleanup and 'compactify' user input ('I   don't know!!!😀' -> 'i dont know')
-        user_input = compact(DataOperations._cleanup_user_input(user_input).lower())
+        user_input = DataOperations.compact(DataOperations._cleanup_user_input(user_input).lower())
 
         # 'Compactify' translations
-        translations = [(t, compact(t.lower())) for t in translations]
+        translations = [(t, DataOperations.compact(t.lower())) for t in translations]
 
         for translation, compact_translation in translations:
             current_distance = jellyfish.jaro_distance(user_input, compact_translation)
@@ -104,6 +102,27 @@ class DataOperations:
                 best_translation = translation
 
             return max_distance, best_translation
+
+    @staticmethod
+    def find_matching_blocks(user_input, reference):
+        seq = SequenceMatcher(None,
+                              "".join(DataOperations.compact(DataOperations._cleanup_user_input(user_input).lower())),
+                              DataOperations.compact(reference.lower()))
+        a = seq.get_matching_blocks()
+        a = a[:-1]  # Last element is a dummy
+
+        b: list = [False] * len(reference)
+
+        for _, i, n in a:
+            if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different word
+                for x in range(i, i + n):
+                    b[x] = True
+
+        return b
+
+    @staticmethod
+    def compact(input_string: str) -> str:
+        return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 
     @staticmethod
     def _cleanup_user_input(user_input: str) -> str:

@@ -17,11 +17,10 @@ class UiOperations:
             print(Fore.GREEN + "Correct!")
         elif distance > dop.level_good:  # The phrases are very similar, perhaps a typo
             print(Fore.BLACK + "Almost correct. Right answer is: ", end="")
-            print(Fore.BLACK + best_translation)
+            print(Fore.GREEN + best_translation)
         elif distance > dop.level_mediocre:  # Phrases have a lot in common
-            print(Fore.BLACK + "Not bad. ", end="")
-            print(Fore.BLACK + "Right answer is: ", end="")
-            print(Fore.BLACK + best_translation)
+            print(Fore.BLACK + "Not bad. Right answer is: ", end="")
+            print(Fore.GREEN + best_translation)
         else:
             print(Fore.RED + "Wrong. ", end="")  # There are too many mistakes
             print(Fore.BLACK + "Right answer is: ", end="")

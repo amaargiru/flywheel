@@ -1,12 +1,13 @@
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from re import Pattern
 from typing import List
 
 import jellyfish
 
 datetime_format: str = "%Y.%m.%d %H:%M:%S"
+max_attempts_len: int = 10  # Limit for 'Attempts' list
 
 
 class DataOperations:
@@ -42,8 +43,10 @@ class DataOperations:
                 if rus_part not in repetitions:
                     repetitions[rus_part] = {
                         "translations": eng_part,
-                        "attempts": [],
-                        "time_to_repeat": datetime.now().strftime(datetime_format)}  # Recommendation to check this phrase right now
+                        "time_to_repeat": datetime.now().strftime(datetime_format),  # Recommendation to check this phrase right now
+                        "easiness_factor": 2.5,  # EF, how easy the card is (and determines how quickly the inter-repetition interval grows)
+                        "repetition_number": 0,  # Number of times the card has been successfully recalled in a row
+                        "attempts": []}  # Reserve field in case of transition from supermemo-2 to supermemo-18
                     new_phrases += 1
 
         return (False, no_added_message) if new_phrases == 0 else (True, f"Added {new_phrases} new phrases")
@@ -63,8 +66,36 @@ class DataOperations:
         return recommended_phrase
 
     @staticmethod
-    def update_repetitions(repetitions: dict, current_phrase: str, user_result: float) -> str:
+    def update_repetitions(repetitions: dict, current_phrase: str, user_result: float):
+        # Update list of attempts
+        if len(repetitions[current_phrase]['attempts']) == max_attempts_len:
+            repetitions[current_phrase]['attempts'].pop(0)
         repetitions[current_phrase]['attempts'].append((datetime.now().strftime(datetime_format), user_result))
+
+        # Update whole repetition data
+        repetitions[current_phrase] = DataOperations.supermemo2(repetitions[current_phrase], user_result)
+
+    @staticmethod
+    # https://en.wikipedia.org/wiki/SuperMemo
+    def supermemo2(repetition: dict, user_result: float) -> dict:
+        if user_result >= DataOperations.level_good:  # Correct response
+            if repetition["repetition_number"] == 0:  # + 1 day
+                repetition["time_to_repeat"] = (datetime.now() + timedelta(days=1)).strftime(datetime_format)
+            elif repetition["repetition_number"] == 1:  # + 6 days
+                repetition["time_to_repeat"] = (datetime.now() + timedelta(days=6)).strftime(datetime_format)
+            else:  # + (6 * EF) days
+                repetition["time_to_repeat"] = (datetime.now()
+                                                + timedelta(days=6 * repetition["easiness_factor"])).strftime(datetime_format)
+            repetition["repetition_number"] += 1
+        else:  # Incorrect response
+            repetition["time_to_repeat"] = (datetime.now()).strftime(datetime_format)  # Recommendation to repeat this phrase right now
+            repetition["repetition_number"] = 0
+
+        repetition["easiness_factor"] = repetition["easiness_factor"] + \
+                                        (0.1 - (5 - 5 * user_result) * (0.08 + (5 - 5 * user_result) * 0.02))
+        repetition["easiness_factor"] = max(repetition["easiness_factor"], 1.3)
+
+        return repetition
 
     @staticmethod
     def cleanup_user_input(user_input: str) -> str:
@@ -84,10 +115,10 @@ class DataOperations:
     @staticmethod
     def find_max_jaro_distance(user_input: str, translations: str | List[str]) -> (float, str):
         max_distance: float = 0
-        best_translation: str = ''
 
         if isinstance(translations, str):
             translations = [translations]
+        best_translation: str = translations[0]
 
         def compact(input_string: str) -> str:
             return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')

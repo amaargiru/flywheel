@@ -46,7 +46,7 @@ class DataOperations:
                         "time_to_repeat": datetime.now().strftime(datetime_format),  # Recommendation to check this phrase right now
                         "easiness_factor": 2.5,  # EF, how easy the card is (and determines how quickly the inter-repetition interval grows)
                         "repetition_number": 0,  # Number of times the card has been successfully recalled in a row
-                        "attempts": []}  # Reserve field in case of transition from supermemo-2 to supermemo-18
+                        "attempts": []}  # In use flag + reserve field in case of transition from supermemo-2 to supermemo-18
                     new_phrases += 1
 
         return (False, no_added_message) if new_phrases == 0 else (True, f"Added {new_phrases} new phrases")
@@ -59,6 +59,10 @@ class DataOperations:
 
         for current_phrase, value in repetitions.items():
             current_time_to_repeat = datetime.strptime(value["time_to_repeat"], datetime_format)
+            # If we have learned phrases that need to be repeated over the next 24 hours, preference will be given to them
+            if len(value["attempts"]) == 0:
+                current_time_to_repeat += timedelta(days=1)
+
             if current_time_to_repeat < min_time_to_repeat:
                 recommended_phrase = current_phrase
                 min_time_to_repeat = current_time_to_repeat

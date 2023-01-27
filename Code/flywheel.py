@@ -30,7 +30,7 @@ if __name__ == '__main__':
             dop.update_repetitions(repetitions, current_phrase, user_result)
             fop.save_json_to_file(repetitions_file_path, repetitions)
 
-            statistics = dop.update_user_statistics(statistics)
+            statistics = dop.update_statistics(statistics)
             fop.save_json_to_file(statistics_file_name, statistics)
     else:
         print(assesment_error_message)

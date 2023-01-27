@@ -86,7 +86,7 @@
 Ты не я || You are not me
 Это не мы || This is not us
 Что у меня? || What do I have?
-Я как вы || I am like you
+Я как вы || I am like you | I'm like you
 Он был не его || He was not his
 Они всё ещё здесь || They are still here
 У нас есть всё || We have everything
@@ -118,7 +118,7 @@
 У него всё хорошо || He is doing well
 Какой ты хочешь? || What do you want?
 Мы должны говорить || We must speak
-Вот такой вот я || Here I am
+Вот такой вот я || Here I am | Here I'm
 А как же мы? || But what about us?
 Твоя тоже ничего || Yours is nothing too
 Эти деньги мои || This money is mine

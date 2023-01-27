@@ -12,21 +12,21 @@ class UiOperations:
         distance, best_translation = dop.find_max_string_similarity(user_input, repetition["translations"])
         diff = dop.find_matching_blocks(user_input, best_translation)
 
-        colorama.init()
+        colorama.init(autoreset=True)
 
         if distance > dop.level_excellent:  # Phrases are identical
             print(Fore.GREEN + "Correct!")
         elif distance > dop.level_good:  # The phrases are very similar, perhaps a typo
-            print(Fore.BLACK + "Almost correct. Right answer is: ", end="")
+            print("Almost correct. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
             print('\n')
         elif distance > dop.level_mediocre:  # Phrases have a lot in common
-            print(Fore.BLACK + "Not bad. Right answer is: ", end="")
+            print("Not bad. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
             print('\n')
         else:
             print(Fore.RED + "Wrong. ", end="")  # There are too many mistakes
-            print(Fore.BLACK + "Right answer is: ", end="")
+            print("Right answer is: ", end="")
             print(Fore.GREEN + best_translation)
 
         print(colorama.Style.RESET_ALL)

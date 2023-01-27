@@ -87,7 +87,7 @@ class DataOperations:
         repetitions[current_phrase] = DataOperations._supermemo2(repetitions[current_phrase], user_result)
 
     @staticmethod
-    def update_user_statistics(statistics: dict):
+    def update_statistics(statistics: dict):
         """Update user statistics, now this one just increments attempts counter"""
         if "attempts_num" in statistics:
             statistics["attempts_num"] += 1

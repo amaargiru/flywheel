@@ -50,6 +50,10 @@ class DataOperations:
                         "attempts": []}  # In use flag + reserve field in case of transition from supermemo-2 to supermemo-18
                     new_phrases += 1
 
+                if repetitions[rus_part]["translations"] != eng_part:  # Correct translations
+                    repetitions[rus_part]["translations"] = eng_part
+                    new_phrases += 1
+
         return (False, no_added_message) if new_phrases == 0 else (True, f"Added {new_phrases} new phrases")
 
     @staticmethod

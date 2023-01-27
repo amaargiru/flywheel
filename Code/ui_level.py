@@ -9,7 +9,7 @@ class UiOperations:
     def user_session(phrase: str, repetition: dict) -> float:
         """Console user interface"""
         user_input: str = input(f"Enter phrase \"{phrase}\" in english: ")
-        distance, best_translation = dop.find_max_jaro_distance(user_input, repetition["translations"])
+        distance, best_translation = dop.find_max_string_similarity(user_input, repetition["translations"])
         diff = dop.find_matching_blocks(user_input, best_translation)
 
         colorama.init()
@@ -19,9 +19,11 @@ class UiOperations:
         elif distance > dop.level_good:  # The phrases are very similar, perhaps a typo
             print(Fore.BLACK + "Almost correct. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
+            print('\n')
         elif distance > dop.level_mediocre:  # Phrases have a lot in common
             print(Fore.BLACK + "Not bad. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
+            print('\n')
         else:
             print(Fore.RED + "Wrong. ", end="")  # There are too many mistakes
             print(Fore.BLACK + "Right answer is: ", end="")

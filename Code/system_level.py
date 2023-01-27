@@ -52,8 +52,8 @@ class FileOperations:
         return phrase_mapping
 
     @staticmethod
-    def read_repetitions(file_path: str) -> dict:
-        """Read repetitions from file"""
+    def read_json_from_file(file_path: str) -> dict:
+        """Read JSON data from file"""
         repetitions: dict = {}
 
         try:
@@ -65,8 +65,8 @@ class FileOperations:
         return repetitions
 
     @staticmethod
-    def save_repetitions(file_path: str, repetitions: dict):
-        """Save repetitions to file"""
+    def save_json_to_file(file_path: str, repetitions: dict):
+        """Save JSON data to file"""
         try:
             with open(file_path, 'w', encoding='utf-8') as repf:
                 repf.write(json.dumps(repetitions, ensure_ascii=False, indent=2))

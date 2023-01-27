@@ -81,7 +81,18 @@ class DataOperations:
         repetitions[current_phrase] = DataOperations._supermemo2(repetitions[current_phrase], user_result)
 
     @staticmethod
-    def find_max_jaro_distance(user_input: str, translations: str | List[str]) -> (float, str):
+    def update_user_statistics(statistics: dict):
+        """Now just increment attempts counter"""
+        if "attempts_num" in statistics:
+            statistics["attempts_num"] += 1
+        else:
+            statistics = {"attempts_num": 1}
+
+        return statistics
+
+    @staticmethod
+    def find_max_string_similarity(user_input: str, translations: str | List[str]) -> (float, str):
+        """Compares user_input against each string in translations"""
         max_distance: float = 0
 
         if isinstance(translations, str):

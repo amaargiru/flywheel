@@ -35,6 +35,7 @@ class UiOperations:
 
     @staticmethod
     def _print_colored_diff(correction, reference) -> None:
+        """Visual representation of user errors"""
         for i, ch in enumerate(reference):
             if correction[i]:
                 print(Fore.GREEN + ch, end="")

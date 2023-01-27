@@ -18,6 +18,7 @@ class DataOperations:
 
     @staticmethod
     def data_assessment(phrases: dict, repetitions: dict) -> (bool, str):
+        """Check data before work"""
         if not isinstance(phrases, dict):
             print(f"Cant parse phrases file")
             sys.exit()
@@ -76,6 +77,7 @@ class DataOperations:
 
     @staticmethod
     def update_repetitions(repetitions: dict, current_phrase: str, user_result: float):
+        """Update list of user repetitions"""
         # Update list of attempts
         if len(repetitions[current_phrase]['attempts']) == max_attempts_len:
             repetitions[current_phrase]['attempts'].pop(0)
@@ -86,7 +88,7 @@ class DataOperations:
 
     @staticmethod
     def update_user_statistics(statistics: dict):
-        """Now just increment attempts counter"""
+        """Update user statistics, now this one just increments attempts counter"""
         if "attempts_num" in statistics:
             statistics["attempts_num"] += 1
         else:
@@ -120,6 +122,7 @@ class DataOperations:
 
     @staticmethod
     def find_matching_blocks(user_input, reference):
+        """Representation of user errors"""
         seq = SequenceMatcher(None,
                               "".join(DataOperations.compact(DataOperations._cleanup_user_input(user_input).lower())),
                               DataOperations.compact(reference.lower()))
@@ -137,10 +140,12 @@ class DataOperations:
 
     @staticmethod
     def compact(input_string: str) -> str:
+        """Allows only letters and numbers"""
         return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 
     @staticmethod
     def _cleanup_user_input(user_input: str) -> str:
+        """Cleanup user input"""
         MAX_STRING_SIZE: int = 200
         comma_pattern: Pattern[str] = re.compile(r"(,){2,}")
         white_list: str = " ?!.,:;'"  # Allow symbols (+ alpha-numeric)
@@ -157,6 +162,7 @@ class DataOperations:
     @staticmethod
     # https://en.wikipedia.org/wiki/SuperMemo
     def _supermemo2(repetition: dict, user_result: float) -> dict:
+        """Update next attempt time based on user result"""
         if user_result >= DataOperations.level_good:  # Correct response
             if repetition["repetition_number"] == 0:  # + 1 day
                 repetition["time_to_repeat"] = (datetime.now() + timedelta(days=1)).strftime(datetime_format)

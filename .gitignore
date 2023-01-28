@@ -4,7 +4,9 @@
 ##          github.com/github/gitignore/blob/main/Python.gitignore
 ##          github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 
-# Project specific files
+# Project specific directories and files
+nuitka_out/
+uml/
 repetitions.json
 user_statistics.txt
 

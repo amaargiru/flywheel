@@ -60,20 +60,28 @@ class DataOperations:
     @staticmethod
     def determine_next_phrase(repetitions: dict) -> str:
         """Determine phrase for next user session"""
-        recommended_phrase: str = ""
-        min_time_to_repeat = datetime.max
+        recommended_started_phrase: str = ""
+        recommended_not_started_phrase: str = ""
+
+        min_time_to_repeat_started_phrases: datetime = datetime.max
+        min_time_to_repeat_not_started_phrases: datetime = datetime.max
 
         for current_phrase, value in repetitions.items():
-            current_time_to_repeat = datetime.strptime(value["time_to_repeat"], datetime_format)
-            # If we have learned phrases that need to be repeated over the next 24 hours, preference will be given to them
-            if len(value["attempts"]) == 0:
-                current_time_to_repeat += timedelta(days=1)
+            if len(value["attempts"]) > 0:
+                current_time_to_repeat_started_phrases = datetime.strptime(value["time_to_repeat"], datetime_format)
+                if current_time_to_repeat_started_phrases < min_time_to_repeat_started_phrases:
+                    recommended_started_phrase = current_phrase
+                    min_time_to_repeat_started_phrases = current_time_to_repeat_started_phrases
+            else:
+                current_time_to_repeat_not_started_phrases = datetime.strptime(value["time_to_repeat"], datetime_format)
+                if current_time_to_repeat_not_started_phrases < min_time_to_repeat_not_started_phrases:
+                    recommended_not_started_phrase = current_phrase
+                    min_time_to_repeat_not_started_phrases = current_time_to_repeat_not_started_phrases
 
-            if current_time_to_repeat < min_time_to_repeat:
-                recommended_phrase = current_phrase
-                min_time_to_repeat = current_time_to_repeat
-
-        return recommended_phrase
+        if min_time_to_repeat_started_phrases <= datetime.now() or recommended_not_started_phrase == "":
+            return recommended_started_phrase
+        else:
+            return recommended_not_started_phrase
 
     @staticmethod
     def update_repetitions(repetitions: dict, current_phrase: str, user_result: float):
@@ -88,7 +96,7 @@ class DataOperations:
 
     @staticmethod
     def update_statistics(statistics: dict):
-        """Update user statistics, now this one just increments attempts counter"""
+        """Update user statistics, for now just increment the attempt counter"""
         if "attempts_num" in statistics:
             statistics["attempts_num"] += 1
         else:
@@ -176,8 +184,8 @@ class DataOperations:
             repetition["time_to_repeat"] = (datetime.now()).strftime(datetime_format)  # Recommendation to repeat this phrase right now
             repetition["repetition_number"] = 0
 
-        repetition["easiness_factor"] = repetition["easiness_factor"] + \
-                                        (0.1 - (5 - 5 * user_result) * (0.08 + (5 - 5 * user_result) * 0.02))
+        repetition["easiness_factor"] = repetition["easiness_factor"] + (
+                0.1 - (5 - 5 * user_result) * (0.08 + (5 - 5 * user_result) * 0.02))
         repetition["easiness_factor"] = max(repetition["easiness_factor"], 1.3)
 
         return repetition

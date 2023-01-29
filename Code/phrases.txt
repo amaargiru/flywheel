@@ -14,8 +14,8 @@
 Я учусь || I study
 Я понимаю || I understand
 Я понимаю тебя || I understand you
-Я знаю это || I know it
-Я знаю это очень хорошо || I know it very well
+Я знаю это || I know it | I know this
+Я знаю это очень хорошо || I know it very well | I know this very well
 Я живу в России || I live in Russia
 Я говорю по английски || I speak English
 Я хожу в школу || I go to school
@@ -25,16 +25,16 @@
 У меня есть сестра || I have a sister
 У меня есть машина || I have a car
 Я так думаю || I think so
-Я вижу это || I see it
-Я хочу это || I want it
-Я помню это || I remember it
-Я помню это очень хорошо || I remember it very well
+Я вижу это || I see it | I see this
+Я хочу это || I want it | I want this
+Я помню это || I remember it | I remember this
+Я помню это очень хорошо || I remember it very well | I remember this very well
 Мы понимаем тебя || We understand you
 Мы говорим по-английски || We speak English
-Ты знаешь это || You know it
+Ты знаешь это || You know it | You know this
 Они помогают мне || They help me
 Они ходят на работу || They go to work
-Мы помним это || We remember it
+Мы помним это || We remember it | We remember this
 Ты говоришь по английски очень хорошо || You speak English very well
 Мы живём здесь || We live here
 Я живу в этом городе || I live in this city
@@ -108,6 +108,7 @@
 Только ты можешь помочь || Only you can help
 Она хорошо себя знает || She knows herself well
 Она была моя || She was mine
+Я знал это || I knew it | I knew this
 Мне эта нравится || I like this one
 Можете тоже пойти? || Can you go too?
 Давай, ты можешь || Come on, you can
@@ -352,7 +353,7 @@
 Покажи мне другие часы || Show me another watch
 А теперь смотрите внимательно || Now look carefully
 Ты не наша подруга || You are not our friend
-Я здесь самый богатый || I am the richest here
+Я здесь самый богатый || I am the richest here | I'm the richest here
 Ты наш враг? || Are you our enemy?
 Кто твой любимый художник? || Who is your favorite artist?
 Мне здорово повезло || I was very lucky
@@ -422,7 +423,7 @@
 Либо да, либо нет || Either yes or no
 Это наша единственная возможность || This is our only opportunity
 О ком мы говорим? || Who are we talking about?
-Без вас я ничто || Without you, I am nothing
+Без вас я ничто || Without you, I am nothing | Without you, I'm nothing
 Быстрый твой автомобиль || Your fast car
 Вы не видели знак? || Have you seen the sign?
 Вам нужна новая одежда || You need new clothes
@@ -603,7 +604,7 @@
 На моих половина третьего || On mine half past two
 Бросьте его туда || \u200b\u200bThrow it there
 Дым наполнил комнату || Smoke filled the room
-Я ваш капитан || I am your captain
+Я ваш капитан || I am your captain | I'm your captain
 Позволь мне угадать || Let me guess
 Принесите меню, пожалуйста! || Bring the menu, please!
 Найти золото было непросто || Finding gold was not easy
@@ -701,7 +702,7 @@
 Безопасность прежде всего || Safety first
 Ведь это потрясающе, да? || It's awesome, isn't it?
 Ей нравится фотографировать || She likes taking pictures
-Я ваш родственник || I am your relative
+Я ваш родственник || I am your relative | I'm your relative
 Где мой второй ботинок? || Where is my second boot?
 Мои каникулы прошли быстро || My vacation was quick
 Он низкий, но сильный || He is low but strong
@@ -781,7 +782,7 @@
 Преступник был арестован || A criminal was arrested
 У меня график || I have a schedule
 Это был отличный комментарий || That was a great comment
-Я не бездомный || I am not homeless
+Я не бездомный || I am not homeless | I'm not homeless
 Меня беспокоит Ваш кашель || Your cough is bothering me
 Китай больше, чем Япония || China is bigger than Japan
 Необходимо сбросить вес || Need to lose weight
@@ -1006,7 +1007,7 @@
 У нас есть соглашение || We have an agreement
 Нам стоило это предвидеть || We should have foreseen this
 Твой французский акцент ужасен || Your French accent is terrible
-Я смертельно устал || I am mortally tired
+Я смертельно устал || I am mortally tired | I'm mortally tired
 Он старый и некрасивый || He is old and ugly
 Какой высоты та башня? || How tall is that tower?
 Вода была еле тёплая || The water was barely warm
@@ -1196,7 +1197,7 @@
 Давайте не будем больше петь || Let's not sing anymore
 Я думала, что ты любишь читать || I thought you like to read
 Для них это было довольно легко || For them it was pretty easy
-В понедельник я больше всего занят || On Monday I am most busy
+В понедельник я больше всего занят || On Monday I am most busy | On Monday I'm most busy
 Вам нужно пить больше воды || You need to drink more water
 Вы не можете взять обе книги || You cannot take both books
 Он достаточно хорошо умеет читать || He can read quite well
@@ -1314,7 +1315,7 @@
 Откуда у вас наш адрес? || Where did you get our address?
 Мы оба знаем, кто в этом виноват || We both know who is to blame
 Он открыл ей свой секрет || He revealed to her his secret
-Я здесь для того, чтобы слушать || I am here to listen
+Я здесь для того, чтобы слушать || I am here to listen | I'm here to listen
 Он пришёл попросить нас о помощи || He came to ask us for help
 Оно не так дорого стоило || It was not so expensive
 Я должен сесть на первый поезд || I have to catch the first train
@@ -1575,7 +1576,7 @@
 Он ходил в музей по воскресеньям || He went to the museum on Sundays
 Вы не можете остаться надолго || You cannot stay for long
 Это как раз по моей части || This is precisely my part
-Я выше того, чтобы лгать || I am superior to lying
+Я выше того, чтобы лгать || I am superior to lying | I'm superior to lying
 Они не могут Вас уволить || They cannot fire you
 Можно мне ещё ненадолго остаться? || Can I stay a while longer?
 Мы можем обсудить это позже || We can discuss this later
@@ -1617,7 +1618,7 @@
 У нас с Вами примерно один размер || We have approximately the same size with you
 Откуда у вас такая информация? || Where did you get this information?
 Я больше люблю молоко, чем сок || I like milk more than juice
-Мне до сих пор иногда одиноко || I am still sometimes lonely
+Мне до сих пор иногда одиноко || I am still sometimes lonely | I'm still sometimes lonely
 Он посоветовал ей перестать пить || He advised her to stop drinking
 Давай не будем никому рассказывать || Let's not tell anyone
 Вам не следует винить себя за это || You should not blame yourself for this
@@ -1627,8 +1628,8 @@
 Я думал, вы работаете допоздна || I thought you were working late
 Мы искали это везде и повсюду || We searched for it everywhere and everywhere
 Мы смотрели вниз на красивое море || We looked down at the beautiful sea
-Мне надоело играть в игры || I'm tired of playing games
-У меня аллергия на морковь || I am allergic to carrots
+Мне надоело играть в игры || I am tired of playing games | I'm tired of playing games
+У меня аллергия на морковь || I am allergic to carrots | I'm allergic to carrots
 Английский не простой для нас || English is not easy for us
 Он был ранен в плечо || He was wounded in the shoulder
 Как мы можем попасть внутрь? || How can we get inside?
@@ -1664,7 +1665,7 @@
 Почему я должна давать вам деньги? || Why should I give you money?
 Будем надеяться, что вы ошибаетесь || Let’s hope that you are mistaken
 Он был пьяный и злой || He was drunk and evil
-Я буду помнить вас, пока я жив || I will remember you while I am alive
+Я буду помнить вас, пока я жив || I will remember you while I am alive | I will remember you while I'm alive
 Никто не может этого отрицать || No one can deny this
 На обед я съел салат || I ate salad for lunch
 Какой у тебя любимый город в США? || What is your favorite city in the USA?
@@ -1701,7 +1702,7 @@
 Где я могу положить свои сумки? || Where can I put my bags?
 Кто заставил тебя съесть мышь? || Who made you eat the mouse?
 Вы должны были приехать на поезде || You should have arrived by train
-Я не один из твоих солдат || I am not one of your soldiers
+Я не один из твоих солдат || I am not one of your soldiers | I'm not one of your soldiers
 Результаты были не очень хорошие || The results were not very good
 Это ваша первая поездка в Японию? || Is this your first trip to Japan?
 Сколько примерно это будет стоить? || How much will it cost?
@@ -1731,14 +1732,14 @@
 Обычно я ем вне дома || I usually eat out
 Это стоило мне триста долларов || It cost me three hundred dollars
 Врачи думали, что у него простуда || Doctors thought he had a cold
-На самом деле, я не эксперт || Actually, I am not an expert
+На самом деле, я не эксперт || Actually, I am not an expert | Actually, I'm not an expert
 Мне нужно убраться в квартире || I need to clean the apartment
 Она выглядит мило в том платье || She looks cute in that dress
 Он попытался сдержать свой гнев || He tried to restrain his anger
 Он был очень старый и больной || He was very old and sick
 Мы бы не стали рисковать || We would not risk it
 Могу я принять ваш заказ? || Can I accept your order?
-Мне стыдно за поведение моего сына || I am ashamed of my son’s behavior
+Мне стыдно за поведение моего сына || I am ashamed of my son’s behavior | I'm ashamed of my son’s behavior
 Вчера я спал двенадцать часов || Yesterday I slept twelve hours
 Вы сегодня вечером идёте в театр? || Are you going to the theater tonight?
 У меня есть множество идей || I have many ideas
@@ -1867,7 +1868,7 @@
 Джентльмен такого не сделал бы || A gentleman would not do that
 У меня вдруг пропал аппетит || I suddenly lost my appetite
 Я не хотел тебя расстраивать || I didn’t mean to upset you
-Мне стыдно за твое поведение || I am ashamed of your behavior
+Мне стыдно за твое поведение || I am ashamed of your behavior | I'm ashamed of your behavior
 Мой портфель было нигде не найти || My portfolio was nowhere to be found
 Меня назвали в честь дяди || I was named after my uncle
 В чём Ваши сильные стороны? || What are your strengths?
@@ -2057,7 +2058,7 @@
 У нас был небольшой спор || We had a little argument
 Он как раз закончил колледж || He just graduated from college
 Хочу вновь с вами увидеться || I want to see you again
-Я вполне уверен, что это был слон || I am pretty sure it was an elephant
+Я совершенно уверен, что это был слон || I am pretty sure it was an elephant | I'm pretty sure it was an elephant
 Этот меч тяжелее, чем я думал || This sword is heavier than I thought
 Есть у вас сдача с одного доллара? || Do you have change with one dollar?
 Этот зал был полон людей || This hall was full of people

@@ -14,13 +14,13 @@ class UiOperations:
 
         colorama.init(autoreset=True)
 
-        if distance > dop.level_excellent:  # Phrases are identical
+        if distance >= dop.level_excellent:  # Phrases are identical
             print(Fore.GREEN + "Correct!")
-        elif distance > dop.level_good:  # The phrases are very similar, perhaps a typo
+        elif distance >= dop.level_good:  # The phrases are very similar, perhaps a typo
             print("Almost correct. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
             print('\n')
-        elif distance > dop.level_mediocre:  # Phrases have a lot in common
+        elif distance >= dop.level_mediocre:  # Phrases have a lot in common
             print("Not bad. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
             print('\n')
@@ -29,7 +29,7 @@ class UiOperations:
             print("Right answer is: ", end="")
             print(Fore.GREEN + best_translation)
 
-        print(colorama.Style.RESET_ALL)
+        # print(colorama.Style.RESET_ALL)
 
         return distance
 

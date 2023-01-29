@@ -181,7 +181,6 @@ class DataOperations:
                                                 + timedelta(days=6 * repetition["easiness_factor"])).strftime(datetime_format)
             repetition["repetition_number"] += 1
         else:  # Incorrect response
-            repetition["time_to_repeat"] = (datetime.now()).strftime(datetime_format)  # Recommendation to repeat this phrase right now
             repetition["repetition_number"] = 0
 
         repetition["easiness_factor"] = repetition["easiness_factor"] + (

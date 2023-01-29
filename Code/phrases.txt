@@ -37,7 +37,7 @@
 Мы помним это || We remember it | We remember this
 Ты говоришь по английски очень хорошо || You speak English very well
 Мы живём здесь || We live here
-Я живу в этом городе || I live in this city
+Я живу в этом городе || I live in this city | I live in this town
 Мы живём в этой стране || We live in this country
 Мы говорим по английски || We speak English
 Я очень хорошо знаю это || I know it very well
@@ -55,7 +55,7 @@
 Я иду в школу || I go to school
 Мы живем в этой стране || We live in this country
 Собака сидит на столе || A dog sits on the table | The dog sits on the table
-Кот сидит на столе | Кошка сидит на столе || A cat sits on the table | The cat sits on the table
+Кот сидит на столе | Кошка сидит на столе || A cat sits on the table | The cat sits on the table | A cat is sitting on the table | The cat is sitting on the table
 Мы хотим это || We want it
 Ты работаешь очень усердно || You work very hard
 Они учатся очень усердно || They study very hard
@@ -77,8 +77,8 @@
 Она читает английские книги || She reads English books
 Это выглядит странно || It looks strange
 Он знает это || He knows it
-Она видит эту ошибку || She sees this mistake
-Он видит эту ошибку || He sees that mistake
+Она видит эту ошибку || She sees this mistake | She sees that mistake
+Он видит эту ошибку || He sees this mistake | He sees that mistake
 Это случается || It happens
 Он хочет большего || He wants more
 Она хочет больше практики || She wants more practice

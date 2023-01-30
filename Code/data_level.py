@@ -95,12 +95,23 @@ class DataOperations:
         repetitions[current_phrase] = DataOperations._supermemo2(repetitions[current_phrase], user_result)
 
     @staticmethod
-    def update_statistics(statistics: dict):
+    def update_statistics(statistics: dict, current_phrase: str):
         """Update user statistics, for now just increment the attempt counter"""
         if "attempts_num" in statistics:
             statistics["attempts_num"] += 1
         else:
-            statistics = {"attempts_num": 1}
+            statistics["attempts_num"] = 1
+
+        current_russian_words_set = set(DataOperations.compact(current_phrase.lower()).split())
+
+        if "russian_words" in statistics:
+            full_russian_words_set = set(statistics["russian_words"])
+            full_russian_words_set.update(current_russian_words_set)
+            statistics["russian_words"] = list(full_russian_words_set)
+        else:
+            statistics["russian_words"] = list(current_russian_words_set)
+
+        statistics["russian_words"].sort()
 
         return statistics
 

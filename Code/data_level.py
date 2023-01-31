@@ -137,7 +137,7 @@ class DataOperations:
                 max_distance = current_distance
                 best_translation = translation
 
-            return max_distance, best_translation
+        return max_distance, best_translation
 
     @staticmethod
     def find_matching_blocks(user_input, reference):

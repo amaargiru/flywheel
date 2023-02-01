@@ -91,7 +91,7 @@
 Они всё ещё здесь || They are still here
 У нас есть всё || We have everything
 Почему вы все здесь? || Why are you all here?
-Его здесь уже нет || He is no longer here
+Его здесь уже нет || He is no longer here | He's no longer here
 Так и надо || That's right
 Когда это будет? || When will it be?
 Мне надо быть здесь || I need to be here
@@ -116,7 +116,7 @@
 Мой лучше, чем твой || Mine is better than yours
 Давайте ещё раз || Let's do it again
 Кто так говорит? || Who says that?
-У него всё хорошо || He is doing well
+У него всё хорошо || He is doing well | He's doing well
 Что ты хочешь? || What do you want?
 Мы должны говорить || We must speak
 Вот такой вот я || Here I am | Here I'm
@@ -133,7 +133,7 @@
 Сколько стоит твоя жизнь? || How much is your life?
 Оно ей нужно || She needs her
 Завтра, похоже, будет дождь || Tomorrow it seems to rain
-Вот ваша собака || Here is your dog
+Вот ваша собака || Here is your dog | Here's your dog
 Дай мне письмо, пожалуйста || Give me a letter, please
 Дай мне несколько || Give me some
 Все мы люди || We are all human
@@ -149,7 +149,7 @@
 Всё работает как часы || Everything works like a clock
 Дай мне тот ключ || Give me that key
 Куда идёт этот поезд? || Where is this train going?
-Ей тридцать один || She is thirty—one
+Ей тридцать один || She is thirty—one | She's thirty—one
 Дайте мне вина || Give me some wine
 Мне нравятся твои глаза || I like your eyes
 Ужин скоро будет готов || Dinner will be ready soon
@@ -197,7 +197,7 @@
 Возможно, оно того стоит || Maybe it's worth it
 Вы можете посмотреть телевизор || You can watch TV
 Это просто странно || This is just weird
-Какой твой любимый город? || What is your favorite city?
+Какой твой любимый город? || What is your favorite city? | What is your favorite town?
 Вы всё делаете правильно || You are doing everything right
 Эта комната довольно большая || This room is quite large
 Вы сделали свой выбор || You made your choice
@@ -239,7 +239,7 @@
 Могу я взять слово? || Can I take the floor?
 Он закончил завтрак || He finished breakfast
 Давай поговорим снаружи || Let's talk outside
-Кто твой лучший друг? || Who is your best friend?
+Кто твой лучший друг? || Who is your best friend? | Who's your best friend?
 Вот такая история || Here is a story
 Ваш отец довольно высокий || Your father is quite tall
 Полностью с этим согласен || I completely agree with this

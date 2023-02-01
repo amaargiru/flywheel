@@ -62,7 +62,7 @@
 Он живет там || He lives there
 Она чувствует себя счастливой || She feels happy
 Я чувствую себя счастливым || I feel happy
-Это помогает мне || It helps me
+Это помогает мне || It helps me | This helps me
 Он также работает здесь || He also works here
 Он так думает || He thinks so
 Он живет в этом доме || He lives in this house
@@ -117,7 +117,7 @@
 Давайте ещё раз || Let's do it again
 Кто так говорит? || Who says that?
 У него всё хорошо || He is doing well
-Какой ты хочешь? || What do you want?
+Что ты хочешь? || What do you want?
 Мы должны говорить || We must speak
 Вот такой вот я || Here I am | Here I'm
 А как же мы? || But what about us?

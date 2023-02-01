@@ -25,12 +25,12 @@ if __name__ == '__main__':
 
         while True:
             current_phrase: str = dop.determine_next_phrase(repetitions)
-            user_result: float = uop.user_session(current_phrase, repetitions[current_phrase])
+            user_result, best_translation = uop.user_session(current_phrase, repetitions[current_phrase])
 
             dop.update_repetitions(repetitions, current_phrase, user_result)
             fop.save_json_to_file(repetitions_file_path, repetitions)
 
-            statistics = dop.update_statistics(statistics, current_phrase)
+            statistics = dop.update_statistics(statistics, current_phrase, best_translation)
             fop.save_json_to_file(statistics_file_name, statistics)
     else:
         print(assesment_error_message)

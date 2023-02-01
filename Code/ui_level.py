@@ -31,7 +31,7 @@ class UiOperations:
 
         # print(colorama.Style.RESET_ALL)
 
-        return distance
+        return distance, best_translation
 
     @staticmethod
     def _print_colored_diff(correction, reference) -> None:

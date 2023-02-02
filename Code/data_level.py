@@ -105,7 +105,7 @@ class DataOperations:
             statistics["attempts_num"] = 1
 
         # Update russian words set
-        current_russian_words_set = set(DataOperations.compact(current_phrase.lower()).split())
+        current_russian_words_set = set(DataOperations._compact(current_phrase.lower()).split())
 
         if "russian_words" in statistics:
             full_russian_words_set = set(statistics["russian_words"])
@@ -117,7 +117,7 @@ class DataOperations:
         statistics["russian_words"].sort()
 
         # Update english words set
-        current_english_words_set = set(DataOperations.compact(best_translation.lower()).split())
+        current_english_words_set = set(DataOperations._compact(best_translation.lower()).split())
 
         if "english_words" in statistics:
             full_english_words_set = set(statistics["english_words"])
@@ -140,10 +140,10 @@ class DataOperations:
         best_translation: str = translations[0]
 
         # Cleanup and 'compactify' user input ('I   don't know!!!😀' -> 'i dont know')
-        user_input = DataOperations.compact(DataOperations._cleanup_user_input(user_input).lower())
+        user_input = DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())
 
         # 'Compactify' translations
-        translations = [(t, DataOperations.compact(t.lower())) for t in translations]
+        translations = [(t, DataOperations._compact(t.lower())) for t in translations]
 
         for translation, compact_translation in translations:
             current_distance = jellyfish.jaro_distance(user_input, compact_translation)
@@ -158,8 +158,8 @@ class DataOperations:
     def find_matching_blocks(user_input, reference):
         """Representation of user errors"""
         seq = SequenceMatcher(None,
-                              "".join(DataOperations.compact(DataOperations._cleanup_user_input(user_input).lower())),
-                              DataOperations.compact(reference.lower()))
+                              "".join(DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())),
+                              DataOperations._compact(reference.lower()))
         a = seq.get_matching_blocks()
         a = a[:-1]  # Last element is a dummy
 
@@ -173,7 +173,7 @@ class DataOperations:
         return b
 
     @staticmethod
-    def compact(input_string: str) -> str:
+    def _compact(input_string: str) -> str:
         """Allows only letters and numbers"""
         return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 

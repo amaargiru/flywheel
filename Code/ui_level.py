@@ -1,4 +1,5 @@
-import colorama
+import os
+
 from colorama import Fore
 
 from data_level import DataOperations as dop
@@ -6,36 +7,33 @@ from data_level import DataOperations as dop
 
 class UiOperations:
     @staticmethod
-    def user_session(phrase: str, repetition: dict) -> float:
+    def user_session(phrase: str, repetition: dict) -> (float, str):
         """Console user interface"""
         user_input: str = input(f"Enter phrase \"{phrase}\" in english: ")
         distance, best_translation = dop.find_max_string_similarity(user_input, repetition["translations"])
         diff = dop.find_matching_blocks(user_input, best_translation)
 
-        colorama.init(autoreset=True)
-
         if distance >= dop.level_excellent:  # Phrases are identical
-            print(Fore.GREEN + "Correct!")
+            print(Fore.GREEN + "Correct!" + os.linesep)
         elif distance >= dop.level_good:  # The phrases are very similar, perhaps a typo
-            print("Almost correct. Right answer is: ", end="")
+            print(Fore.RESET + "Almost correct. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
-            print('\n')
+            print(os.linesep)
         elif distance >= dop.level_mediocre:  # Phrases have a lot in common
-            print("Not bad. Right answer is: ", end="")
+            print(Fore.RESET + "Not bad. Right answer is: ", end="")
             UiOperations._print_colored_diff(diff, best_translation)
-            print('\n')
+            print(os.linesep)
         else:
             print(Fore.RED + "Wrong. ", end="")  # There are too many mistakes
-            print("Right answer is: ", end="")
-            print(Fore.GREEN + best_translation)
+            print(Fore.RESET + "Right answer is: " + Fore.GREEN + best_translation + os.linesep)
 
-        # print(colorama.Style.RESET_ALL)
+        print(Fore.RESET, end="")
 
         return distance, best_translation
 
     @staticmethod
     def _print_colored_diff(correction, reference) -> None:
-        """Visual representation of user errors"""
+        """User errors' visualization"""
         for i, ch in enumerate(reference):
             if correction[i]:
                 print(Fore.GREEN + ch, end="")

@@ -20,11 +20,11 @@ class DataOperations:
     def data_assessment(phrases: dict, repetitions: dict) -> (bool, str):
         """Check data before work"""
         if not isinstance(phrases, dict):
-            print(f"Cant parse phrases file")
+            print(f"Cannot parse phrase file")
             sys.exit()
 
         if not isinstance(repetitions, dict):
-            print(f"Cant parse repetitions file")
+            print(f"Cannot parse repetitions file")
             sys.exit()
 
         if len(phrases) == 0 and len(repetitions) == 0:
@@ -35,7 +35,7 @@ class DataOperations:
     @staticmethod
     def merge(phrases: dict, repetitions: dict) -> (bool, str):
         """Merge new phrases into general dictionary"""
-        no_added_message: str = "No new phrases added"
+        no_added_message: str = "No new phrases"
         new_phrases: int = 0
 
         if len(phrases) == 0:
@@ -59,7 +59,7 @@ class DataOperations:
 
     @staticmethod
     def determine_next_phrase(repetitions: dict) -> str:
-        """Determine phrase for next user session"""
+        """Set phrase for next user session"""
         recommended_started_phrase: str = ""
         recommended_not_started_phrase: str = ""
 
@@ -86,7 +86,7 @@ class DataOperations:
     @staticmethod
     def update_repetitions(repetitions: dict, current_phrase: str, user_result: float):
         """Update list of user repetitions"""
-        # Update list of attempts
+        # Update attempt list
         if len(repetitions[current_phrase]['attempts']) == max_attempts_len:
             repetitions[current_phrase]['attempts'].pop(0)
         repetitions[current_phrase]['attempts'].append((datetime.now().strftime(datetime_format), user_result))
@@ -96,7 +96,7 @@ class DataOperations:
 
     @staticmethod
     def update_statistics(statistics: dict, current_phrase: str, best_translation: str):
-        """Update user statistics, for now just increment the attempt counter"""
+        """Update user statistics"""
 
         # Update attempts num
         if "attempts_num" in statistics:
@@ -156,7 +156,7 @@ class DataOperations:
 
     @staticmethod
     def find_matching_blocks(user_input, reference):
-        """Representation of user errors"""
+        """Display of user errors"""
         seq = SequenceMatcher(None,
                               "".join(DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())),
                               DataOperations._compact(reference.lower()))
@@ -174,7 +174,7 @@ class DataOperations:
 
     @staticmethod
     def _compact(input_string: str) -> str:
-        """Allows only letters and numbers"""
+        """Allows letters and numbers only"""
         return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 
     @staticmethod
@@ -185,7 +185,7 @@ class DataOperations:
         white_list: str = " ?!.,:;'"  # Allow symbols (+ alpha-numeric)
 
         user_input = user_input[:MAX_STRING_SIZE]  # Length limit
-        user_input = user_input.strip()  # Remove leading and trailing whitespace
+        user_input = user_input.strip()  # Remove leading and trailing whitespaces
         user_input = ''.join(ch for ch in user_input if ch.isalnum() or ch in white_list)  # Delete all unwanted symbols
         user_input = user_input.replace("\t", " ")  # Replace tabs with spaces
         user_input = ' '.join(user_input.split())  # Replace multiple spaces with one

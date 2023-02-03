@@ -6,10 +6,10 @@ from pathlib import Path
 class FileOperations:
     @staticmethod
     def find_or_create_file(filename: str, parents_level_up: int = 2) -> str:
-        """Find and open a file if exists (include path's logical parents), or create a new empty file"""
-        if os.path.exists(filename):  # If file exist in app directory
+        """Find and open a file if it exists (include the path's logical parents), or create a new empty file"""
+        if os.path.exists(filename):  # If file exists in app directory
             return filename
-        else:  # If file doesn't exist in app directory, start search in all project directories
+        else:  # If the file doesn't exist in the app directory, start searching in all project directories
             for root, dirs, files in os.walk(Path(__file__).parents[parents_level_up]):
                 if filename in files:
                     return os.path.join(root, filename)
@@ -36,18 +36,18 @@ class FileOperations:
                         else:
                             rus_part, eng_part = phrases_pair[0], phrases_pair[1]
 
-                            if "|" in eng_part:  # Multiple english phrases
+                            if "|" in eng_part:  # More than one English phrase
                                 eng_part = list(map(str.strip, eng_part.split('|')))  # Just split into separate english phrases
 
-                            if "|" in rus_part:  # Multiple russian phrases
+                            if "|" in rus_part:  # More than one Russian phrase
                                 rus_part = list(map(str.strip, rus_part.split('|')))  # Split into separate russian phrases...
                                 for rus_phrase in rus_part:
                                     phrase_mapping[rus_phrase] = eng_part  # ... and save separate items
 
-                            else:  # Single russian phrase
+                            else:  # Single Russian phrase
                                 phrase_mapping[rus_part] = eng_part
         except Exception:
-            print(f'Cant open or parse {file_path} file')
+            print(f'Cannot open or parse {file_path} file')
 
         return phrase_mapping
 
@@ -60,7 +60,7 @@ class FileOperations:
             with open(file_path, 'r', encoding='utf-8') as repf:
                 repetitions = json.load(repf)
         except Exception:
-            print(f'Cant open or parse {file_path} file')
+            print(f'Cannot open or parse {file_path} file')
 
         return repetitions
 
@@ -71,4 +71,4 @@ class FileOperations:
             with open(file_path, 'w', encoding='utf-8') as repf:
                 repf.write(json.dumps(repetitions, ensure_ascii=False, indent=2))
         except Exception:
-            print(f'Cant save {file_path} file')
+            print(f'Cannot save {file_path} file')

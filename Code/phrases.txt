@@ -83,6 +83,98 @@
 Он хочет большего || He wants more
 Она хочет больше практики || She wants more practice
 Это действительно случается || It really happens
+Мне это не нравится || I do not like this
+Это был не он || It wasn't him
+Мне нравится это || I like this
+Это не так || This is not true
+Я не люблю тебя || I do not love you
+Это не здесь || It's not here
+Я тебя очень люблю || I love you very much
+Мне не очень хорошо || I'm not doing well
+Он мне не нравится || I do not like him
+Я не люблю её || I don't love her
+Мне это не нужно || I do not need it
+Это очень хорошо || It is very good
+Это уже слишком! This is too much!
+Он мне нравится || I like him
+Мне это нужно || I need it
+Я люблю её || I love her
+И не я || And not me
+Это ещё что! What's this!
+Я не хочу || I do not want
+Я тебя очень хочу || I want you so much
+Я уже здесь! I'm already here!
+Это не всегда просто || It's not always easy
+Это выглядит очень хорошо || It looks very good
+Это не было хорошо || It wasn't good
+Это было очень хорошо || It was very good
+Ты нужна мне || I need you
+Мне нужно это сейчас || I need it now
+Это не так просто || It is not so easy
+Это не мы || This is not us
+Мне будет нужно это || I will need this
+Это были не мы || It wasn't us
+Он вас очень любит || He loves you very much
+Что будет, то будет || What will be will be
+Это всегда было так || This has always been the case
+Ты не мой отец! You are not my father
+Ты нужна мне здесь || I need you here
+Он уже здесь || He's already here
+Он любит её || He loves her
+Это было здесь || It was here
+Я хочу тебя || I want you
+Ты меня не любишь! You do not love me!
+Этот мне не нравится || I don't like this one
+Ты должен мне || You owe me
+Он не боится || He is not afraid
+Он мне не отец || He is not my father
+Я хочу это всё || I want it all
+Она мне не нравится || I do not like her
+Это так просто || It is so simple
+Не так быстро! Not so fast!
+Мне здесь будет хорошо || I will be fine here
+Я тебя не ненавижу || I don’t hate you
+Так было всегда || It has always been that way
+Так, так, так || Well, well, well
+Это не моя книга || This is not my book
+Ты мой отец || You are my father
+Ты всё ещё здесь || Are you still here
+Тебе это нужно || Do you need it
+Я хочу ещё || I want more
+Он ещё здесь || He's still here
+Он выглядит хорошо || It looks good
+Он хорошо выглядит || He looks good
+Ты лучше меня || You are better than me
+Всё не так просто || It is not that simple
+Я так не хотел || I didn't want to
+Это очень легко || It is very easy
+Мне нравится этот || I like this
+Я начал это || I started this
+Я не хочу их || I don't want them
+Мы здесь уже были || We've already been here
+Она мне нравится || I like her
+Это действительно хорошо! This is really good!
+Этот не будет || This one won't
+Я не боюсь || I'm not afraid
+Я боюсь за тебя || I am afraid for you
+Я очень боюсь || I am very afraid
+Он мой отец || He is my father
+Я не такой || I'm not like that
+Ты его не видел || You haven't seen him
+Я лучше тебя || I'm better than you 
+Ты очень хорошо выглядишь || You look very good
+Он нас не любит || He doesn't love us
+Она любит его || She loves him
+Она очень хорошо выглядит || She looks very good
+Я не могу || I can not
+Ему это нужно || He needs it
+Не говори мне это || Don't tell me that
+Он мне как отец || He is like a father to me
+Я уже это видел || I've seen it before ||
+Он будет сегодня здесь || He will be here today 
+Я тебя не видел || I did not see you
+Его все любят || Everyone loves him
+Я всё потерял || I've lost everything
 Ты не я || You are not me
 Это не мы || This is not us
 Что у меня? || What do I have?

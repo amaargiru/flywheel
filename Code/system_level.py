@@ -57,8 +57,8 @@ class FileOperations:
         repetitions: dict = {}
 
         try:
-            with open(file_path, 'r', encoding='utf-8') as repf:
-                repetitions = json.load(repf)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                repetitions = json.load(f)
         except Exception:
             print(f'Cannot open or parse {file_path} file')
 
@@ -68,7 +68,7 @@ class FileOperations:
     def save_json_to_file(file_path: str, repetitions: dict):
         """Save JSON data to file"""
         try:
-            with open(file_path, 'w', encoding='utf-8') as repf:
-                repf.write(json.dumps(repetitions, ensure_ascii=False, indent=2))
+            with open(file_path, 'w', encoding='utf-8') as f:
+                f.write(json.dumps(repetitions, ensure_ascii=False, indent=2))
         except Exception:
             print(f'Cannot save {file_path} file')

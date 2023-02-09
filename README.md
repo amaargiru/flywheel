@@ -124,6 +124,91 @@ if __name__ == '__main__':
         exit()
 ```
 
+Думаю, большую часть методов, используемых в программе, описывать особого смысла не имеет, остановлюсь только на ключевых функциях, имеющих непосредственное отношение к анализу прогресса пользователя.
+
+Сначала нужно определить, правильно ли ответил пользователь на предложенный вопрос:
+
+```python
+@staticmethod
+def find_max_string_similarity(user_input: str, translations: str | List[str]) -> (float, str):
+    """Compares user_input against each string in translations"""
+    max_distance: float = 0
+
+    if isinstance(translations, str):
+        translations = [translations]
+    best_translation: str = translations[0]
+
+    # Cleanup and 'compactify' user input ('I   don't know!!!😀' -> 'i dont know')
+    user_input = DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())
+
+    # 'Compactify' translations
+    translations = [(t, DataOperations._compact(t.lower())) for t in translations]
+
+    for translation, compact_translation in translations:
+        current_distance = jellyfish.jaro_distance(user_input, compact_translation)
+
+        if current_distance > max_distance:
+            max_distance = current_distance
+            best_translation = translation
+
+    return max_distance, best_translation
+
+@staticmethod
+def _compact(input_string: str) -> str:
+    """Allows letters and numbers only"""
+    return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
+```
+
+Алгоритм интервальных повторений, решающий, когда именно пройденная фраза будет предложена пользователю в следующий раз, построен на базе [SuperMemo-2](https://en.wikipedia.org/wiki/SuperMemo#Description_of_SM-2_algorithm):
+
+```python
+@staticmethod
+# https://en.wikipedia.org/wiki/SuperMemo
+def _supermemo2(repetition: dict, user_result: float) -> dict:
+    """Update next attempt time based on user result"""
+    if user_result >= DataOperations.level_good:  # Correct response
+        if repetition["repetition_number"] == 0:  # + 1 day
+            repetition["time_to_repeat"] = (datetime.now() + timedelta(days=1)).strftime(datetime_format)
+        elif repetition["repetition_number"] == 1:  # + 6 days
+            repetition["time_to_repeat"] = (datetime.now() + timedelta(days=6)).strftime(datetime_format)
+        else:  # + (6 * EF) days
+            repetition["time_to_repeat"] = (datetime.now()
+                                            + timedelta(days=6 * repetition["easiness_factor"])).strftime(datetime_format)
+        repetition["repetition_number"] += 1
+    else:  # Incorrect response
+        repetition["repetition_number"] = 0
+
+    repetition["easiness_factor"] = repetition["easiness_factor"] + (
+            0.1 - (5 - 5 * user_result) * (0.08 + (5 - 5 * user_result) * 0.02))
+    repetition["easiness_factor"] = max(repetition["easiness_factor"], 1.3)
+
+    return repetition
+```
+
+Есть семействе алгоритмов SuperMemo есть более свежие реализации, вплоть до SuperMemo-18. Вы можете перейти на их использование, специально для этого в repetitions.json предусмотрено хранение нескольких последних попыток пользователя:
+```python
+max_attempts_len: int = 10  # Limit for 'Attempts' list
+```
+
+Чтобы показать пользователю ошибки и опечатки, сформируем разноцветную фразу, в которой цвет символа будет зависеть от правильности его написания:
+```python
+@staticmethod
+def _print_colored_diff(correction, reference) -> None:
+    """Visualisation of user errors"""
+    for i, ch in enumerate(reference):
+        if correction[i]:
+            print(Fore.GREEN + ch, end="")
+        else:
+            if ch != " ":
+                print(Fore.RED + ch, end="")  # Just a letter
+            else:
+                if i - 1 >= 0 and i + 1 < len(reference):  # Emphasise the space between correct but sticky characters
+                    if correction[i - 1] and correction[i + 1]:
+                        print(Fore.RED + "_", end="")
+                    else:
+                        print(Fore.RED + " ", end="")
+```
+
 ### Выведение
 
 Ну что ж, пожалуй, на этом пока всё. С настоящего момента и до конца своего текущего жизненного цикла вы можете тратить на обучение именно столько времени, сколько удобно именно вам, добавлять новые фразы или дополнять существующие переводы и сохранять прогресс даже после микроскопического усилия.

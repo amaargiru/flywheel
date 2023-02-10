@@ -160,17 +160,17 @@ class DataOperations:
         seq = SequenceMatcher(None,
                               "".join(DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())),
                               DataOperations._compact(reference.lower()))
-        a = seq.get_matching_blocks()
-        a = a[:-1]  # Last element is a dummy
+        blocks = seq.get_matching_blocks()
+        blocks = blocks[:-1]  # Last element is a dummy
 
-        b: list = [False] * len(reference)
+        corr_map: list = [False] * len(reference)
 
-        for _, i, n in a:
+        for _, i, n in blocks:
             if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different word
                 for x in range(i, i + n):
-                    b[x] = True
+                    corr_map[x] = True
 
-        return b
+        return corr_map
 
     @staticmethod
     def _compact(input_string: str) -> str:

@@ -11,7 +11,7 @@ class UiOperations:
         """Console user interface"""
         user_input: str = input(f'Enter phrase \"{phrase}\" in English: ')
         distance, best_translation = dop.find_max_string_similarity(user_input, repetition['translations'])
-        diff = dop.find_unmatched_blocks(user_input, best_translation)
+        diff = dop.find_user_mistakes(user_input, best_translation)
 
         if distance >= dop.level_excellent:  # Phrases are identical
             print(Fore.GREEN + 'Correct!' + os.linesep)

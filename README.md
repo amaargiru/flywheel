@@ -220,28 +220,52 @@ max_attempts_len: int = 10  # Limit for 'Attempts' list
 Теперь, когда ответ пользователя уже взвешен и учтён, нужно показать ученику не просто правильный вариант, а подробности, помогающие локализовать ошибки. Для этого вначале сформируем структуру данных, содержащую информацию о разности между желаемым и фактическим результатом:
 
 ```python
+# from dataclasses import dataclass
 # from difflib import SequenceMatcher
 
 @staticmethod
-def find_matching_blocks(user_input, reference):
-    """Display of user errors"""
-    seq = SequenceMatcher(None,
-                            "".join(DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())),
-                            DataOperations._compact(reference.lower()))
+def find_user_mistakes(user_input: str, reference: str) -> list:
+    """Dig for user errors and typos"""
+
+    @dataclass
+    class ComplexPhrase:
+        phrase_without_punctuation: List[str]
+        transformation_matrix: List[int]
+
+    user_input = DataOperations._cleanup_user_input(user_input).lower()
+    reference = reference.lower()
+    correction_map: list[bool] = [True] * len(reference)
+
+    complex_reference: ComplexPhrase = ComplexPhrase(phrase_without_punctuation=[], transformation_matrix=[])
+
+    # 'Minify' reference phrase and remember transformation shifts
+    for i, ch in enumerate(reference):
+        if ch.isalnum() or ch == ' ':
+            complex_reference.phrase_without_punctuation.append(ch)
+            complex_reference.transformation_matrix.append(i)
+
+    minified_reference: str = ''.join(complex_reference.phrase_without_punctuation)
+    corr_map: list[bool] = [False] * len(minified_reference)
+
+    # Compare cleaned user input and 'minified' reference
+    seq = SequenceMatcher(lambda ch: not (ch.isalnum() or ch == ' '), user_input, minified_reference)
     blocks = seq.get_matching_blocks()
     blocks = blocks[:-1]  # Last element is a dummy
-
-    corr_map: list = [False] * len(reference)
 
     for _, i, n in blocks:
         if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different word
             for x in range(i, i + n):
                 corr_map[x] = True
 
-    return corr_map
+    # 'Unminify' reference phrase and restore transformation shifts
+    for i, corr in enumerate(corr_map):
+        if corr is False:
+            correction_map[complex_reference.transformation_matrix[i]] = False
+
+    return correction_map
 ```
 
-Чтобы наглядно показать пользователю ошибки и опечатки, сформируем разноцветную фразу, в которой цвет символа будет зависеть от правильности его написания:
+Чтобы наглядно показать пользователю ошибки и опечатки, сформируем полноцветный пользовательский вывод, фразу, в которой цвет символа будет зависеть от правильности его написания:
 
 ```python
 @staticmethod

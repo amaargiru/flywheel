@@ -1,5 +1,5 @@
 [+] Add some docstrings  
-[-] Back: update find_unmatched_blocks()  
+[+] Back: update find_unmatched_blocks()  
 [-] Back + Front: validate new user parameters (email validation, name length, password length)  
 [-] Back: slow requests, 250 - 500 ms (but 10-15 ms through Swagger UI)  
 [-] Back: FastAPI doesn't recommend peewee. Migrate from peewee to SQLAlchemy  

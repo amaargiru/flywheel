@@ -1,5 +1,6 @@
 import re
 import sys
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from difflib import SequenceMatcher
 from re import Pattern
@@ -160,27 +161,45 @@ class DataOperations:
         return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 
     @staticmethod
-    def find_unmatched_blocks(user_input: str, reference: str) -> list:
-        """Display of user errors"""
+    def find_user_mistakes(user_input: str, reference: str) -> list:
+        """Dig for user errors and typos"""
+
+        @dataclass
+        class ComplexPhrase:
+            phrase_without_punctuation: List[str]
+            transformation_matrix: List[int]
+
         user_input = DataOperations._cleanup_user_input(user_input).lower()
         reference = reference.lower()
+        correction_map: list[bool] = [True] * len(reference)
 
-        seq = SequenceMatcher(lambda ch: not (ch.isalnum() or ch == ' '), user_input, reference)
+        complex_reference: ComplexPhrase = ComplexPhrase(phrase_without_punctuation=[], transformation_matrix=[])
+
+        # 'Minify' reference phrase and remember transformation shifts
+        for i, ch in enumerate(reference):
+            if ch.isalnum() or ch == ' ':
+                complex_reference.phrase_without_punctuation.append(ch)
+                complex_reference.transformation_matrix.append(i)
+
+        minified_reference: str = ''.join(complex_reference.phrase_without_punctuation)
+        corr_map: list[bool] = [False] * len(minified_reference)
+
+        # Compare cleaned user input and 'minified' reference
+        seq = SequenceMatcher(lambda ch: not (ch.isalnum() or ch == ' '), user_input, minified_reference)
         blocks = seq.get_matching_blocks()
         blocks = blocks[:-1]  # Last element is a dummy
-
-        corr_map: list = [False] * len(reference)
-
-        for i, ch in enumerate(reference):
-            if not (ch.isalnum() or ch == ' '):
-                corr_map[i] = True
 
         for _, i, n in blocks:
             if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different word
                 for x in range(i, i + n):
                     corr_map[x] = True
 
-        return corr_map
+        # 'Unminify' reference phrase and restore transformation shifts
+        for i, corr in enumerate(corr_map):
+            if corr is False:
+                correction_map[complex_reference.transformation_matrix[i]] = False
+
+        return correction_map
 
     @staticmethod
     def _cleanup_user_input(user_input: str) -> str:

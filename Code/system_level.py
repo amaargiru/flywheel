@@ -28,7 +28,7 @@ class FileOperations:
             with open(file_path, 'r', encoding='utf-8') as phrf:
                 for string in phrf.readlines():
                     if string[0] != '#' and '||' in string:  # No comment line and contains rus-eng separator
-                        phrases_pair = list(map(str.strip, string.split("||")))
+                        phrases_pair = list(map(str.strip, string.split('||')))
 
                         if len(phrases_pair) > 2:
                             print(f'Error. String contains {len(phrases_pair)} "||" separators: ' + string +
@@ -36,10 +36,10 @@ class FileOperations:
                         else:
                             rus_part, eng_part = phrases_pair[0], phrases_pair[1]
 
-                            if "|" in eng_part:  # More than one English phrase
+                            if '|' in eng_part:  # More than one English phrase
                                 eng_part = list(map(str.strip, eng_part.split('|')))  # Just split into separate english phrases
 
-                            if "|" in rus_part:  # More than one Russian phrase
+                            if '|' in rus_part:  # More than one Russian phrase
                                 rus_part = list(map(str.strip, rus_part.split('|')))  # Split into separate russian phrases...
                                 for rus_phrase in rus_part:
                                     phrase_mapping[rus_phrase] = eng_part  # ... and save separate items

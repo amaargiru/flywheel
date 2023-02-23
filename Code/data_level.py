@@ -46,7 +46,7 @@ class DataOperations:
                     repetitions[rus_part] = {
                         "translations": eng_part,
                         "time_to_repeat": datetime.now().strftime(datetime_format),  # Recommendation to check this phrase right now
-                        "easiness_factor": 2.5,  # EF, how easy the card is (and determines how quickly the inter-repetition interval grows)
+                        "easiness_factor": 2.5,  # How easy the card is (and determines how quickly the inter-repetition interval grows)
                         "repetition_number": 0,  # Number of times the card has been successfully recalled in a row
                         "attempts": []}  # In use flag + reserve field in case of transition from supermemo-2 to supermemo-18
                     new_phrases += 1
@@ -156,11 +156,11 @@ class DataOperations:
 
     @staticmethod
     def _compact(input_string: str) -> str:
-        """Allows letters and numbers only"""
+        """Restrict use of all special characters and allow letters and numbers only"""
         return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 
     @staticmethod
-    def find_matching_blocks(user_input: str, reference: str) -> list:
+    def find_unmatched_blocks(user_input: str, reference: str) -> list:
         """Display of user errors"""
         user_input = DataOperations._cleanup_user_input(user_input).lower()
         reference = reference.lower()
@@ -207,7 +207,7 @@ class DataOperations:
                 repetition["time_to_repeat"] = (datetime.now() + timedelta(days=1)).strftime(datetime_format)
             elif repetition["repetition_number"] == 1:  # + 6 days
                 repetition["time_to_repeat"] = (datetime.now() + timedelta(days=6)).strftime(datetime_format)
-            else:  # + (6 * EF) days
+            else:  # + (6 * easiness_factor) days
                 repetition["time_to_repeat"] = (datetime.now()
                                                 + timedelta(days=6 * repetition["easiness_factor"])).strftime(datetime_format)
             repetition["repetition_number"] += 1

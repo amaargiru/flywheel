@@ -155,15 +155,25 @@ class DataOperations:
         return max_distance, best_translation
 
     @staticmethod
-    def find_matching_blocks(user_input, reference):
+    def _compact(input_string: str) -> str:
+        """Allows letters and numbers only"""
+        return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
+
+    @staticmethod
+    def find_matching_blocks(user_input: str, reference: str) -> list:
         """Display of user errors"""
-        seq = SequenceMatcher(None,
-                              "".join(DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())),
-                              DataOperations._compact(reference.lower()))
+        user_input = DataOperations._cleanup_user_input(user_input).lower()
+        reference = reference.lower()
+
+        seq = SequenceMatcher(lambda ch: not (ch.isalnum() or ch == ' '), user_input, reference)
         blocks = seq.get_matching_blocks()
         blocks = blocks[:-1]  # Last element is a dummy
 
         corr_map: list = [False] * len(reference)
+
+        for i, ch in enumerate(reference):
+            if not (ch.isalnum() or ch == ' '):
+                corr_map[i] = True
 
         for _, i, n in blocks:
             if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different word
@@ -171,11 +181,6 @@ class DataOperations:
                     corr_map[x] = True
 
         return corr_map
-
-    @staticmethod
-    def _compact(input_string: str) -> str:
-        """Allows letters and numbers only"""
-        return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 
     @staticmethod
     def _cleanup_user_input(user_input: str) -> str:

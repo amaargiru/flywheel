@@ -190,7 +190,7 @@ class DataOperations:
         blocks = blocks[:-1]  # Last element is a dummy
 
         for _, i, n in blocks:
-            if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different word
+            if n >= 3:  # Don't show to the user too short groups of correct letters, perhaps he entered a completely different phrase
                 for x in range(i, i + n):
                     corr_map[x] = True
 

@@ -62,7 +62,7 @@ class DataOperations:
     def determine_next_phrase(repetitions: dict) -> str:
         """Set phrase for next user session"""
         recommended_started_phrase: str = ''
-        recommended_not_started_phrase: str = ''
+        recommended_continuing_phrase: str = ''
 
         min_time_to_repeat_started_phrases: datetime = datetime.max
         min_time_to_repeat_not_started_phrases: datetime = datetime.max
@@ -76,13 +76,13 @@ class DataOperations:
             else:
                 current_time_to_repeat_not_started_phrases = datetime.strptime(value['time_to_repeat'], datetime_format)
                 if current_time_to_repeat_not_started_phrases < min_time_to_repeat_not_started_phrases:
-                    recommended_not_started_phrase = current_phrase
+                    recommended_continuing_phrase = current_phrase
                     min_time_to_repeat_not_started_phrases = current_time_to_repeat_not_started_phrases
 
-        if min_time_to_repeat_started_phrases <= datetime.now() or recommended_not_started_phrase == '':
+        if min_time_to_repeat_started_phrases <= datetime.now() or recommended_continuing_phrase == '':
             return recommended_started_phrase
         else:
-            return recommended_not_started_phrase
+            return recommended_continuing_phrase
 
     @staticmethod
     def update_repetitions(repetitions: dict, current_phrase: str, user_result: float):

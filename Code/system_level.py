@@ -9,10 +9,11 @@ class FileOperations:
         """Find and open a file if it exists (include the path's logical parents), or create a new empty file"""
         if os.path.exists(filename):  # If file exists in app directory
             return filename
-        else:  # If the file doesn't exist in the app directory, start searching in all project directories
-            for root, dirs, files in os.walk(Path(__file__).parents[parents_level_up]):
-                if filename in files:
-                    return os.path.join(root, filename)
+
+        # If the file doesn't exist in the app directory, start searching in all project directories
+        for root, dirs, files in os.walk(Path(__file__).parents[parents_level_up]):
+            if filename in files:
+                return os.path.join(root, filename)
 
         # File doesn't exist in all project directories
         with open(filename, 'w'):  # Create file
@@ -26,13 +27,13 @@ class FileOperations:
 
         try:
             with open(file_path, 'r', encoding='utf-8') as phrf:
-                for string in phrf.readlines():
+                for string in phrf:
                     if string[0] != '#' and '||' in string:  # No comment line and contains rus-eng separator
                         phrases_pair = list(map(str.strip, string.split('||')))
 
                         if len(phrases_pair) > 2:
-                            print(f'Error. String contains {len(phrases_pair)} "||" separators: ' + string +
-                                  '. String must contain only one "||" separator between phrases in different languages')
+                            print(f'Error. String contains {len(phrases_pair)} "||" separators: {string}. String must contain '
+                                  'only one "||" separator between phrases in different languages')
                         else:
                             rus_part, eng_part = phrases_pair[0], phrases_pair[1]
 
@@ -46,8 +47,8 @@ class FileOperations:
 
                             else:  # Single Russian phrase
                                 phrase_mapping[rus_part] = eng_part
-        except Exception:
-            print(f'Cannot open or parse {file_path} file')
+        except Exception as e:
+            print(f'Cannot open or parse {file_path} file: {repr(e)}')
 
         return phrase_mapping
 
@@ -59,8 +60,8 @@ class FileOperations:
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 repetitions = json.load(f)
-        except Exception:
-            print(f'Cannot open or parse {file_path} file')
+        except Exception as e:
+            print(f'Cannot open or parse {file_path} file: {repr(e)}')
 
         return repetitions
 
@@ -70,5 +71,5 @@ class FileOperations:
         try:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(json.dumps(repetitions, ensure_ascii=False, indent=2))
-        except Exception:
-            print(f'Cannot save {file_path} file')
+        except Exception as e:
+            print(f'Cannot save {file_path} file: {repr(e)}')

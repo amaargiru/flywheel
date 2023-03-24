@@ -13,17 +13,17 @@ class Printer:
         init()
 
         if ratio > Printer.level4ratio:
-            print(Fore.GREEN + "Correct.")
+            print(f"{Fore.GREEN}Correct.")
         elif ratio > Printer.level3ratio:  # Во фразах очень много общего, показываем пользователю diff
-            print(Fore.BLACK + "Almost correct. Right answer is: ", end="")
+            print(f"{Fore.BLACK}Almost correct. Right answer is: ", end="")
             Printer.__print_colored_diff(correction, index, references)
         elif ratio > Printer.level2ratio:  # Во фразах много общего, можно попробовать вывести пользователю diff
-            print(Fore.BLACK + "Not bad. ", end="")
-            print(Fore.BLACK + "Right answer is: ", end="")
+            print(f"{Fore.BLACK}Not bad. ", end="")
+            print(f"{Fore.BLACK}Right answer is: ", end="")
             Printer.__print_colored_diff(correction, index, references)
         else:
-            print(Fore.RED + "Wrong. ", end="")  # Много ошибок, не пытаемся показать diff
-            print(Fore.BLACK + "Right answer is: ", end="")
+            print(f"{Fore.RED}Wrong. ", end="")
+            print(f"{Fore.BLACK}Right answer is: ", end="")
             print(Fore.GREEN + references[0])
 
         print(Style.RESET_ALL)
@@ -33,15 +33,15 @@ class Printer:
         for i, ch in enumerate(references[index]):
             if correction[i]:
                 print(Fore.GREEN + ch, end="")
+            elif ch == " ":
+                if i >= 1 and i + 1 < len(references[index]):  # Подчеркиваем пробел среди верных, но слипшихся символов
+                    if correction[i - 1] and correction[i + 1]:
+                        print(f"{Fore.RED}_", end="")
+                    else:
+                        print(f"{Fore.RED} ", end="")
+
             else:
-                if ch != " ":
-                    print(Fore.RED + ch, end="")  # Just letter
-                else:
-                    if i - 1 >= 0 and i + 1 < len(references[index]):  # Подчеркиваем пробел среди верных, но слипшихся символов
-                        if correction[i - 1] and correction[i + 1]:
-                            print(Fore.RED + "_", end="")
-                        else:
-                            print(Fore.RED + " ", end="")
+                print(Fore.RED + ch, end="")  # Just letter
 
     @staticmethod
     def format_message_to_api(references: List[str], index: int, correction: List[bool], ratio: float) -> dict:
@@ -68,15 +68,13 @@ class Printer:
         for i, ch in enumerate(references[index]):
             if correction[i]:
                 hint_list.append(ch)
-            else:
-                if ch != " ":
-                    hint_list.append("/" + ch)
-                else:
-                    if i - 1 >= 0 and i + 1 < len(references[index]):  # Подчеркиваем пробел среди верных, но слипшихся символов
-                        if correction[i - 1] and correction[i + 1]:
-                            hint_list.append("/" + ch)
-                        else:
-                            hint_list.append(ch)
+            elif ch == " ":
+                if i >= 1 and i + 1 < len(references[index]):  # Подчеркиваем пробел среди верных, но слипшихся символов
+                    if correction[i - 1] and correction[i + 1]:
+                        hint_list.append(f"/{ch}")
+                    else:
+                        hint_list.append(ch)
 
-        hint = "".join(hint_list)
-        return hint
+            else:
+                hint_list.append(f"/{ch}")
+        return "".join(hint_list)

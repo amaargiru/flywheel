@@ -21,14 +21,14 @@ class DataOperations:
     def data_assessment(phrases: dict, repetitions: dict) -> (bool, str):
         """Check data before work"""
         if not isinstance(phrases, dict):
-            print(f'Cannot parse phrase file')
+            print('Cannot parse phrase file')
             sys.exit()
 
         if not isinstance(repetitions, dict):
-            print(f'Cannot parse repetitions file')
+            print('Cannot parse repetitions file')
             sys.exit()
 
-        if len(phrases) == 0 and len(repetitions) == 0:
+        if not phrases and not repetitions:
             return False, 'Both structures have zero length'
         else:
             return True, 'No data assessment errors'
@@ -39,22 +39,21 @@ class DataOperations:
         no_added_message: str = 'No new phrases'
         new_phrases: int = 0
 
-        if len(phrases) == 0:
+        if not phrases:
             return False, no_added_message
-        else:
-            for rus_part, eng_part in phrases.items():
-                if rus_part not in repetitions:
-                    repetitions[rus_part] = {
-                        'translations': eng_part,
-                        'time_to_repeat': datetime.now().strftime(datetime_format),  # Recommendation to check this phrase right now
-                        'easiness_factor': 2.5,  # How easy the card is (and determines how quickly the inter-repetition interval grows)
-                        'repetition_number': 0,  # Number of times the card has been successfully recalled in a row
-                        'attempts': []}  # In use flag + reserve field in case of transition from supermemo-2 to supermemo-18
-                    new_phrases += 1
+        for rus_part, eng_part in phrases.items():
+            if rus_part not in repetitions:
+                repetitions[rus_part] = {
+                    'translations': eng_part,
+                    'time_to_repeat': datetime.now().strftime(datetime_format),  # Recommendation to check this phrase right now
+                    'easiness_factor': 2.5,  # How easy the card is (and determines how quickly the inter-repetition interval grows)
+                    'repetition_number': 0,  # Number of times the card has been successfully recalled in a row
+                    'attempts': []}  # In use flag + reserve field in case of transition from supermemo-2 to supermemo-18
+                new_phrases += 1
 
-                if repetitions[rus_part]['translations'] != eng_part:  # Correct translations
-                    repetitions[rus_part]['translations'] = eng_part
-                    new_phrases += 1
+            if repetitions[rus_part]['translations'] != eng_part:  # Correct translations
+                repetitions[rus_part]['translations'] = eng_part
+                new_phrases += 1
 
         return (False, no_added_message) if new_phrases == 0 else (True, f'Added {new_phrases} new phrases')
 
@@ -213,9 +212,7 @@ class DataOperations:
         user_input = ''.join(ch for ch in user_input if ch.isalnum() or ch in white_list)  # Delete all unwanted symbols
         user_input = user_input.replace('\t', ' ')  # Replace tabs with spaces
         user_input = ' '.join(user_input.split())  # Replace multiple spaces with one
-        user_input = re.sub(comma_pattern, ',', user_input)  # Replace multiple commas with one
-
-        return user_input
+        return re.sub(comma_pattern, ',', user_input)
 
     @staticmethod
     # https://en.wikipedia.org/wiki/SuperMemo

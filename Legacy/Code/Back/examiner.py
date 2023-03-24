@@ -30,9 +30,7 @@ class Examiner:
             else:
                 final_coeff = question_candidate.score / current_user_memory_coeff
 
-            if final_coeff >= 9:  # Дальше 512 дней вряд ли стоит заглядывать
-                final_coeff = 9
-
+            final_coeff = min(final_coeff, 9)
             question_candidate_required_datetime = question_candidate.last_attempt + timedelta(days=2 ** final_coeff)
             if question_candidate_required_datetime <= min_next_question_time:
                 min_next_question_time = question_candidate_required_datetime
@@ -48,12 +46,6 @@ class Examiner:
         native_phrase = Question.get(Question.id == question_id).native_phrase
         query = Answer.select().where(Answer.question_id == question_id)
 
-        references = []
-        for ref in query:
-            references.append(ref.english_phrase)
-
-        links_to_audio = []
-        for ref in query:
-            links_to_audio.append(ref.link_to_audio)
-
+        references = [ref.english_phrase for ref in query]
+        links_to_audio = [ref.link_to_audio for ref in query]
         return UserQuestion(native_phrase, references, links_to_audio)

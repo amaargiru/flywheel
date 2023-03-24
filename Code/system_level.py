@@ -7,12 +7,11 @@ class FileOperations:
     @staticmethod
     def find_or_create_file(filename: str, parents_level_up: int = 2) -> str:
         """Find and open a file if it exists (include the path's logical parents), or create a new empty file"""
-        if os.path.exists(filename):  # If file exists in app directory
+        if os.path.exists(filename):
             return filename
-        else:  # If the file doesn't exist in the app directory, start searching in all project directories
-            for root, dirs, files in os.walk(Path(__file__).parents[parents_level_up]):
-                if filename in files:
-                    return os.path.join(root, filename)
+        for root, dirs, files in os.walk(Path(__file__).parents[parents_level_up]):
+            if filename in files:
+                return os.path.join(root, filename)
 
         # File doesn't exist in all project directories
         with open(filename, 'w'):  # Create file
@@ -26,13 +25,14 @@ class FileOperations:
 
         try:
             with open(file_path, 'r', encoding='utf-8') as phrf:
-                for string in phrf.readlines():
+                for string in phrf:
                     if string[0] != '#' and '||' in string:  # No comment line and contains rus-eng separator
                         phrases_pair = list(map(str.strip, string.split('||')))
 
                         if len(phrases_pair) > 2:
-                            print(f'Error. String contains {len(phrases_pair)} "||" separators: ' + string +
-                                  '. String must contain only one "||" separator between phrases in different languages')
+                            print(
+                                f'Error. String contains {len(phrases_pair)} "||" separators: {string}. String must contain only one "||" separator between phrases in different languages'
+                            )
                         else:
                             rus_part, eng_part = phrases_pair[0], phrases_pair[1]
 

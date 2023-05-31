@@ -1,58 +1,56 @@
-## Duolingo на минималках
+Duolingo with Minimal Settings
 
-Привет, меня зовут Емельянов Михаил, я Python-программист и я хотел бы показать вам свой небольшой «проект выходного дня» — **Flywheel**, микро-платформу для изучения иностранных языков — смесь Duolingo и Anki, программу, которая может помочь вам правильно **писать** на английском. Flywheel доступен в исходниках, лежит на [GitHub](https://github.com/amaargiru/flywheel).
+Hi, my name is Mikhail Emelyanov, I’m a Python programmer and I would like to show you my pet project — Flywheel, a micro-platform for learning foreign languages, a mixture of Duolingo and Anki, an application that can teach you to properly write in Spanish (or any other language you’re studying). Flywheel’s source code is available on [GitHub](https://github.com/amaargiru/flywheel).
 
-![Flywheel](https://raw.githubusercontent.com/amaargiru/flywheel/main/pics/Dorothy.png)
+As you may know, generalized knowledge of a foreign language can be broken down into four relatively independent components: reading, writing, listening, and speaking. Unfortunately, training one of these abilities has no direct effect on the other components, so, for example, by developing our reading skills, the effect on our writing skills is quite indirect. Flywheel is a ‘sharpener’ specifically for **written Spanish**.
 
-Как вы, возможно, знаете, обобщенное знание иностранного языка можно разложить на четыре относительно независимые составляющие: чтение, письмо, слушание и говорение. К сожалению, тренировка одной из этих способностей не будет напрямую отражаться на остальных компонентах, поэтому, например, развивая навык чтения, мы достаточно опосредованно влияем на навык письма. Flywheel — «точилка» именно для **письменного английского**.
+If you’ve ever used Duolingo, you should have some idea of the format in which you’ll be studying. The formula is simple: here’s a phrase, translate it into the other language; the app will remember the last time you translated a phrase and how successful you were at it; and depending on the accuracy of your answer, it will determine when you should do the same phrase again. In my opinion, Duolingo and its approach are brilliant. However... There are certain aspects that somewhat spoil the learning experience, and Flywheel was specifically designed to address them.
 
-Если вы когда-нибудь пользовались Duolingo, то имеете представление о формате, в котором будет идти обучение. Последовательность проста: вот тебе фраза, переведи её на другой язык; программа запомнит, когда ты в последний раз переводил ту или иную фразу и насколько успешно у тебя это получилось; в зависимости от правильности ответа будет определено время, когда тебе нужно задать эту же фразу еще раз. В целом, на мой взгляд, как сам Duolingo, так и используемый им подход — просто гениальны. Но... Есть нюансы, которые несколько портят впечатления от процесса учёбы, и именно для их устранения я и задумал Flywheel.
+### Wish List
 
-### Хотелки
+First and most importantly, I want all translation assignments to be English to Spanish only. I only want to see English phrases that I need to translate into Spanish. I don’t want to translate from Spanish to English. I’m not studying to be a translator; I want to learn a foreign language! And in my opinion, the way to do that is to not write anything in English at all while I’m studying. There’s a little lifehack for Duolingo — you can switch from learning Spanish for English speakers to learning *English for Spanish speakers* (this, in part, explains the large number of students in this course) so that the course will contain more English-to-Spanish assignments, although the amount of Spanish-to-English translations will still be very large. Whereas I want 100 % of the lesson time to be written in Spanish!
 
-Во-первых, и это самое главное, я хотел бы, чтобы все задания на перевод были *только* русско-английскими. Я хочу видеть только русские фразы, которые мне нужно перевести на английский. Переводить с английского на русский не хочу. Я не учусь на переводчика, я хочу изучить иностранный язык! А для этого гораздо правильнее, на мой взгляд, вообще не включать русскоязычную раскладку на клавиатуре во время учёбы. На Duolingo есть небольшой «лайфхак» — переключение с изучения английского для русскоговорящих на изучение *русского для англоговорящих* (этим, отчасти, и объясняется большое количество учащихся на этом курсе — в основном это вовсе не американцы или жители туманного Альбиона, изучающие русский, а как раз наоборот, жители России, зубрящие английский язык), тогда учебный курс будет содержать больше русско-английских заданий, но количество англо-русских переводов всё равно останется очень большим. А я хочу 100 % времени урока писать на английском!
+Second, I’m an adult, and I don’t need the studying process to be gamified at all. All those little people cheerfully winking, encouraging and advising me is one giant, irrelevant and annoying pain. There are even browser extensions that try to cut out all of these unnecessary functions, reducing the website’s visuals to the necessary level of minimalism.
 
-Во-вторых, я взрослый человек, и мне совершенно не нужна геймификация процесса обучения. Всё эти человечки, весело подмигивающие, приободряющие и дающие советы — один сплошной жирный, неуместный и раздражающий Круциатус. Доходит даже до выпуска расширений для браузера, которые пытаются вырезать весь этот ненужный функционал, сведя визуал сайта до необходимого уровня минимализма.
+Third, I’m an adult (yes, I’m repeating myself) and sometimes I don’t have the time for a full-sized lesson. While Duolingo has fairly short ones, the breakdown of the learning process into set lessons containing an XX amount of questions is primarily convenient for the learning platform, not the learner. I want to be able to repeat not twenty phrases, but, say, five or three, or even one. I want to be able to interrupt the studying process at any moment without losing progress! After all, I sometimes am only able to practice on rare breaks of undetermined duration between my main activities over tea and cookies, or during breaks between spending time with the kids. If I have only a literal spare minute, I want to do a couple of sets and maintain my progress.
 
-Третье — я взрослый человек (повторяюсь, да) и у меня иногда нет времени на полноразмерный урок. Хотя на Duolingo он довольно короток, но, тем не менее, разбивка процесса обучения на фиксированный уроки по ...надцать вопросов удобна в первую очередь для обучающей платформы, а не для ученика. Я хочу, чтобы у меня была возможность повтора не двадцати фраз, а, скажем, пяти или трёх, даже одной, наконец. Хочу прерывать процесс обучения в любой момент без потери прогресса! В конце концов, я иногда могу заниматься только в редкие перерывы недетерминированной продолжительности между моими основными активностями, под чай с печенькой, или в передышке между общением с детьми. Если у меня есть буквально свободная минута, то я хочу сделать пару подходов и сохранить свой прогресс.
+Fourth, I want to be able to add new phrases at any stage of my study! After hearing or reading something new, useful or just interesting, I want to add the phrase to the list, letting the app ensure that this phrase will remain in my memory forever.
 
-В-четвертых, хочу иметь возможность всегда, на любом этапе обучения добавлять новые фразы! Услышав или вычитав что-то новое, полезное или просто интересное, хочу добавить фразу в список, пусть теперь программа позаботится о том, чтобы я эта фраза осталась в моей памяти навсегда.
+Fifth, but also no less important consideration — I want the program to indicate the wrong parts of the translation. Sometimes the entered text contains small mistakes or typos, catching which is difficult with a naked eye. I want the program to show the difference between my translation and the correct version, so that I can focus on learning Spanish, and not on the game of finding the wrong letter in a long phrase in a foreign language.
 
-Пятое, и тоже немаловажное соображение — хочу, чтобы программа показывала неправильно введенные фрагменты перевода. Иногда в введенном тексте есть мелкие ошибки, опечатки, «поймать» которые глазами довольно затруднительно. Надо, чтобы программа наглядно показывала разницу между моим переводом и правильным вариантом, а я бы сосредоточился на изучении английского, а не на игре «найди ошибочную букву в длинной фразе на иностранном языке».
+This is my wish list — I want Duolingo, but only with English-to-Spanish tasks, without gamification, saving progress after each task, with the ability to add new phrases and with the visualization of the errors made, even minor ones.
 
-Вот такой вот список пожеланий у меня накопился — хочу Duolingo, но только с русско-английскими заданиями, без геймификации, с сохранением прогресса после каждого задания, с возможностью добавлять новые фразы и с визуализацией сделанных ошибок, даже мелких.
+I think that’s where the preface can end and we can get to the heart of the matter. If you simply want to start learning Spanish, go to the next section, ‘Usage.’ If you want to see the app’s inner workings, go to the ‘How It Works’ section (near the end of the article).
 
-Думаю, на этом предисловие можно закончить и перейти к сути. Если вы просто хотите начать учить английский язык — переходите к следующему разделу, «Использование». Если вы хотите посмотреть, как программа устроена «под капотом», то переходите разделу «Как это работает» (ближе к концу статьи).
+### Usage
 
-### Использование
+Using Flywheel is extremely simple. At the start, you have just one file, phrases.txt (the file that comes with the application contains about two thousand phrases). Inside are many pairs of phrases, separated with a double vertical line, e.g.:
 
-Использование Flywheel предельно просто. В самом начале у вас есть всего один файл — phrases.txt (в файле, идущем вместе с программой, около двух тысяч фраз). Там вы можете видеть множество фразовых пар, просто разделенных двойной вертикальной чертой, например:
+...
 
-*Я люблю тебя || I love you*
+If the English phrase can be correctly translated into several different Spanish phrases, a single vertical line is used to separate them:
 
-Если русскую фразу можно корректно перевести несколькими разными английскими фразами, то для их разделения используется одиночная вертикальная черта:
+...
 
-*Я живу в этом городе || I live in this city | I live in this town*
+Finally, if there are two English phrases that can also have multiple equivalent translations, a single vertical line is also used to separate them:
 
-Наконец, если существуют две русскоязычные фразы, которые тоже могут иметь множество эквивалентных переводов, то для их разделения также используется одиночная вертикальная черта:
+...
 
-*Кот сидит на столе | Кошка сидит на столе || A cat sits on the table | The cat sits on the table*
+The latter phrase pair can be made even more complicated:
 
-Последнюю фразовую пару можно еще немного усложнить:
+...
 
-*Кот сидит на столе | Кошка сидит на столе || A cat sits on the table | The cat sits on the table | A cat is sitting on the table | The cat is sitting on the table*
+Of course, you can and should add **your own phrase pairs** to phrases.txt. This is the essence of Flywheel — you don’t have to memorize the dictionary, it’s just a template. Adjust the content of the lessons to suit your level of proficiency; move the phrase pairs you find most useful higher up in the dictionary; add pairs related to your job. Needless to say, the shell doesn’t care what language you’re learning. If you wish to learn French, bien accueillir! Want to learn Aleutian? No problem. Need to learn Aleutian as a native French speaker? Easy as pie!
 
-Разумеется, в phrases.txt можно и нужно добавлять **собственные фразовые пары**. В этом-то и состоит самый цимес Flywheel — не обязательно зубрить то, что содержится в словаре, это просто заготовка. Корректируйте содержание уроков под свой уровень владения языком; перемещайте наиболее полезные, на ваш взгляд, фразовые пары повыше в словаре; добавляйте пары, связанные с вашей профессиональной деятельностью. Не говоря уже о том, что оболочке всё равно, какой язык вы учите. Хотите изучать испанский — bienvenido! Хотите изучать алеутский — да не вопрос. Хотите изучать алеутский, будучи носителем испанского? Легко!
+Please don’t add single words to the dictionary! Sure, technically it’s possible, but it’s not particularly worthwhile from the perspective of language learning efficiency. Try adding phrases specifically, and if you want to add a specific new word to your vernacular it’s better to pick up a phrase which uses it in a specific context. This way you’ll not only remember the word better, but you’ll more easily move it from the passive phase to the active phase, as you won’t simply recognize it in a text or in speech, but will actually start applying it in writing and in speaking.
 
-Пожалуйста, не добавляйте в словарь слова! Разумеется, технически это возможно, но с точки зрения эффективности изучения языка не очень оправдано. Постарайтесь добавлять именно фразы, а если хотите добавить в свою личную копилку какое-нибудь конкретное новое слово, лучше возьмите фразу, где оно применяется в конкретном контексте. Так вы не только лучше запомните это слово, но и легче переведете его из пассивной фазы в активную — будете не просто распознавать его в тексте или в устной речи, но и начнете применять его при письме и при говорении.
+Next, simply run flywheel.py. Two more files will be added to your application folder — repetitions.json (this will record your progress and memorization of all completed phrase pairs) and user_statistics.txt (this will record the total number of exercises you have completed and will generate a general list of words you have managed to learn).
 
-Теперь просто запустите flywheel.py. В папке с программой появятся еще два файла — repetitions.json (здесь будет записан ваш прогресс и степень запоминания всех пройденных фразовых пар) и user_statistics.txt (здесь будет записано общее количество сделанных вами упражнений и будет сформирован общий список слов, которые вы успели изучить).
+### How It Works
 
-### Как это работает
+If you are a beginner Python developer and want to try your hand at something simple but not useless, give Flywheel a whirl. Maybe you’ll be able to add some hot new features to it, and improve your Spanish while debugging it as well. Naturally, most of the methods used in the application don’t need a lot of describing, so I’ll focus only on the general approach and the key functions that are directly related to the analysis of user progress.
 
-Если вы — начинающий Python-разработчик и хотите поточить зубки обо что-нибудь простенькое, но не бесполезное, попробуйте Flywheel. Возможно, вам удастся прикрутить к нему какую-нибудь убервостребованную фичу, а в процессе отладки еще и английский подтянете. Разумеется, большую часть методов, используемых в программе, описывать особого смысла не имеет, остановлюсь только на общем подходе и на ключевых функциях, имеющих непосредственное отношение к анализу прогресса пользователя.
-
-В последнее время я стал практиковать следующий метод: пишу заготовку main, *как будто бы* все методы программы уже разработаны и мне просто осталось их вызвать. Это позволяет взглянуть на код с высоты, так сказать, птичьего полёта (даже если высота полёта вызывает ассоциации скорее с пингвином, а не с орлом :) и оценить примерный уровень планируемых трудозатрат. В этот раз получилось следующее:
+Recently I have been practicing the following method: I write a template main as if all of the application’s methods have already been developed and I just need to call them. This gives you sort of a bird’s-eye view of the code (even if it’s more like a penguin’s rather than an eagle’s :) and a rough estimate of the level of effort required. This is what I ended up with:
 
 ```python
 phrases_file_name = "phrases.txt"
@@ -79,14 +77,14 @@ if __name__ == "__main__":
         exit()
 ```
 
-Логика работы примерно такова:  
-• найдём в каталогах проекта файл phrases.txt (множество фразовых пар, разделенных двойной вертикальной чертой, подробности читайте в разделе «Использование»); если найти его не удалось, создадим пустышку для будущего редактирования пользователем;  
-• аналогично, поищем файл repetitions.json (записи прогресса и степень запоминания всех пройденных фразовых пар), если не нашли — создаем пустой файл;  
-• создаем структуры данных из информации, считанной из phrases.txt и repetitions.json, а потом оцениваем, можно ли работать с такой комбинацией. Не пустой phrases.txt — OK, мы сможем преобразовать фразовые пары в наш внутренний формат и переписать эту информацию в repetitions.json. Не пустой repetitions.json — тоже OK, можем работать с уже накопленной информацией. А вот две пустышки, и phrases.txt, и repetitions.json — уже не OK, нам просто неоткуда черпать информацию, необходимую для работы — жалуемся на этот факт пользователю, пусть создаст phrases.txt хоть с каким-то минимальным содержимым;  
-• в цикле подбрасываем пользователю новое задание, выбирая из фразового словаря ту фразу, которая наиболее актуальна на настоящий момент. Если есть фразы, требующие повторения, в первую очередь берем именно их; если все пройденные задания не требуют освежения памяти прямо сейчас, то начинаем подкидывать новые фразы.  
-• после каждого задания, вне зависимости от качества ответа, обновляем информацию в repetitions.json и статистику пользователя.
+The operating logic is roughly thus:
+• we look for phrases.txt in the project directories (lots of phrase pairs separated by a dual vertical line, see the ‘Usage’ section for details); if we can’t find it, we create a blank file for future editing by the user;
+• similarly, we look for repetitions.json (progress records and memorization degrees of all complete phrase pairs); if not found, we create an empty file;
+• we create data structures from the information taken from phrases.txt and repetitions.json, and then evaluate whether we can work with given combination. If phrases.txt is not empty, then okay, we can convert phrase pairs to our internal format and transfer that information to repetitions.json. If repetitions.json is not empty, then also okay, we can work with the information we’ve already accumulated. Both phrases.txt and repetitions.json being empty is not okay, we have nowhere to draw the information we need to work, so we complain about this fact to the user, let them create phrases.txt with at least some minimal content;
+• during the loop, we feed a new task to the user, picking the most relevant phrase we need at the moment from the phrase dictionary. If there are phrases that require repetition, we pick them first; if all completed tasks don’t require a refresher right now, we start mixing in new phrases.
+• after each task, we update the data in repetitions.json and the user’s statistics, regardless of the quality of the answer.
 
-В процессе написания кода я разбил весь функционал на data_level (это, своего рода, квинтэссенция собственно языковой практики), system_level (функционал, зависящий от операционной системы) и ui_level (методы, определяющие способ взаимодействия с пользователем) плюс добавил файл статистики, отображающий общее количество «подходов», предпринятых пользователем, а также содержащий все как английские, так и русские слова, пройденные им в процессе обучения. Окончательный вариант получился примерно тем же самым, что и первоначальная заготовка, только чуточку разлапистее:
+In the process of writing the code, I divided all the functionality into data_level (sort of the essence of the language practice itself), system_level (functionality that depends on the operating system) and ui_level (methods that determine how to interact with the user), also adding a statistics file showing the total number of attempts made by the user and containing all the Spanish and English words that they learned. The final version turned out to be about the same as the original blueprint, if only a little more spread out:
 
 ```python
 from data_level import DataOperations as dop
@@ -128,7 +126,7 @@ if __name__ == '__main__':
         exit()
 ```
 
-Сначала нужно определить, правильно ли ответил пользователь на предложенный вопрос, с учётом возможного существования нескольких правильных вариантов перевода:
+First we need to determine whether the user answered the given question correctly, allowing for the possible existence of several correct versions of the translation.
 
 ```python
 # import jellyfish
@@ -161,13 +159,13 @@ def _compact(input_string: str) -> str:
     return ''.join(ch for ch in input_string if ch.isalnum() or ch == ' ')
 ```
 
-Внутри шелухи, занятой переливанием данных, вы можете видеть вычисление расстояния Джаро:
+Inside the husk engaged in data transfer, you can see the Jaro distance calculation:
 
 ```python
 current_distance = jellyfish.jaro_distance()
 ```
 
-И, соответственно, есть оценка правильности ответа пользователя:
+Accordingly, there is an estimate of the accuracy of the user’s answer:
 
 ```python
 level_excellent: float = 0.99
@@ -175,23 +173,23 @@ level_good: float = 0.97
 level_mediocre: float = 0.65
 ```
 
-Прикиньте, может быть, тут более уместно будет расстояние Левенштейна?
+Come to think of it, maybe the Levenshtein distance would be more appropriate here?
 
-Попробуйте, кстати, превратить вот это:
+By the way, try turning this:
 
 ```Python
 user_input = DataOperations._compact(DataOperations._cleanup_user_input(user_input).lower())
 ```
 
-примерно вот в это (я имею в виду не выкидывание DataOperations, а организацию пайпа методов типа string):
+into something like this (I don't mean dropping DataOperations, but rather arranging a pipe for methods like string):
 
 ```Python
 user_input = user_input.lower().cleanup().compact()
 ```
 
-К сожалению, добавление собственных методов к встроенным типам в Python требует или применения субклассов, или использования велосипедов типа forbiddenfruit (уже немножко умер) / fishhook (еще немножко сыроват). А ведь в C# эта возможность встроена из коробки, аргхх...
+Unfortunately, adding your own methods to those provided by Python requires either using subclasses or reinventing something like forbiddenfruit (bit dead already) / fishhook (still a little raw). Meanwhile, C# provides this feature out of the box, curses!
 
-Алгоритм интервальных повторений, в зависимости от качества ответа решающий, когда именно пройденная фраза будет предложена пользователю в следующий раз, построен на базе [SuperMemo-2](https://en.wikipedia.org/wiki/SuperMemo#Description_of_SM-2_algorithm):
+The interval repetition algorithm, which, depending on the quality of the answer, decides when a completed phrase will be offered to the user next time, is based on [SuperMemo-2](https://en.wikipedia.org/wiki/SuperMemo#Description_of_SM-2_algorithm):
 
 ```python
 def _supermemo2(repetition: dict, user_result: float) -> dict:
@@ -215,17 +213,17 @@ def _supermemo2(repetition: dict, user_result: float) -> dict:
     return repetition
 ```
 
-В семействе алгоритмов SuperMemo есть более свежие реализации, вплоть до SuperMemo-18. Вы можете перейти на их использование, специально для этого в repetitions.json предусмотрено хранение нескольких последних попыток пользователя:
+The SuperMemo family of algorithms has more recent implementations, up to SuperMemo-18. You can move over to using them, repetitions.json stores the last few user attempts specifically for this purpose.
 
 ```python
 max_attempts_len: int = 10  # Limit for 'Attempts' list
 ```
 
-Заодно попробуйте разобраться, почему, при наличии SuperMemo-18, по сию пору активно используется SuperMemo-2, а самые рисковые разработчики не уходят дальше SuperMemo-5 или, максимум, упрощенного SuperMemo-8. Почитайте заодно про [A Trainable Spaced Repetition Model for Language Learning](https://github.com/duolingo/halflife-regression/blob/master/settles.acl16.pdf), алгоритм, опубликованный разработчиками Duolingo, в которой они пытались устранить недочеты предыдущих подходов. Попробуйте повторить ключевой функционал Duolingo, это вполне реализуемая возможность.
+While you’re at it, try to figure out why, despite the fact that SuperMemo-18 exists, SuperMemo-2 is still actively used, and even the most adventurous developers don’t venture beyond SuperMemo-5 or, at most, a simplified SuperMemo-8. Have a look at [A Trainable Spaced Repetition Model for Language Learning](https://github.com/duolingo/halflife-regression/blob/master/settles.acl16.pdf), an algorithm published by the developers of Duolingo, which attempts to address the shortcomings of previous approaches. Try to replicate Duolingo’s key functionality, it’s quite feasible.
 
-Далее идёт сохранение полученных результатов, думаю, останавливаться подробно на реализации этого функционала необходимости нет.
+Next comes the saving of the results; I think there’s no need to dwell on the implementation of this function.
 
-Теперь, когда ответ пользователя уже взвешен и учтён, нужно показать ученику не просто правильный вариант, а подробности, помогающие локализовать ошибки. Для этого вначале сформируем структуру данных, содержащую информацию о разности между желаемым и фактическим результатом:
+Now that the user’s answer has been weighed and accounted for, we need to show the student not only the correct option, but also the specifics that will help them identify the mistakes. To do this, we will first form a data structure containing information on the difference between the desired and the actual result.
 
 ```python
 # from dataclasses import dataclass
@@ -272,7 +270,7 @@ def find_user_mistakes(user_input: str, reference: str) -> list:
     return correction_map
 ```
 
-Немножко сложновато? На первый взгляд, можно было пойти более коротким путём, напрямую применив SequenceMatcher к пользовательскому ответу и референсной фразе, примерно вот так:
+A bit complicated? At a glance, we could have taken a shorter route by directly applying SequenceMatcher to the user’s response and reference phrase, like this.
 
 ```python
 def find_user_mistakes(user_input: str, reference: str) -> list:
@@ -293,13 +291,13 @@ def find_user_mistakes(user_input: str, reference: str) -> list:
     return corr_map
 ```
 
-Вместо этого мы «заворачиваем», а потом «разворачиваем» какую-то дополнительную структуру данных, которая хранит далеко не все символы исходного текста, но зато помнит, какие символы куда смещены. Зачем?
+Instead, we wrap and then unwrap some additional data structure that does not store all the characters from the source text, but remembers which characters are shifted where. What for?
 
-Дело в том, что одной из ключевых фич Duolingo является игнорирование знаков препинания и разницы между прописными и заглавными буквами. Например, вместо «Hello! My name is Kitty» вполне допустимо ввести «hello my name is kitty», и это очень круто. Мы же, в конце концов, в первую очередь изучаем грамматику иностранного языка, уже в целом владея правилами написания имен и расстановки знаков препинания (хотя в английском и здесь есть свои особенности), и получение незачёта за написание, скажем, имени Michael с прописной буквы было бы, конечно, мощной просадкой всего юзер экспириенса.
+The thing is, one of Duolingo’s key features is that it ignores punctuation and the difference between uppercase and lowercase letters. For example, it’s perfectly acceptable to type ‘hello my name is kitty’ instead of ‘Hello! My name is Kitty,’ and that’s pretty cool. After all, we’re primarily studying the grammar of a foreign language, having already learned the general rules of writing names and punctuation (although Spanish has its own peculiarities), and getting a fail for spelling the name Michael with a lowercase letter would certainly be a huge drawback for the whole user experience.
 
-Такую же вкусняшку я захотел внедрить и в Flywheel. Именно поэтому референсная фраза и ответ пользователя сначала сворачиваются в «чистый текст», без знаков препинания и заглавных букв, потом сравниваются, а в конце референсная фраза снова разворачивается в полный ответ, показываемый пользователю.
+This is the kind of goodie I wanted to implement in Flywheel as well. That’s why the reference phrase and the user’s answer are first converted into plain text without punctuation and capital letters, then compared, ending with the reference phrase once again unfolded into a full response and shown to the user.
 
-Далее, чтобы наглядно показать пользователю ошибки и опечатки, сформируем полноцветный пользовательский вывод, фразу, в которой цвет символа будет зависеть от правильности его написания:
+Next, to clearly show the mistakes and typos to the user, we form a full-colour user output, a phrase in which the colour of the character will depend on the correctness of its spelling:
 
 ```python
 def _print_colored_diff(correction, reference) -> None:
@@ -318,18 +316,18 @@ def _print_colored_diff(correction, reference) -> None:
                         print(Fore.RED + ' ', end='')
 ```
 
-На этом жизненный цикл очередного вопроса в консольном приложении заканчивается.
+This ends the life cycle of the question in the console application.
 
-Хотите примерно то же самое, но по-взрослому (а то вроде как-то фу заставлять пользователя выходить из программы по Ctrl-C) — с веб-интерфейсом, базой данных, ORM, API и голосовыми подсказками? Покопайтесь в папке [flywheel/Legacy](https://github.com/amaargiru/flywheel/tree/main/Legacy). Там лежит рабочий код, отличающийся от последней микро-версии, описанной в этой статье, менее консистентным data_level (в частности, я, не зная о SuperMemo, пытался изобрести свой собственный алгоритм интервальных повторений), но зато там есть все упомянутые плюшки. Возможно, тихий хлопок одной ладонью, зовущий вас обратно в консоль, вы услышите чуть позже... А пока можете попробовать запилить собственный стартап, создав потенциального соперника Duolingo, Cerego, Course Hero или Memrise.
+Want something like that, but more sophisticated (because making the user quit the application using Ctrl-C is kind of gross), with a web interface, database, ORM, API, and voice prompts? Have a look in the [flywheel/Legacy](https://github.com/amaargiru/flywheel/tree/main/Legacy) folder. It contains some working code that differs from the latest micro-version described in this article by having a less consistent data_level (in particular, not knowing about SuperMemo, I tried to invent my own algorithm of interval repetitions), but it has all of the aforementioned goodies. Perhaps you’ll hear the quiet one-handed clap calling you back to the console later... Meanwhile, you can try to make your own startup, building a potential rival to Duolingo, Cerego, Course Hero or Memrise.
 
-### Выведение
+### Outro
 
-Ну что ж, пожалуй, на этом пока всё. С настоящего момента и до конца своего текущего жизненного цикла вы можете тратить на изучение иностранного языка именно столько времени, сколько удобно именно вам, добавлять новые фразы или дополнять существующие переводы и сохранять прогресс даже после микроскопического усилия.
+Well, that’s about it for now. From now until the end of your current lifecycle, you can spend as much time on learning a foreign language as you like, add new phrases or add to existing translations and keep up with your progress even after minuscule efforts.
 
-Не забывайте, однако, о том, что:  
-во-первых, чудес не бывает, и при любом раскладе вам придется потратить на изучение языка существенное время ([приблизительные оценки](https://support.cambridgeenglish.org/hc/en-gb/articles/202838506-Guided-learning-hours) от британских учёных);  
-и, во-вторых, по меткому замечанию Ильи Франка, «Язык похож на ледяную горку – на нее надо быстро взбежать; пока не взбежите — будете скатываться», т. е., другими словами, если вы не выделите на изучение языка достаточно много времени, причем укладываясь в достаточно сжатые сроки, вам не удастся достигнуть новой точки равновесия, приобретенные знания медленно, но надежно уйдут.
+However, keep in mind that:
+•	first of all, miracles are not real, and you will have to spend a considerable amount of time ([approximate estimates](https://support.cambridgeenglish.org/hc/en-gb/articles/202838506-Guided-learning-hours)) to learn the language in any case;
+•	and, secondly, as aptly noted by Ilya Frank, ‘Language is akin to an icy hill — you have got to move fast if you want to get to the top of it,’ that is, in other words, if you don’t dedicate enough time to language learning, and keep to a fairly tight schedule, you will not be able to reach a new equilibrium point, and your acquired knowledge will slowly but surely fade away.
 
-Если у вас остались вопросы, жду вас в комментариях. Напоминаю, что программа Flywheel доступна в исходниках, лежит на [GitHub](https://github.com/amaargiru/flywheel), по возможности обновляется и исправляется. Если вас заинтересовал такой достаточно немудрёный, но, на мой взгляд, весьма эффективный метод изучения английского языка, пожалуйста, создавайте форки репозитария, корректируйте как код (проект написан на Python и содержит всего около четырехсот строк), так и список переведенных фраз. Если поставите на GitHub'е звёздочку — будет просто супер, может быть, пригодится когда-нибудь на собеседовании; всё-таки свитер с дырками от орденов завсегда выглядит солиднее, чем просто свитер, даже если это был памятный знак «40 лет пионерлагерю "Орлёнок"» :)
+If you have any questions, feel free to leave them in the comments. As a reminder, Flywheel’s source code is available on [GitHub](https://github.com/amaargiru/flywheel) and is updated and corrected whenever possible. If this rather simple but, in my opinion, very effective method of learning Spanish grabbed your attention, please create repository forks, make corrections both to code (project is written in Python and contains only about four hundred lines) and to the list of translated phrases. If you could leave a star on GitHub, that would be great.
 
-И знаете, что мне нравится в таком методе больше всего? За несколько дней использования программы мой английский, конечно, сильно не улучшился. Но! У меня появилось достаточно отчётливое чувство контроля над процессом изучения иностранного языка! Раньше, при использовании того же Duolingo, меня не покидало ощущение некоторой пассивности, чувство пассажира машинки, намертво приваренной к остову аттракциона: вот машинка начинает двигаться, вот резко дёргается вправо, вот плавный левый поворот... Траектория, возможно, была и неплоха, и научно обоснована, но вот беда — никак не учитывала мои предыдущие знания и индивидуальные предпочтения. Теперь же, когда у меня в руках находятся и данные, и методы их обработки, я чувствую, что мой автомобильчик худо-бедно начинает слушаться руля и едет-таки в нужном именно мне направлении.
+You know what I like most about this method? After a few days of using the app, my Spanish obviously didn’t improve much. However! I gained a distinct feeling of control over the process of learning a foreign language! Previously, when using Duolingo, I had this feeling of passivity, like a passenger in a bumper car welded to the base of an amusement park ride: the car would move, then suddenly jerk to the right, then make a gentle left turn... Perhaps the trajectory was fairly good, and scientifically sound, but my issue was that it didn’t consider my previous knowledge and individual preferences. Now that both data and methods of their processing are in my hands, I feel that my little car is more or less obeying the steering wheel and is going in the direction I need.

@@ -9,7 +9,7 @@ class UiOperations:
     @staticmethod
     def user_session(phrase: str, repetition: dict) -> (float, str):
         """Console user interface"""
-        user_input: str = input(f'Enter phrase \"{phrase}\" in English: ' + os.linesep)
+        user_input: str = input(f'Enter phrase \"{phrase}\" in Spanish: ' + os.linesep)
         distance, best_translation = dop.find_max_string_similarity(user_input, repetition['translations'])
         diff = dop.find_user_mistakes(user_input, best_translation)
 

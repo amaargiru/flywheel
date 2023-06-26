@@ -21,7 +21,7 @@ if __name__ == '__main__':
 
     if can_work:
         is_merged, merge_message = dop.merge(phrases, repetitions)
-        # print(merge_message)
+        print(merge_message)
 
         if is_merged:
             fop.save_json_to_file(repetitions_file_path, repetitions)

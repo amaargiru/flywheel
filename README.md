@@ -28,11 +28,11 @@ I think that’s where the preface can end and we can get to the heart of the ma
 
 Using Flywheel is extremely simple. At the start, you have just one file, phrases.txt (the file that comes with the application contains about two thousand phrases). Inside are many pairs of phrases, separated with a double vertical line, e.g.:
 
-*Te quiero || I love you*
+*I love you || Te quiero*
 
 If the English phrase can be correctly translated into several different Spanish phrases, a single vertical line is used to separate them:
 
-*Lo se | Ya se | Yo sé || I know*
+*I know || Lo se | Ya se | Yo sé*
 
 If there are two English phrases that can also have multiple equivalent translations, a single vertical line is also used to separate them.
 

@@ -28,19 +28,13 @@ I think that’s where the preface can end and we can get to the heart of the ma
 
 Using Flywheel is extremely simple. At the start, you have just one file, phrases.txt (the file that comes with the application contains about two thousand phrases). Inside are many pairs of phrases, separated with a double vertical line, e.g.:
 
-...
+*Te quiero || I love you*
 
 If the English phrase can be correctly translated into several different Spanish phrases, a single vertical line is used to separate them:
 
-...
+*Lo se | Ya se | Yo sé || I know*
 
-Finally, if there are two English phrases that can also have multiple equivalent translations, a single vertical line is also used to separate them:
-
-...
-
-The latter phrase pair can be made even more complicated:
-
-...
+If there are two English phrases that can also have multiple equivalent translations, a single vertical line is also used to separate them.
 
 Of course, you can and should add **your own phrase pairs** to phrases.txt. This is the essence of Flywheel — you don’t have to memorize the dictionary, it’s just a template. Adjust the content of the lessons to suit your level of proficiency; move the phrase pairs you find most useful higher up in the dictionary; add pairs related to your job. Needless to say, the shell doesn’t care what language you’re learning. If you wish to learn French, bien accueillir! Want to learn Aleutian? No problem. Need to learn Aleutian as a native French speaker? Easy as pie!
 

@@ -37,26 +37,26 @@ class DataOperations:
     def merge(phrases: dict, repetitions: dict) -> (bool, str):
         """Merge new phrases into general dictionary"""
         no_added_message: str = 'No new phrases'
-        new_phrases: int = 0
+        new_phrases_num: int = 0
 
         if len(phrases) == 0:
             return False, no_added_message
 
-        for rus_part, eng_part in phrases.items():
-            if rus_part not in repetitions:
-                repetitions[rus_part] = {
-                    'translations': eng_part,
+        for native_part, english_part in phrases.items():
+            if native_part not in repetitions:
+                repetitions[native_part] = {
+                    'translations': english_part,
                     'time_to_repeat': datetime.now().strftime(datetime_format),  # Recommendation to check this phrase right now
                     'easiness_factor': 2.5,  # How easy the card is (and determines how quickly the inter-repetition interval grows)
                     'repetition_number': 0,  # Number of times the card has been successfully recalled in a row
                     'attempts': []}  # In use flag + reserve field in case of transition from supermemo-2 to supermemo-18
-                new_phrases += 1
+                new_phrases_num += 1
 
-            if repetitions[rus_part]['translations'] != eng_part:  # Correct translations
-                repetitions[rus_part]['translations'] = eng_part
-                new_phrases += 1
+            if repetitions[native_part]['translations'] != english_part:  # Correct translations
+                repetitions[native_part]['translations'] = english_part
+                new_phrases_num += 1
 
-        return (False, no_added_message) if new_phrases == 0 else (True, f'Added {new_phrases} new phrases')
+        return (False, no_added_message) if new_phrases_num == 0 else (True, f'Added {new_phrases_num} new phrases')
 
     @staticmethod
     def determine_next_phrase(repetitions: dict) -> str:
@@ -105,17 +105,17 @@ class DataOperations:
         else:
             statistics['attempts_num'] = 1
 
-        # Update russian words set
-        current_russian_words_set = set(DataOperations._compact(current_phrase.lower()).split())
+        # Update native words set
+        current_native_words_set = set(DataOperations._compact(current_phrase.lower()).split())
 
-        if 'russian_words' in statistics:
-            full_russian_words_set = set(statistics['russian_words'])
-            full_russian_words_set.update(current_russian_words_set)
-            statistics['russian_words'] = list(full_russian_words_set)
+        if 'native_words' in statistics:
+            full_native_words_set = set(statistics['native_words'])
+            full_native_words_set.update(current_native_words_set)
+            statistics['native_words'] = list(full_native_words_set)
         else:
-            statistics['russian_words'] = list(current_russian_words_set)
+            statistics['native_words'] = list(current_native_words_set)
 
-        statistics['russian_words'].sort()
+        statistics['native_words'].sort()
 
         # Update english words set
         current_english_words_set = set(DataOperations._compact(best_translation.lower()).split())

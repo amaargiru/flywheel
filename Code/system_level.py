@@ -28,25 +28,25 @@ class FileOperations:
         try:
             with open(file_path, 'r', encoding='utf-8') as phrf:
                 for string in phrf:
-                    if string[0] != '#' and '||' in string:  # No comment line and contains rus-eng separator
+                    if string[0] != '#' and '||' in string:  # No comment line and contains native-english separator
                         phrases_pair = list(map(str.strip, string.split('||')))
 
                         if len(phrases_pair) > 2:
                             print(f'Error. String contains {len(phrases_pair)} "||" separators: {string}. String must contain '
                                   'only one "||" separator between phrases in different languages')
                         else:
-                            rus_part, eng_part = phrases_pair[0], phrases_pair[1]
+                            native_part, english_part = phrases_pair[0], phrases_pair[1]
 
-                            if '|' in eng_part:  # More than one English phrase
-                                eng_part = list(map(str.strip, eng_part.split('|')))  # Just split into separate english phrases
+                            if '|' in english_part:  # More than one English phrase
+                                english_part = list(map(str.strip, english_part.split('|')))  # Just split into separate english phrases
 
-                            if '|' in rus_part:  # More than one Russian phrase
-                                rus_part = list(map(str.strip, rus_part.split('|')))  # Split into separate russian phrases...
-                                for rus_phrase in rus_part:
-                                    phrase_mapping[rus_phrase] = eng_part  # ... and save separate items
+                            if '|' in native_part:  # More than one native phrase
+                                native_part = list(map(str.strip, native_part.split('|')))  # Split into separate native phrases...
+                                for native_phrase in native_part:
+                                    phrase_mapping[native_phrase] = english_part  # ... and save separate items
 
-                            else:  # Single Russian phrase
-                                phrase_mapping[rus_part] = eng_part
+                            else:  # Single native phrase
+                                phrase_mapping[native_part] = english_part
         except Exception as e:
             print(f'Cannot open or parse {file_path} file: {repr(e)}')
 

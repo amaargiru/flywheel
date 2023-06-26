@@ -1,6 +1,8 @@
-Duolingo with Minimal Settings
+## My own Duolingo without overengineering
 
 Hi, my name is Mikhail Emelyanov, I’m a Python programmer and I would like to show you my pet project — Flywheel, a micro-platform for learning foreign languages, a mixture of Duolingo and Anki, an application that can teach you to properly write in Spanish (or any other language you’re studying). Flywheel’s source code is available on [GitHub](https://github.com/amaargiru/flywheel).
+
+![Flywheel](https://raw.githubusercontent.com/amaargiru/flywheel/main/pics/Dorothy.png)
 
 As you may know, generalized knowledge of a foreign language can be broken down into four relatively independent components: reading, writing, listening, and speaking. Unfortunately, training one of these abilities has no direct effect on the other components, so, for example, by developing our reading skills, the effect on our writing skills is quite indirect. Flywheel is a ‘sharpener’ specifically for **written Spanish**.
 

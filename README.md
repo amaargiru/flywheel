@@ -1,4 +1,4 @@
-## My own Duolingo without overengineering
+## Your own Duolingo without overengineering
 
 Hi, my name is Mikhail Emelyanov, I’m a Python programmer and I would like to show you my pet project — Flywheel, a micro-platform for learning foreign languages, a mixture of Duolingo and Anki, an application that can teach you to properly write in Spanish (or any other language you’re studying). Flywheel’s source code is available on [GitHub](https://github.com/amaargiru/flywheel).
 

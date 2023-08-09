@@ -320,7 +320,7 @@ Want something like that, but more sophisticated (because making the user quit t
 
 Well, that’s about it for now. From now until the end of your current lifecycle, you can spend as much time on learning a foreign language as you like, add new phrases or add to existing translations and keep up with your progress even after minuscule efforts.
 
-However, keep in mind that:
+However, keep in mind that:  
 • first of all, miracles are not real, and you will have to spend a considerable amount of time ([approximate estimates](https://support.cambridgeenglish.org/hc/en-gb/articles/202838506-Guided-learning-hours)) to learn the language in any case;  
 • and, secondly, as aptly noted by Ilya Frank, ‘Language is akin to an icy hill — you have got to move fast if you want to get to the top of it,’ that is, in other words, if you don’t dedicate enough time to language learning, and keep to a fairly tight schedule, you will not be able to reach a new equilibrium point, and your acquired knowledge will slowly but surely fade away.
 

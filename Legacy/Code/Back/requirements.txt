@@ -1,6 +1,6 @@
 colorama==0.4.4
 colorlog==6.6.0
-fastapi==0.75.2
+fastapi==0.109.1
 jellyfish==0.9.0
 jose==1.0.0
 passlib==1.7.4

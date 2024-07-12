@@ -26,6 +26,8 @@ I think that’s where the preface can end and we can get to the heart of the ma
 
 ### Usage
 
+![Flywheel usage](https://raw.githubusercontent.com/amaargiru/flywheel/main/pics/Usage-reduced-896x512.jpg)
+
 Using Flywheel is extremely simple. At the start, you have just one file, phrases.txt (the file that comes with the application contains about two thousand phrases). Inside are many pairs of phrases, separated with a double vertical line, e.g.:
 
 *I love you || Te quiero*
